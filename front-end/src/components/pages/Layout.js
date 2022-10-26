@@ -1,6 +1,6 @@
 import React from 'react';
 import {Outlet} from 'react-router-dom';
-import Navbar from './../components/navbar.js';
+import Navbar from '../navbar.js';
 import headerimg from './headerimg.jpeg';
 
 function Layout() {
