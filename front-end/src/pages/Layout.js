@@ -2,6 +2,7 @@ import React from 'react';
 import {Outlet} from 'react-router-dom';
 import Navbar from '../components/navbar.js';
 import headerimg from '../images/headerimg.jpg';
+import '../css/layout.css';
 
 function Layout() {
     return (
@@ -21,26 +22,10 @@ function Layout() {
 }
 
 function TopHeader() {
-    const headerstyle = {
-        border: '5px solid red',
-        height: '180px',
-        position: 'relative',
-        textAlign: 'center'
-    };
-    const logostyle = {
-        position:'absolute',
-        top:'50%',
-        left:'50%',
-        transform:'translate(-50%,-50%)',
-        color: 'white',
-        fontSize: '70px',
-        fontFamily: "Bungee Spice",
-        textShadow: "8px 10px 0 black"
-    };
     return (
-        <div style={headerstyle}>
-            <img src={headerimg} style={{width:'100%',height:'100%'}}></img>
-            <div style={logostyle}>Amusement Park</div>
+        <div id='topheader'>
+            <img src={headerimg} style={{width:'100%',height:'100%'}} alt='header'></img>
+            <div id='logo'>Amusement Park</div>
         </div>
     );
 }

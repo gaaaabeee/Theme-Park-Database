@@ -1,0 +1,17 @@
+#topheader {
+    border: 5px solid red;
+    height: 180px;
+    position: relative;
+    text-align: center
+}
+
+#logo {
+    position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        color: white;
+        font-size: 70px;
+        font-family: Bungee Spice;
+        text-shadow: 8px 10px 0 black
+}
