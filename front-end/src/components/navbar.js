@@ -1,7 +1,10 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, {useState} from 'react';
+import {NavLink} from 'react-router-dom';
 import '../css/navbar.css';
 
+//navigation bar at top of screen
+
+//navigation container
 function Navbar() {
     return (
         <div id='navbox'>
@@ -17,10 +20,11 @@ function Navbar() {
     );
 }
 
+//navigation button
 function NavButton(props) {
     return (
         <li style={{float:'left'}}>
-            <Link id='navbutton' to={props.link}>{props.text}</Link>
+            <NavLink id='navbutton' to={props.link}>{props.text}</NavLink>
         </li>
     );
 }

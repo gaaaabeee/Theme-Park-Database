@@ -26,7 +26,11 @@
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-#navbutton:hover {
+#navbutton:hover:not(.active) {
     background-color: #FF5656;
     box-shadow: 3px 3px 3px 1px #7A0707
+}
+
+#navbutton.active {
+    background-color: #B93131;
 }
