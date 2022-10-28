@@ -31,12 +31,8 @@ function TopHeader() {
 }
 
 function BottomFooter() {
-    const footerstyle = {
-        backgroundColor: 'red',
-        height: '200px'
-    };
     return (
-        <footer style={footerstyle}></footer>
+        <footer id='bottomfooter'></footer>
     );
 }
 

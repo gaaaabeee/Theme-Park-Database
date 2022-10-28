@@ -1,0 +1,31 @@
+#navbox {
+    background-color: red;
+    height: 60px;
+    border: 1px solid #7A0707
+}
+
+#navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#navbutton {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px 25px;
+    text-decoration: none;
+    font-size: 24px;
+    border-style: none solid none none;
+    border-width: 1px;
+    border-color: #7A0707;
+    box-shadow: 1px 1px 3px 1px #7A0707;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+#navbutton:hover {
+    background-color: #FF5656;
+    box-shadow: 3px 3px 3px 1px #7A0707
+}

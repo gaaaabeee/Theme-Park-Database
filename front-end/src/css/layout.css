@@ -16,3 +16,8 @@
         font-family: Bungee Spice;
         text-shadow: 8px 10px 0 black
 }
+
+#bottomfooter {
+        background-color: red;
+        height: 200px
+}
