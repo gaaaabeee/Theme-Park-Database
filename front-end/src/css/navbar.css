@@ -1,7 +1,8 @@
 #navbox {
     background-color: red;
     height: 60px;
-    border: 1px solid #7A0707
+    border: 1px solid #7A0707;
+    font-weight: bold;
 }
 
 #navbar {
@@ -22,7 +23,7 @@
     border-width: 1px;
     border-color: #7A0707;
     box-shadow: 1px 1px 3px 1px #7A0707;
-    transition: background-color 0.2s, box-shadow 0.2s;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 #navbutton:hover {

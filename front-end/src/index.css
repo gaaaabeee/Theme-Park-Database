@@ -4,3 +4,7 @@
     font-family: "Bungee Spice";
     src: url("./fonts/BungeeSpice-Regular.ttf") format("ttf");
 }
+
+body {
+    font-family: Trebuchet MS, sans-serif;
+}

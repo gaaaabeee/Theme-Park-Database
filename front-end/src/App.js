@@ -8,7 +8,6 @@ import Rides from './pages/RidePage.js';
 import Shops from './pages/ShopsPage.js';
 import Events from './pages/EventsPage.js';
 import Map from './pages/MapPage.js';
-import './index.css';
 
 function App() {
     return (
