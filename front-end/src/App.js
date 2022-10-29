@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {BrowserRouter,Routes,Route} from "react-router-dom";
 import useStateContext from './hooks/useStateContext.js';
-import {TopHeader,BottomFooter} from './pages/Layout.js';
+import {TopHeader,BottomFooter} from './components/Layout.js';
 import Home from './pages/HomePage.js';
 import Tickets from './pages/TicketPage.js';
 import Rides from './pages/RidePage.js';
@@ -32,16 +32,18 @@ function App() {
     return (
         <BrowserRouter>
             <TopHeader />
-            <Routes>
-                <Route index path='/' element={<Home />}></Route>
-                <Route path='/tickets' element={<Tickets />}></Route>
-                <Route path='/rides' element={<Rides />}></Route>
-                <Route path='/shops' element={<Shops />}></Route>
-                <Route path='/events' element={<Events />}></Route>
-                <Route path='/map' element={<Map />}></Route>
-                <Route path='/login' element={<Login />}></Route>
-                <Route path='/signup' element={<Signup />}></Route>
-            </Routes>
+            <main>
+                <Routes>
+                    <Route index path='/' element={<Home />}></Route>
+                    <Route path='/tickets' element={<Tickets />}></Route>
+                    <Route path='/rides' element={<Rides />}></Route>
+                    <Route path='/shops' element={<Shops />}></Route>
+                    <Route path='/events' element={<Events />}></Route>
+                    <Route path='/map' element={<Map />}></Route>
+                    <Route path='/login' element={<Login />}></Route>
+                    <Route path='/signup' element={<Signup />}></Route>
+                </Routes>
+            </main>
             <BottomFooter />
         </BrowserRouter>
     )
