@@ -1,0 +1,50 @@
+.form-page {
+    background-color: lightskyblue;
+    width: 100%;
+    text-align: center;
+}
+
+.form-box {
+    background-color: red;
+    display: inline-block;
+    margin: 5% 10%;
+    padding: 50px 30px;
+    width: 400px;
+    color: white;
+    border: 1px solid red;
+    border-radius: 50px;
+}
+
+.form-inner-box {
+    text-align: left;
+    padding: 0 20px;
+}
+
+.submit-button {
+    font-size: 20px;
+    padding: 2px 20px;
+    background-color: goldenrod;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.submit-button:hover {
+    color: red;
+    text-decoration: underline red solid;
+}
+
+.other-form-button {
+    color: black;
+    background-color: goldenrod;
+    text-align: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.other-form-button:hover {
+    color: red;
+    text-decoration: underline red solid;
+}

@@ -1,32 +1,19 @@
 import React from 'react';
-import {Outlet} from 'react-router-dom';
 import Navbar from '../components/navbar.js';
 import headerimg from '../images/headerimg.jpg';
 import '../css/layout.css';
 
-function Layout() {
-    return (
-        <>
-            <header>
-                <TopHeader />
-                <Navbar />
-            </header>
-            <main>
-                <Outlet />
-            </main>
-            <footer>
-                <BottomFooter />
-            </footer>
-        </>
-    );
-}
+//layout of every page, includes header, navbar, and footer
 
 function TopHeader() {
     return (
-        <div id='topheader'>
-            <img src={headerimg} style={{width:'100%',height:'100%'}} alt='header'></img>
-            <div id='headerlogo'>Amusement Park</div>
-        </div>
+        <header>
+            <div id='topheader'>
+                <img src={headerimg} style={{width:'100%',height:'100%'}} alt='header'></img>
+                <div id='headerlogo'>Amusement Park</div>
+            </div>
+            <Navbar />
+        </header>
     );
 }
 
@@ -43,5 +30,5 @@ function BottomFooter() {
     );
 }
 
-export default Layout;
+export {TopHeader,BottomFooter};
 

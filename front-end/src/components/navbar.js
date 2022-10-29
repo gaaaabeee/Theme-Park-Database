@@ -9,12 +9,14 @@ function Navbar() {
     return (
         <div id='navbox'>
             <ul id='navbar'>
-                <NavButton link="/" text="Home" />
-                <NavButton link="/tickets" text="Buy Tickets" />
-                <NavButton link="/rides" text="Rides" />
-                <NavButton link="/shops" text="Shops and Restaurants" />
-                <NavButton link="/events" text="Events" />
-                <NavButton link="/map" text="Map" />
+                <NavButton link="/" text="Home" align="left"/>
+                <NavButton link="/tickets" text="Buy Tickets" align="left"/>
+                <NavButton link="/rides" text="Rides" align="left"/>
+                <NavButton link="/shops" text="Shops and Restaurants" align="left"/>
+                <NavButton link="/events" text="Events" align="left"/>
+                <NavButton link="/map" text="Map" align="left"/>
+                <NavButton link="/signup" text="Sign Up" align="right"/>
+                <NavButton link="/login" text="Log In" align="right"/>
             </ul>
         </div>
     );
@@ -22,9 +24,10 @@ function Navbar() {
 
 //navigation button
 function NavButton(props) {
+    const align = {float: props.align};
     return (
-        <li style={{float:'left'}}>
-            <NavLink id='navbutton' to={props.link}>{props.text}</NavLink>
+        <li style={align}>
+            <NavLink id='navbutton' activeClassName='active' to={props.link}>{props.text}</NavLink>
         </li>
     );
 }
