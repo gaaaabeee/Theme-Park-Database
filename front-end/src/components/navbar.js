@@ -27,7 +27,7 @@ function NavButton(props) {
     const align = {float: props.align};
     return (
         <li style={align}>
-            <NavLink id='navbutton' activeClassName='active' to={props.link}>{props.text}</NavLink>
+            <NavLink id='navbutton' to={props.link}>{props.text}</NavLink>
         </li>
     );
 }
