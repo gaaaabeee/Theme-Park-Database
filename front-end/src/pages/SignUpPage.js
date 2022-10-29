@@ -11,7 +11,7 @@ function Signup() {
                 <h2>Sign Up</h2>
                 <hr style={{border:'2px solid white'}}/>
                 <div class='form-inner-box'>
-                    <form name="signupForm" method="post" id="signupForm">
+                    <form name="signupForm" method="post" id="signupForm"> 
                         <label>First Name: </label><br />
                         <input type="text" name="fname" size="30"/><br /><br />
                         <label>Last Name: </label><br />
