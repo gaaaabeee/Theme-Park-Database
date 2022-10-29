@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-//import ReactDOM from 'react-dom/client';
 import {BrowserRouter,Routes,Route} from "react-router-dom";
+import useStateContext from './hooks/useStateContext.js';
 import {TopHeader,BottomFooter} from './pages/Layout.js';
 import Home from './pages/HomePage.js';
 import Tickets from './pages/TicketPage.js';
@@ -11,9 +11,24 @@ import Map from './pages/MapPage.js';
 import Login from './pages/LoginPage.js';
 import Signup from './pages/SignUpPage.js';
 import Profile from './pages/ProfilePage.js';
+import Logout from './pages/LogoutPage.js';
 import Employee from './pages/EmployeePage.js';
 
 function App() {
+    const {context,setContext} = useStateContext();
+
+    let loginOrProfile, signupOrLogout;
+    if (context.customer_id != 0)
+    {
+        loginOrProfile = (<Route path='/profile' element={<Profile />}></Route>);
+        signupOrLogout = (<Route path='/logout' element={<Logout />}></Route>);
+    }
+    else {
+        
+        loginOrProfile = (<Route path='/login' element={<Login />}></Route>);
+        signupOrLogout = (<Route path='/signup' element={<Signup />}></Route>);
+    }
+
     return (
         <BrowserRouter>
             <TopHeader />

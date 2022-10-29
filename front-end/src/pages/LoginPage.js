@@ -1,7 +1,9 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import useForm from '../hooks/useForm.js';
 import '../css/formpage.css';
+import { createAPIEndpoint, ENDPOINTS, BASE_URL } from '../api/index.js';
+import useStateContext from '../hooks/useStateContext.js';
 
 //login page
 
@@ -12,6 +14,9 @@ const getFreshModel = () => ({
 
 function Login() {
 
+    const {context, setContext} = useStateContext();
+    const navigate = useNavigate();
+
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
 
     //when form submits
@@ -19,11 +24,13 @@ function Login() {
         e.preventDefault();
         if (validate()) {
             //code for when user has valid login info
-            console.log(values); //DELETE THIS LATER
-        }
-        else {
-            //user hasnt submitted valid login info
-            console.log(errors); //DELETE THIS LATER
+            createAPIEndpoint(ENDPOINTS.customer)
+            .post(values)
+            .then(response => {
+                setContext({customer_id: response.data.customer_id});
+                navigate('/');
+                console.log(context);}) 
+            .catch(error => console.log(error))
         }
     };
 
