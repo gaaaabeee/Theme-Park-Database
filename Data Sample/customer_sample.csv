@@ -1,0 +1,9 @@
+customer_id,fname,lname,email,password,height,DOB,tickets_bought
+1,Steven,Nguyen,stevengnuyen123@gmail.com,good,5.8,2000-04-10,2
+2,Steven,Truong,steventruong123@gmail.com,goodjob,6.3,2002-02-11,2
+3,Abraham,Richard,arichperson123@gmail.com,ohyeah123,6.7,1998-06-28,6
+4,Brack,Hampton,brockhampton12@gmail.com,sugarplease095,5.7,1995-03-12,3
+5,Rick,Tran,ricktran12@gmail.com,good5490,5.3,2001-09-20,5
+6,James,Harden,jharden13@gmail.com,nbaplayer123,6.5,1985-08-31,1
+7,Noah,Nguyen,NoahNguyener123@gmail.com,volleyballislife!,5.7,2002-03-11,8
+8,Ben,Truong,bentruong123@gmail.com,goodjobohyeah,6.9,2004-03-11,5

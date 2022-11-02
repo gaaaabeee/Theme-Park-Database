@@ -1,0 +1,10 @@
+employee_id,fname,lname,DOB,supervisor_id,job_title,assigned_id
+1121223,James,Anderson,"2001-01-05 00:00:00",2010221,"attraction attendent",12030444
+1124931,Claire,Bluefield,"2004-10-31 00:00:00",2015341,"restaurant team member",1243290
+1127968,Angel,Garcia,"2003-05-17 00:00:00",2010221,"ride attendent",1241522
+2010221,Jose,Sanchez,"1986-06-09 00:00:00",2094576,"attraction and ride manager",1230444
+2011974,Jeffrey,Byezos,"1966-04-10 00:00:00",NULL,CEO,1111
+2015341,Valerie,Davidson,"1976-10-17 00:00:00",2094576,"restaurant manager",12493461
+2034042,Tina,Richardson,"1970-07-23 00:00:00",2011974,VP,1301
+2042589,Nhat,Vu,"1990-02-28 00:00:00",2011974,Secretary,1421
+2094576,Johnny,Peter,"1980-02-28 00:00:00",2011974,Treasurer,1522
