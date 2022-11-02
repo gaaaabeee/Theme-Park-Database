@@ -68,6 +68,9 @@ function Signup() {
                         <label>Height: </label><br />
                         <input type="text" name="height" onChange={handleInputChange} size="10" placeholder="ex: 6'10"/><br />
                         <p>{errors.height}</p><br />
+                        <label>Date of Birth: </label><br />
+                        <input type="date" name="dob" onChange={handleInputChange} size="20" required/><br />
+                        <p>{errors.dob}</p><br />
                         <label>Email: </label><br />
                         <input type="email" name="email" onChange={handleInputChange} placeholder="ex: example@email.com" size="30" required/><br />
                         <p>{errors.email}</p><br />
