@@ -2,7 +2,7 @@ import React from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import useForm from '../hooks/useForm.js';
 import '../css/formpage.css';
-import { createAPIEndpoint, ENDPOINTS, BASE_URL } from '../api/index.js';
+import { createAPIEndpoint, ENDPOINTS } from '../api/index.js';
 import useStateContext from '../hooks/useStateContext.js';
 
 //login page
@@ -24,7 +24,7 @@ function Login() {
         e.preventDefault();
         if (validate()) {
             //code for when user has valid login info
-            createAPIEndpoint(ENDPOINTS.customer)
+            createAPIEndpoint(ENDPOINTS.customerLogin)
             .post(values)
             .then(response => {
                 setContext({customer_id: response.data.customer_id});
@@ -63,7 +63,7 @@ function Login() {
                 <p>Don't have an account?</p>
                 <Link className="other-form-button" to="/signup">Create New Account</Link>
                 <br /><br />
-                <br /><br />
+                <p>Are you an employee? Log in here.</p>
                 <Link className="other2-form-button" to="/employeelogin">Employee Log In</Link>
             </div>
         </div>

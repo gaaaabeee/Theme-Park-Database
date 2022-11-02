@@ -11,6 +11,7 @@ const getFreshModel = () => ({
     fname: "",
     lname: "",
     height: "",
+    dob: "",
     email: "",
     password: ""
 });
@@ -26,15 +27,27 @@ function Signup() {
         e.preventDefault();
         if (validate()) {
             //code for when user has valid sign up info
-            createAPIEndpoint(ENDPOINTS.participant)
+            createAPIEndpoint(ENDPOINTS.customerSignup)
             .post(values)
             .then(response => {
                 setContext({customer_id: response.data.customer_id});
-                navigate('/signclear');
+                navigate('/');
                 console.log(context);})
             .catch(error => console.log(error))
         }
     };
+
+    //gets age from date of birth
+    const getAge = (dobStr) => {
+        const today = new Date();
+        const birth = new Date(dobStr);
+        const age = today.getFullYear() - birth.getFullYear();
+        const month = today.getMonth() - birth.getMonth();
+        if (month < 0 || (month === 0 && today.getDate() < birth.getDate())) {
+            age--;
+        }
+        return age;
+    }
 
     //check if fields are correct
     const validate = () => {
@@ -46,6 +59,8 @@ function Signup() {
         } else {
             temp.height = "";
         }
+        const age = getAge(values.dob);
+        temp.dob = (age >= 13) ? "" : "You must be 13 or older to make an account.";
         temp.email = (/\S+@\S+\.\S+/).test(values.email) ? "" : "Not a valid email.";
         temp.password = values.password != "" ? "" : "You must enter a password.";
         setErrors(temp);
