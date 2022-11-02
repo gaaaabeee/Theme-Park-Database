@@ -27,8 +27,8 @@ function Login() {
             createAPIEndpoint(ENDPOINTS.customerLogin)
             .post(values)
             .then(response => {
-                setContext({customer_id: response.data.customer_id});
-                navigate('/tickets');
+                setContext({login_id: response.data.customer_id, account: "customer"});
+                navigate('/');
                 console.log(context);}) 
             .catch(error => console.log(error))
         }

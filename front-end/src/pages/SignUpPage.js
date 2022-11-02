@@ -2,7 +2,7 @@ import React from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import useForm from '../hooks/useForm.js';
 import '../css/formpage.css';
-import { createAPIEndpoint, ENDPOINTS, BASE_URL } from '../api/index.js';
+import { createAPIEndpoint, ENDPOINTS } from '../api/index.js';
 import useStateContext from '../hooks/useStateContext.js';
 
 // sign up page
@@ -30,8 +30,8 @@ function Signup() {
             createAPIEndpoint(ENDPOINTS.customerSignup)
             .post(values)
             .then(response => {
-                setContext({customer_id: response.data.customer_id});
-                navigate('/');
+                //setContext({customer_id: response.data.customer_id, account: "customer"});
+                navigate('/signclear');
                 console.log(context);})
             .catch(error => console.log(error))
         }
