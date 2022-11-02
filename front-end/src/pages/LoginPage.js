@@ -28,7 +28,7 @@ function Login() {
             .post(values)
             .then(response => {
                 setContext({customer_id: response.data.customer_id});
-                navigate('/');
+                navigate('/tickets');
                 console.log(context);}) 
             .catch(error => console.log(error))
         }
@@ -62,6 +62,9 @@ function Login() {
                 <br /><br />
                 <p>Don't have an account?</p>
                 <Link className="other-form-button" to="/signup">Create New Account</Link>
+                <br /><br />
+                <br /><br />
+                <Link className="other2-form-button" to="/employeelogin">Employee Log In</Link>
             </div>
         </div>
     );

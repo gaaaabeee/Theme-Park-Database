@@ -13,6 +13,9 @@ import Signup from './pages/SignUpPage.js';
 import Profile from './pages/ProfilePage.js';
 import Logout from './pages/LogoutPage.js';
 import Employee from './pages/EmployeePage.js';
+import EmployeeLogIn from './pages/EmployeeLogIn.js';
+import SignClear from './pages/SignClearPage.js';
+
 
 function App() {
     const {context,setContext} = useStateContext();
@@ -42,6 +45,8 @@ function App() {
                     <Route path='/map' element={<Map />}></Route>
                     <Route path='/login' element={<Login />}></Route>
                     <Route path='/signup' element={<Signup />}></Route>
+                    <Route path='/employeelogin' element={<EmployeeLogIn />}></Route>
+                    <Route path='/signclear' element={<SignClear />}></Route>
                 </Routes>
             </main>
             <BottomFooter />

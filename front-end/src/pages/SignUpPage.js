@@ -30,7 +30,7 @@ function Signup() {
             .post(values)
             .then(response => {
                 setContext({customer_id: response.data.customer_id});
-                navigate('/');
+                navigate('/signclear');
                 console.log(context);})
             .catch(error => console.log(error))
         }
