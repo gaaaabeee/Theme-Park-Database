@@ -5,7 +5,7 @@ import axios from 'axios';
 export const BASE_URL = 'http://cosc3380-park.azurewebsites.net/'; //change to whatever path to website is later
 
 export const ENDPOINTS = {
-    customer: 'Customer',
+    customer: 'customer',
     customerLogin: 'Customer/signin',
     customerSignup: 'Customer/signup',
     employee: 'Employee',

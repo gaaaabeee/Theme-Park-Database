@@ -24,7 +24,7 @@ function EmployeeLogIn() {
         e.preventDefault();
         if (validate()) {
             //code for when user has valid login info
-            createAPIEndpoint(ENDPOINTS.employee)
+            createAPIEndpoint(ENDPOINTS.employeeLogin)
             .post(values)
             .then(response => {
                 setContext({account_id: response.data.employee_id, account: "employee"});
@@ -37,7 +37,7 @@ function EmployeeLogIn() {
     //check if fields are correct
     const validate = () => {
         let temp = {};
-        temp.lname = (/\S+@\S+\.\S+/).test(values.lname) ? "" : "Not a valid name";
+        temp.lname = (/^[a-zA-Z-' ]*$/).test(values.lname) ? "" : "Not a valid name";
         temp.employee_id = values.employee_id != "" ? "" : "You must enter an ID.";
         setErrors(temp);
         return Object.values(temp).every(x => x == "");

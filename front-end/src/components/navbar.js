@@ -9,8 +9,9 @@ import useStateContext from '../hooks/useStateContext.js';
 function Navbar() {
     const {context,setContext} = useStateContext();
     const [loginId, setLoginId] = useState(context.login_id);
+    const [account, setAccount] = useState(context.account);
+
     let signupOrProfile, loginOrLogout;
-    console.log(loginId);
     if (loginId) {
         signupOrProfile = <NavButton link="/profile" text="Profile" align="right" />;
         loginOrLogout = <NavButton link="/logout" text="Log Out" align="right" />;
@@ -18,20 +19,34 @@ function Navbar() {
         signupOrProfile = <NavButton link="/signup" text="Sign Up" align="right"/>;
         loginOrLogout = <NavButton link="/login" text="Log In" align="right"/>;
     }
-    return (
-        <div id='navbox'>
-            <ul id='navbar'>
-                <NavButton link="/" text="Home" align="left"/>
-                <NavButton link="/tickets" text="Buy Tickets" align="left"/>
-                <NavButton link="/rides" text="Rides" align="left"/>
-                <NavButton link="/shops" text="Shops and Restaurants" align="left"/>
-                <NavButton link="/events" text="Events" align="left"/>
-                <NavButton link="/map" text="Map" align="left"/>
-                {signupOrProfile}
-                {loginOrLogout}
-            </ul>
-        </div>
-    );
+    if (account == "employee")
+    {
+        return (
+            <div id='navbox'>
+                <ul id='navbar'>
+                    <NavButton link="/" text="Home" align="left"/>
+                    <NavButton link="/employee" text="Reports" align="left"/>
+                    {signupOrProfile}
+                    {loginOrLogout}
+                </ul>
+            </div>
+        );
+    } else {
+        return (
+            <div id='navbox'>
+                <ul id='navbar'>
+                    <NavButton link="/" text="Home" align="left"/>
+                    <NavButton link="/tickets" text="Buy Tickets" align="left"/>
+                    <NavButton link="/rides" text="Rides" align="left"/>
+                    <NavButton link="/shops" text="Shops and Restaurants" align="left"/>
+                    <NavButton link="/events" text="Events" align="left"/>
+                    <NavButton link="/map" text="Map" align="left"/>
+                    {signupOrProfile}
+                    {loginOrLogout}
+                </ul>
+            </div>
+        );
+    }
 }
 
 //navigation button
