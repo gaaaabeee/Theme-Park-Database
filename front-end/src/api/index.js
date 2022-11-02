@@ -2,10 +2,14 @@ import axios from 'axios';
 
 //connects front end to back end, change if needed
 
-export const BASE_URL = 'http://localhost:3000/'; //change to whatever path to website is later
+export const BASE_URL = 'http://cosc3380-park.azurewebsites.net/'; //change to whatever path to website is later
 
 export const ENDPOINTS = {
-    customer: 'customer',
+    customer: 'Customer',
+    customerLogin: 'Customer/signin',
+    customerSignup: 'Customer/signup',
+    employee: 'Employee',
+    employeeLogin: 'Employee/signin',
 };
 
 export const createAPIEndpoint = (endpoint) => {
