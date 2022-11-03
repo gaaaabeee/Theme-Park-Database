@@ -24,12 +24,13 @@ function WebRoutes() {
             <Route path='/events' element={<Events />}></Route>
             <Route path='/map' element={<Map />}></Route>
             <Route path='/login' element={<Login />}></Route>
+            <Route path='/logout' element={<Logout />}></Route>
             <Route path='/signup' element={<Signup />}></Route>
             <Route path='/employeelogin' element={<EmployeeLogIn />}></Route>
             <Route path='/signclear' element={<SignClear />}></Route>
             <Route path='/profile' element={<Profile />}></Route>
             <Route path='/employee' element={<Employee />}></Route>
-            
+            <Route path='/findemployee' element={<EmployeeSearch />}></Route>
         </Routes>
     );
 }

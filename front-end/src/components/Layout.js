@@ -5,14 +5,14 @@ import '../css/layout.css';
 
 //layout of every page, includes header, navbar, and footer
 
-function TopHeader() {
+function TopHeader(props) {
     return (
         <header>
             <div id='topheader'>
                 <img src={headerimg} style={{width:'100%',height:'100%'}} alt='header'></img>
                 <div id='headerlogo'>Amusement Park</div>
             </div>
-            <Navbar />
+            <Navbar login={props.login}/>
         </header>
     );
 }

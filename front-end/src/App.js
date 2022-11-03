@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {BrowserRouter} from "react-router-dom";
 import useStateContext from './hooks/useStateContext.js';
 import {TopHeader,BottomFooter} from './components/Layout.js';
@@ -7,11 +7,11 @@ import WebRoutes from './components/WebRoutes.js';
 
 function App() {
     const {context,setContext} = useStateContext();
-    console.log(context);
+    const [loggedin, setLoggedin] = useState(context.loggedin);
 
     return (
         <BrowserRouter>
-            <TopHeader />
+            <TopHeader login={loggedin} />
             <main>
                 <WebRoutes />
             </main>

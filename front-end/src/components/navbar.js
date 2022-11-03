@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {NavLink} from 'react-router-dom';
 import '../css/navbar.css';
 import useStateContext from '../hooks/useStateContext.js';
@@ -6,19 +6,11 @@ import useStateContext from '../hooks/useStateContext.js';
 //navigation bar at top of screen
 
 //navigation container
-function Navbar() {
-    const {context,setContext} = useStateContext();
-    const [loginId, setLoginId] = useState(context.login_id);
+function Navbar(props) {
+    const {context, setContext} = useStateContext();
     const [account, setAccount] = useState(context.account);
-
-    let signupOrProfile, loginOrLogout;
-    if (loginId) {
-        signupOrProfile = <NavButton link="/profile" text="Profile" align="right" />;
-        loginOrLogout = <NavButton link="/logout" text="Log Out" align="right" />;
-    } else {
-        signupOrProfile = <NavButton link="/signup" text="Sign Up" align="right"/>;
-        loginOrLogout = <NavButton link="/login" text="Log In" align="right"/>;
-    }
+    console.log(context);
+    console.log(props.login);
     if (account == "employee")
     {
         return (
@@ -26,8 +18,8 @@ function Navbar() {
                 <ul id='navbar'>
                     <NavButton link="/" text="Home" align="left"/>
                     <NavButton link="/employee" text="Reports" align="left"/>
-                    {signupOrProfile}
-                    {loginOrLogout}
+                    <ProfNavButton login={props.login} />
+                    <LogNavButton login={props.login} />
                 </ul>
             </div>
         );
@@ -41,8 +33,8 @@ function Navbar() {
                     <NavButton link="/shops" text="Shops and Restaurants" align="left"/>
                     <NavButton link="/events" text="Events" align="left"/>
                     <NavButton link="/map" text="Map" align="left"/>
-                    {signupOrProfile}
-                    {loginOrLogout}
+                    <ProfNavButton login={props.login} />
+                    <LogNavButton login={props.login} />
                 </ul>
             </div>
         );
@@ -57,6 +49,26 @@ function NavButton(props) {
             <NavLink id='navbutton' to={props.link}>{props.text}</NavLink>
         </li>
     );
+}
+
+//log in or log out
+function LogNavButton(props) {
+    const [loggedin, setLoggedin] = useState(props.login);
+    if (loggedin) {
+        return <NavButton link="/logout" text="Log Out" align="right" />;
+    } else {
+        return <NavButton link="/login" text="Log In" align="right"/>;
+    }
+}
+
+//sign up or profile
+function ProfNavButton(props) {
+    const [loggedin, setLoggedin] = useState(props.login);
+    if (loggedin) {
+        return <NavButton link="/profile" text="Profile" align="right" />;
+    } else {
+        return <NavButton link="/signup" text="Sign Up" align="right"/>;
+    }
 }
 
 export default Navbar;

@@ -16,7 +16,7 @@ function Employee() {
                 <hr style={{border:'2px solid white'}}/>
                 <br /><br />
                 <p>Find employees by category:</p>
-                <Link className="other-form-button" to="/signup">Employee Search</Link>
+                <Link className="other-form-button" to="/findemployee">Employee Search</Link>
                 <br /><br />
                 <p>Find entries by month:</p>
                 <Link className="other-form-button" to="/signup">Month Search</Link>

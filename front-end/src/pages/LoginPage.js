@@ -28,8 +28,7 @@ function Login() {
             .post(values)
             .then(response => {
                 setContext({login_id: response.data.customer_id, account: "customer"});
-                navigate('/');
-                console.log(context);}) 
+                navigate('/');}) 
             .catch(error => console.log(error))
         }
     };
