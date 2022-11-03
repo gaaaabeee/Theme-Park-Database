@@ -3,10 +3,10 @@ import React, { useEffect, createContext, useContext, useState } from 'react';
 export const stateContext = createContext();
 
 const getFreshContext = () => {
-    if (localStorage.getItem('context') === null) {
-        localStorage.setItem('context',JSON.stringify({login_id: 0, account: ""}));
+    if (sessionStorage.getItem('context') === null) {
+        sessionStorage.setItem('context',JSON.stringify({login_id: 0, account: ""}));
     }
-    return JSON.parse(localStorage.getItem('context'));
+    return JSON.parse(sessionStorage.getItem('context'));
 }
 
 function useStateContext() {
@@ -18,7 +18,7 @@ function ContextProvider({children}) {
     const [context,setContext] = useState(getFreshContext());
 
     useEffect(() => {
-        localStorage.setItem('context', JSON.stringify(context));
+        sessionStorage.setItem('context', JSON.stringify(context));
     },[context]);
     
     return (

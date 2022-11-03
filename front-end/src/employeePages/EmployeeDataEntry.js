@@ -15,7 +15,7 @@ const getFreshModel = () => ({
     password: ""
 });
 
-function DataEntry() {
+function EmployeeDataEntry() {
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
     const [employeeList,setEmployeeList] = useState([]);
     const [newUsername,setNewUsername] = useState('');
@@ -98,7 +98,9 @@ function DataEntry() {
                 <input type="text" name="password" onChange={handleInputChange}/>
                 <button onClick={formSubmit}>Submit</button>
             </div>
+            <br />
             <div className="employees">
+                <h3>Current Employees</h3>
                 {employeeList.map((val) => {
                     return (
                         <div className="employee" key={val.employee_id}>
@@ -124,4 +126,4 @@ function DataEntry() {
     )
 }
 
-export default DataEntry;
+export default EmployeeDataEntry;

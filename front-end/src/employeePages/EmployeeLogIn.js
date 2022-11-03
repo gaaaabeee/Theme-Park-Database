@@ -27,7 +27,7 @@ function EmployeeLogIn() {
             createAPIEndpoint(ENDPOINTS.employeeLogin)
             .post(values)
             .then(response => {
-                setContext({account_id: response.data.employee_id, account: "employee"});
+                setContext({login_id: response.data.employee_id, account: "employee"});
                 navigate('/employee');
                 window.location.reload(false);}) 
             .catch(error => console.log(error))

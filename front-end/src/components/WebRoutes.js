@@ -12,8 +12,6 @@ import Logout from '../customerPages/LogoutPage.js';
 import Employee from '../employeePages/EmployeePage.js';
 import EmployeeLogIn from '../employeePages/EmployeeLogIn.js';
 import SignClear from '../customerPages/SignClearPage.js';
-import EmployeeSearch from '../employeePages/FindEmployeesPage.js';
-import DataEntry from '../employeePages/DataEntry.js';
 
 function WebRoutes() {
     return (
@@ -31,8 +29,6 @@ function WebRoutes() {
             <Route path='/signclear' element={<SignClear />}></Route>
             <Route path='/profile' element={<Profile />}></Route>
             <Route path='/employee' element={<Employee />}></Route>
-            <Route path='/findemployee' element={<EmployeeSearch />}></Route>
-            <Route path='/dataentry' element={<DataEntry />}></Route>
         </Routes>
     );
 }
