@@ -105,11 +105,13 @@ function EmployeeDataEntry() {
                     return (
                         <div className="thing" key={val.employee_id}>
                             <div>
-                                <h3>Name: {val.fname} {val.lname}</h3>
-                                <h3>DOB: {val.dob}</h3>
-                                <h3>Title: {val.job_title}</h3>
-                                <h3>Username: {val.username}</h3>
-                                <h3>Password: {val.password}</h3>
+                                <h4>ID: {val.employee_id}</h4>
+                                <h4>Name: {val.fname} {val.lname}</h4>
+                                <h4>DOB: {val.dob}</h4>
+                                <h4>Title: {val.job_title}</h4>
+                                <h4>Supervisor ID: {val.supervisor_id}</h4>
+                                <h4>Username: {val.username}</h4>
+                                <h4>Password: {val.password}</h4>
                             </div>
                             <div>
                                 <input type="text" placeholder="New username" onChange={(event) => {

@@ -1,9 +1,11 @@
 import React from 'react';
 import LargeAd from '../components/largeAd.js';
-import SmallAd from '../components/smallAd.js';
+import {LeftSmallAd,RightSmallAd} from '../components/smallAd.js';
+import About from '../components/about.js';
 import '../css/home.css';
 import eventAdImg from '../images/homepage_event_ad.jpg';
 import restaurantAdImg from '../images/homepage_restaurant_ad.jpg';
+import rideAdImg from '../images/rideAdImg.jpg';
 
 //home page
 
@@ -23,6 +25,28 @@ const restaurantAd = {
     image: "url("+restaurantAdImg+")"
 };
 
+const rideAd = {
+    title: "Ride Ad",
+    description: "More about this ride",
+    link: "/rides",
+    buttonText: "See More Rides >",
+    image: "url("+rideAdImg+")"
+};
+
+const ticketAd = {
+    title: "25% Ticket Discount!!",
+    description: "If you buy 2 or more tickets during October then each ticket will be 25% off!",
+    link: "/tickets",
+    buttonText: "Buy Tickets Now >"
+}
+
+const mapAd = {
+    title: "Plan Your Visit!",
+    description: "Check out our map to see where our rides and shops are located!",
+    link: "/map",
+    buttonText: "See the Map >"
+}
+
 //says at top if amusement park is opened or closed today
 function IsOpen() {
     return (<div className="opened-header">We are Opened/Closed today!</div>);
@@ -34,7 +58,16 @@ function Home() {
             <IsOpen />
             <LargeAd value={eventAd} />
             <hr className="line-break" />
+            <div className="smallad-box">
+                <LeftSmallAd value={ticketAd} />
+                <RightSmallAd value={mapAd} />
+            </div>
+            <hr className="line-break" />
             <LargeAd value={restaurantAd} />
+            <hr className="line-break" />
+            <LargeAd value={rideAd} />
+            <hr className="line-break" />
+            <About />
             <hr className="line-break" />
         </div>
     );

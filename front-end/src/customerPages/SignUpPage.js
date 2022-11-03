@@ -41,7 +41,7 @@ function Signup() {
     const getAge = (dobStr) => {
         const today = new Date();
         const birth = new Date(dobStr);
-        const age = today.getFullYear() - birth.getFullYear();
+        let age = today.getFullYear() - birth.getFullYear();
         const month = today.getMonth() - birth.getMonth();
         if (month < 0 || (month === 0 && today.getDate() < birth.getDate())) {
             age--;

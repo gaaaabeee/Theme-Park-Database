@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import '../css/formpage.css';
+import RideSearch from '../components/searchRides.js';
+import RideDataEntry from '../components/rideDataEntry';
 
 
 function Ride2() {
@@ -13,7 +15,7 @@ function Ride2() {
         return (
             <div>
                 <button className="other-form-button" onClick={() => changeOption(0)}>Go Back</button>
-                <div>something</div>
+                <RideSearch />
             </div>
         );
     }
@@ -21,7 +23,7 @@ function Ride2() {
         return (
             <div>
                 <button className="other-form-button" onClick={() => changeOption(0)}>Go Back</button>
-                <div>something</div>
+                <RideDataEntry />
             </div>
         );
     }

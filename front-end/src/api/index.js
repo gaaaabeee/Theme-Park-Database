@@ -10,6 +10,9 @@ export const ENDPOINTS = {
     customerSignup: 'Customer/signup',
     employee: 'Employee',
     employeeLogin: 'Employee/signin',
+    employeeUpdate: 'Employee/update',
+    ride: 'Ride',
+    rideUpdate: 'Ride/update'
 };
 
 export const createAPIEndpoint = (endpoint) => {
