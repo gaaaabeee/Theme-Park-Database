@@ -8,8 +8,8 @@ import useStateContext from '../hooks/useStateContext.js';
 //login page
 
 const getFreshModel = () => ({
-    lname: "",
-    employee_id: ""
+    username: "",
+    password: ""
 });
 
 function EmployeeLogIn() {
@@ -37,8 +37,8 @@ function EmployeeLogIn() {
     //check if fields are correct
     const validate = () => {
         let temp = {};
-        temp.lname = (/^[a-zA-Z-' ]*$/).test(values.lname) ? "" : "Not a valid name";
-        temp.employee_id = values.employee_id != "" ? "" : "You must enter an ID.";
+        temp.lname = values.username != "" ? "" : "You must enter a username.";
+        temp.password = values.password != "" ? "" : "You must enter a password.";
         setErrors(temp);
         return Object.values(temp).every(x => x == "");
     };
@@ -50,11 +50,11 @@ function EmployeeLogIn() {
                 <hr style={{border:'2px solid white'}}/>
                 <div className='form-inner-box'>
                     <form name="loginForm" method="post" id="loginForm" onSubmit={employeelogin}>
-                        <label>Last Name: </label><br />
-                        <input type="lname" name="lname" value={values.lname} onChange={handleInputChange} required/><br />
-                        <p>{errors.lname}</p><br />
-                        <label>Employee ID: </label><br />
-                        <input type="employee_id" name="employee_id" value={values.employee_id} onChange={handleInputChange} size="30" required/><br />
+                        <label>Username: </label><br />
+                        <input type="text" name="username" value={values.username} onChange={handleInputChange} required/><br />
+                        <p>{errors.username}</p><br />
+                        <label>Password: </label><br />
+                        <input type="password" name="password" value={values.password} onChange={handleInputChange} size="30" required/><br />
                         <p>{errors.employee_id}</p><br />
                     </form>
                 </div>
