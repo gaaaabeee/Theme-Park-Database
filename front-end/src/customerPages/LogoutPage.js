@@ -10,6 +10,7 @@ function Logout() {
     const logout = () => {
         setContext({login_id: 0, account: ""});
         navigate("/");
+        window.location.reload(false);
     };
 
     return (

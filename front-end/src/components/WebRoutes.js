@@ -1,18 +1,19 @@
 import {Routes,Route} from "react-router-dom";
-import Home from '../pages/HomePage.js';
-import Tickets from '../pages/TicketPage.js';
-import Rides from '../pages/RidePage.js';
-import Shops from '../pages/ShopsPage.js';
-import Events from '../pages/EventsPage.js';
-import Map from '../pages/MapPage.js';
-import Login from '../pages/LoginPage.js';
-import Signup from '../pages/SignUpPage.js';
-import Profile from '../pages/ProfilePage.js';
-import Logout from '../pages/LogoutPage.js';
-import Employee from '../pages/EmployeePage.js';
-import EmployeeLogIn from '../pages/EmployeeLogIn.js';
-import SignClear from '../pages/SignClearPage.js';
-import EmployeeSearch from '../pages/FindEmployeesPage.js';
+import Home from '../customerPages/HomePage.js';
+import Tickets from '../customerPages/TicketPage.js';
+import Rides from '../customerPages/RidePage.js';
+import Shops from '../customerPages/ShopsPage.js';
+import Events from '../customerPages/EventsPage.js';
+import Map from '../customerPages/MapPage.js';
+import Login from '../customerPages/LoginPage.js';
+import Signup from '../customerPages/SignUpPage.js';
+import Profile from '../customerPages/ProfilePage.js';
+import Logout from '../customerPages/LogoutPage.js';
+import Employee from '../employeePages/EmployeePage.js';
+import EmployeeLogIn from '../employeePages/EmployeeLogIn.js';
+import SignClear from '../customerPages/SignClearPage.js';
+import EmployeeSearch from '../employeePages/FindEmployeesPage.js';
+import DataEntry from '../employeePages/DataEntry.js';
 
 function WebRoutes() {
     return (
@@ -31,6 +32,7 @@ function WebRoutes() {
             <Route path='/profile' element={<Profile />}></Route>
             <Route path='/employee' element={<Employee />}></Route>
             <Route path='/findemployee' element={<EmployeeSearch />}></Route>
+            <Route path='/dataentry' element={<DataEntry />}></Route>
         </Routes>
     );
 }

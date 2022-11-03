@@ -9,8 +9,6 @@ import useStateContext from '../hooks/useStateContext.js';
 function Navbar(props) {
     const {context, setContext} = useStateContext();
     const [account, setAccount] = useState(context.account);
-    console.log(context);
-    console.log(props.login);
     if (account == "employee")
     {
         return (

@@ -29,7 +29,7 @@ function EmployeeLogIn() {
             .then(response => {
                 setContext({account_id: response.data.employee_id, account: "employee"});
                 navigate('/employee');
-                console.log(context);}) 
+                window.location.reload(false);}) 
             .catch(error => console.log(error))
         }
     };
