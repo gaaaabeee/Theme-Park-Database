@@ -45,7 +45,7 @@ function RideDataEntry() {
                     breakdown_nums: response.breakdown_nums
                 }
             ])
-        })
+        }).then(() => {alert("Successfully added employee!");})
     };
 
     //change ride name not attraction_id
