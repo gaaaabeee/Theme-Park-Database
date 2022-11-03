@@ -1,0 +1,42 @@
+.profile-name {
+    text-align: center;
+    border: 1px solid black;
+}
+
+.profile-contents {
+    background-color: red;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    min-height: 55vh;
+}
+
+.profile-info {
+    background-color: white;
+    display: inline-block;
+    margin: 30px auto;
+    padding: 50px 100px;
+    width: 80%;
+    color: black;
+    border: 1px solid black;
+    border-radius: 30px;
+    font-size: 20px;
+}
+
+.profile-grid {
+    display: inline-grid;
+    grid-template-columns: 180px 300px;
+}
+
+.profile-grid-item1 {
+    text-align: left;
+    color: grey;
+}
+
+.profile-grid-item2 {
+    text-align: center;
+}
+
+.profile-line-break {
+    border: 1px solid gray;
+}
