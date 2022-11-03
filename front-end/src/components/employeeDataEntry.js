@@ -99,11 +99,11 @@ function EmployeeDataEntry() {
                 <button onClick={formSubmit}>Submit</button>
             </div>
             <br />
-            <div className="employees">
+            <div className="things">
                 <h3>Current Employees</h3>
                 {employeeList.map((val) => {
                     return (
-                        <div className="employee" key={val.employee_id}>
+                        <div className="thing" key={val.employee_id}>
                             <div>
                                 <h3>Name: {val.fname} {val.lname}</h3>
                                 <h3>DOB: {val.dob}</h3>

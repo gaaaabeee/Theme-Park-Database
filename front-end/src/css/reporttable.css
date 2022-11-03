@@ -1,0 +1,25 @@
+.searchbox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.filter-table {
+    text-align: center;
+    font-size: 15px;
+}
+
+td input {
+    height: 20px;
+}
+
+.result-table {
+    text-align: center;
+}
+
+.result-table td, .result-table th {
+    border: 1px solid black;
+    min-width: 50px;
+}

@@ -1,16 +1,12 @@
 import React, {useState} from 'react';
-import ReactDOM from 'react-dom';
-import {Link, useNavigate} from 'react-router-dom';
-import useForm from '../hooks/useForm.js';
 import '../css/dataentry.css';
-import { createAPIEndpoint, ENDPOINTS, BASE_URL } from '../api/index.js';
-import useStateContext from '../hooks/useStateContext.js';
-
-
+import '../css/reporttable.css';
+import { createAPIEndpoint, ENDPOINTS } from '../api/index.js';
 
 function EmployeeSearch(){
-const [data, setData]= useState([]);
-function findcustomer(){
+const [data, setData] = useState([]);
+
+function findemployee(){
     createAPIEndpoint(ENDPOINTS.employee)
     .fetch()
     .then(response => {
@@ -34,8 +30,10 @@ function findcustomer(){
 
 return(
     <div className='entry-form'>
+        <div className='form-inner-box'>
+            </div> 
         <h2>Employee Search</h2>
-        <button onClick={findcustomer} className="submit-button" type="submit" >Get Employees</button>
+        <button onClick={findemployee} className="submit-button" type="submit" >Get Employees</button>
         <br /><br />
         <br /><br />
         <table>
