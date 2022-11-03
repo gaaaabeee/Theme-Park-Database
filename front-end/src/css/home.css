@@ -113,3 +113,37 @@
     height: 400px;
     width: 30vw;
 }
+.mediumad-box {
+    position: relative;
+    width: 100%;
+    height: 320px;
+}
+
+.mediumad-container {
+    margin: 10px 30px;
+    width: 45%;
+    height: 200%;
+    border-radius: 30px;
+}
+
+.mediumad-content {
+    text-align: center;
+    padding: 20px;
+}
+
+.mediumad-text {
+    padding: 20px;
+    max-height: 180px;
+}
+
+.medium-left {
+    color: white;
+    background-color: #FF5656;
+    float: left;
+}
+
+.medium-right {
+    color: white;
+    background-color: rgb(242, 203, 9);
+    float: right;
+}
