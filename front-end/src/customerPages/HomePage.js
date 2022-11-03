@@ -34,8 +34,8 @@ const rideAd = {
 };
 
 const ticketAd = {
-    title: "25% Ticket Discount!!",
-    description: "If you buy 2 or more tickets during October then each ticket will be 25% off!",
+    title: "Group Ticket Discount!!",
+    description: "Get $15 off for every 5 tickets bought!",
     link: "/tickets",
     buttonText: "Buy Tickets Now >"
 }
