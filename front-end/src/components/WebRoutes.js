@@ -12,6 +12,8 @@ import Logout from '../customerPages/LogoutPage.js';
 import Employee from '../employeePages/EmployeePage.js';
 import EmployeeLogIn from '../employeePages/EmployeeLogIn.js';
 import SignClear from '../customerPages/SignClearPage.js';
+import Customer from '../employeePages/CustomerPage.js';
+import Ride2 from '../employeePages/RidesPage.js';
 
 function WebRoutes() {
     return (
@@ -29,6 +31,8 @@ function WebRoutes() {
             <Route path='/signclear' element={<SignClear />}></Route>
             <Route path='/profile' element={<Profile />}></Route>
             <Route path='/employee' element={<Employee />}></Route>
+            <Route path='/customer' element={<Customer />}></Route>
+            <Route path='/rides2' element={<Ride2 />}></Route>
         </Routes>
     );
 }
