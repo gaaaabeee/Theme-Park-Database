@@ -1,12 +1,12 @@
 CREATE DEFINER=`root`@`localhost` TRIGGER `customer_BEFORE_UPDATE` BEFORE UPDATE ON `customer` FOR EACH ROW BEGIN
 IF (new.height < 0.0) THEN
-	SET new.height = NULL;
+	SET new.height = 0.0;
     END IF;
 END
 
 CREATE DEFINER=`root`@`localhost` TRIGGER `customer_BEFORE_INSERT` BEFORE INSERT ON `customer` FOR EACH ROW BEGIN
 	IF (new.height < 0.0) THEN
-	SET new.height = NULL;
+	SET new.height = 0.0;
     END IF;
 END
 
