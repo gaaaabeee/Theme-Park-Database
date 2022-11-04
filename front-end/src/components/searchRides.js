@@ -19,7 +19,7 @@ function CustomerSearch(){
     const [filters, setFilters] = useState(blankFilters);
     const updateFilters = (obj) => {setFilters({...filters,...obj});}
 
-    const findride = () => {
+    function findride () {
         createAPIEndpoint(ENDPOINTS.ride)
         .fetch()
         .then(response => {
