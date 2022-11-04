@@ -18,7 +18,7 @@ function CustomerSearch(){
 
     const [filters, setFilters] = useState(blankFilters);
     const updateFilters = (obj) => {setFilters({...filters,...obj});}
-
+//const findride = () => was this before? -gabe
     function findride () {
         createAPIEndpoint(ENDPOINTS.ride)
         .fetch()
