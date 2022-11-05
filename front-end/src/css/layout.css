@@ -25,14 +25,27 @@
 }
 
 #footerlogo {
-    text-align: center;
+    text-align: center ;
     font-size: 40px;
-    font-family: Bungee Spice;
-    text-shadow: 3px 3px 0 black
+    font-family: Lilita One;
+    color: gold;
+    text-shadow: 3px 3px 0 lightskyblue
 }
 
 #footertext {
     text-align: center;
     color: white;
     font: inherit;
+}
+
+#footerimage {
+    position:absolute;
+    background-color:red;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+    padding: 15px;
+    height: 180px;
+    width: 270px;
+    float: left;
 }
