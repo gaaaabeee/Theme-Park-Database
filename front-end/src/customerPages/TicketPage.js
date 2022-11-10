@@ -22,7 +22,7 @@ function Tickets() {
         e.preventDefault();
         //if park is open on purchase date (and email is valid if not logged in)
             //add ticket to tickets database
-                //then update tickets bought for customer
+            //then update tickets bought for customer if logged in
                 navigate('/');
                 alert("Successfully purchased tickets!");
     };
