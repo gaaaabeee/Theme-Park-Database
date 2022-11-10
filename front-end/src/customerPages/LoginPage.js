@@ -16,7 +16,6 @@ function Login() {
 
     const {context, setContext} = useStateContext();
     const navigate = useNavigate();
-
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
 
     //when form submits
@@ -29,8 +28,11 @@ function Login() {
             .then(response => {
                 setContext({login_id: response.data.customer_id, account: "customer"});
                 navigate('/');
+                alert("Successfully logged in!");
                 window.location.reload(false);}) 
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error);
+                alert("Username or Password is incorrect");})
         }
     };
 

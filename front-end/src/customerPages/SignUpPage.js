@@ -30,10 +30,12 @@ function Signup() {
             createAPIEndpoint(ENDPOINTS.customerSignup)
             .post(values)
             .then(response => {
-                //setContext({customer_id: response.data.customer_id, account: "customer"});
                 navigate('/signclear');
+                alert("New account created!");
                 console.log(context);})
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error);
+                alert(error);})
         }
     };
 

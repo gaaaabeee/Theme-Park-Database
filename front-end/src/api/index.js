@@ -11,8 +11,8 @@ export const ENDPOINTS = {
     employee: 'Employee',
     employeeLogin: 'Employee/signin',
     employeeUpdate: 'Employee/update',
-    ride: 'Ride',
-    rideUpdate: 'Ride/update'
+    ride: 'Attraction',
+    rideUpdate: 'Attraction/update'
 };
 
 export const createAPIEndpoint = (endpoint) => {

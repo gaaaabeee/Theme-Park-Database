@@ -3,7 +3,10 @@
     border: 5px solid red;
     height: 180px;
     position: relative;
-    text-align: center
+    text-align: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
 }
 
 #headerlogo {

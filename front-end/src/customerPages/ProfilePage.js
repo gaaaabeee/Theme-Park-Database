@@ -153,9 +153,16 @@ function Profile() {
                     </div>
                     <hr className="profile-line-break" />
                 </div>
+                <ViewTickets />
                 <ChangeProfile />
             </div>
         </div>
+    );
+}
+
+function ViewTickets() {
+    return (
+        <div className="profile-info">View Purchased Tickets</div>
     );
 }
 
@@ -163,7 +170,7 @@ function ChangeProfile() {
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshFormModel);
     return (
         <div className="profile-info">Change Profile Info</div>
-    )
+    );
 }
 
 export default Profile;

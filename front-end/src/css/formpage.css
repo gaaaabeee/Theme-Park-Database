@@ -10,7 +10,8 @@
     display: inline-block;
     margin: 5% 5%;
     padding: 50px 30px;
-    width: 400px;
+    min-width: 400px;
+    max-width: 700px;
     color: white;
     border: 1px solid red;
     border-radius: 50px;
@@ -77,4 +78,12 @@
 .logout-button:hover {
     color: red;
     text-decoration: underline red solid;
+}
+
+.deal {
+    background-color: rgb(242, 203, 9);
+    color: black;
+    border-radius: 30px;
+    width: 80%;
+    display: inline-block;
 }

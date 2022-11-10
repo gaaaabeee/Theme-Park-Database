@@ -1,16 +1,17 @@
 import React from 'react';
 import Navbar from './navbar.js';
 import bottomimage from '../images/bottomimage.png';
+import bgHeader from '../images/headerimg.jpg';
 import header from '../images/header.png'; 
 import '../css/layout.css';
 
 //layout of every page, includes header, navbar, and footer
-//<div id='headerlogo'>Amusement Park</div>
 
 function TopHeader(props) {
+    const bgImg = "url("+bgHeader+")";
     return (
         <header>
-            <div id='topheader'>
+            <div id='topheader' style={{backgroundImage: bgImg}}>
                 <img src={header} style={{width:'1200px',height:'170px'}} alt='header'></img>
         
             </div>
