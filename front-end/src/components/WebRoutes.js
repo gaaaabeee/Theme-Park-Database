@@ -14,7 +14,7 @@ import EmployeeLogIn from '../employeePages/EmployeeLogIn.js';
 import SignClear from '../customerPages/SignClearPage.js';
 import Customer from '../employeePages/CustomerPage.js';
 import Ride2 from '../employeePages/RidesPage.js';
-import Stats from '../employeePages/RidesPage.js';
+import Stats from '../employeePages/StatsPage';
 
 function WebRoutes() {
     return (

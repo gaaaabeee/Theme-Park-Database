@@ -11,6 +11,7 @@ export const ENDPOINTS = {
     employee: 'Employee',
     employeeLogin: 'Employee/signin',
     employeeUpdate: 'Employee/update',
+    jobSearch: 'Employee/jobtitle',
     ride: 'Attraction',
     rideUpdate: 'Attraction/update'
 };
