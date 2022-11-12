@@ -13,7 +13,8 @@ export const ENDPOINTS = {
     employeeUpdate: 'Employee/update',
     jobSearch: 'Employee/jobtitle',
     ride: 'Attraction',
-    rideUpdate: 'Attraction/update'
+    rideUpdate: 'Attraction/update',
+    tickets: 'Tickets',
 };
 
 export const createAPIEndpoint = (endpoint) => {

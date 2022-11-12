@@ -20,11 +20,28 @@ function Tickets() {
     //ADD API ENDPOINT CONNECTION
     const buyTickets = (e) => {
         e.preventDefault();
-        //if park is open on purchase date (and email is valid if not logged in)
-            //add ticket to tickets database
-            //then update tickets bought for customer if logged in
+        if (validate())
+        {
+            const data = {tickets: values.tickets, date: values.date, customer_id: context.login_id};
+            createAPIEndpoint(ENDPOINTS.tickets)
+            .post(data)
+            .then(respone => {
                 navigate('/');
                 alert("Successfully purchased tickets!");
+            })
+            .catch(error => {
+                console.log(error);
+                alert("The park is closed on that day.");
+            })
+        }       
+    };
+
+    const validate = () => {
+        let temp = {};
+        temp.email = (/\S+@\S+\.\S+/).test(values.email) ? "" : "Not a valid email.";
+        temp.tickets = values.tickets > 0 ? "" : "Select number of tickets to buy.";
+        setErrors(temp);
+        return Object.values(temp).every(x => x == "");
     };
 
     const getToday = () => {
