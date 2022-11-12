@@ -42,6 +42,22 @@ function Tickets() {
         return today;
     }
 
+    const getFourMonths = () => {
+        let today = new Date();
+        let future = new Date(today.setMonth(today.getMonth()+4));
+        let dd = future.getDate();
+        let mm = future.getMonth()+1;
+        let yyyy = future.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        future = yyyy + '-' + mm + '-' + dd;
+        return future;
+    }
+
     const handleInputChange2 = (e) => {
         handleInputChange(e);
         setPrice(getPrice(e.target.value));
@@ -76,6 +92,7 @@ function Tickets() {
         .catch(errors => console.log(errors))
     }
     let today = getToday();
+    let future = getFourMonths();
     return (
         <div className='form-page'>
             <div className='form-box'>
@@ -93,7 +110,7 @@ function Tickets() {
                         <input type='number' name='tickets' id='ticketsInput' onChange={handleInputChange2} min='0' required /><br />
                         <p>{errors.tickets}</p><br />
                         <label>Purchase Date:</label><br />
-                        <input type='date' name='purchaseDate' id='purchaseDate' onChange={handleInputChange} min={today} required /><br />
+                        <input type='date' name='purchaseDate' id='purchaseDate' onChange={handleInputChange} min={today} max={future} required /><br />
                         <p>{errors.date}</p><br />
                         {!context.login_id &&
                         <>
