@@ -26,7 +26,7 @@ function Login() {
             createAPIEndpoint(ENDPOINTS.customerLogin)
             .post(values)
             .then(response => {
-                setContext({login_id: response.data.customer_id, account: "customer"});
+                setContext({login_id: response.data[0].customer_id, account: "customer"});
                 navigate('/');
                 alert("Successfully logged in!");
                 window.location.reload(false);}) 
