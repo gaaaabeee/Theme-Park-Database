@@ -5,15 +5,20 @@ import axios from 'axios';
 export const BASE_URL = 'https://cosc3380-park.azurewebsites.net/'; //change to whatever path to website is later
 
 export const ENDPOINTS = {
-    customer: 'customer',
+    customer: 'customer', ///{id}
     customerLogin: 'Customer/signin',
     customerSignup: 'Customer/signup',
-    employee: 'Employee',
+    employee: 'Employee', ///{id}
     employeeLogin: 'Employee/signin',
     employeeUpdate: 'Employee/update',
-    jobSearch: 'Employee/jobtitle',
-    ride: 'Attraction',
-    rideUpdate: 'Attraction/update',
+    jobSearch: 'Employee/role/', //{title}
+    employeePosition: 'Employee/position',
+    attraction: 'Attraction',
+    rides: 'attraction/rides',
+    shops: 'attraction/shops',
+    ridesLastMonth: 'attraction/ridereportlastmonth',
+    shopsLastMonth: 'attraction/shopreportlastmonth',
+    attractionUpdate: 'Attraction/update',
     tickets: 'Tickets',
 };
 

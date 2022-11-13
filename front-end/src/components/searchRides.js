@@ -20,7 +20,7 @@ function CustomerSearch(){
     const updateFilters = (obj) => {setFilters({...filters,...obj});}
 //const findride = () => was this before? -gabe
     function findride () {
-        createAPIEndpoint(ENDPOINTS.ride)
+        createAPIEndpoint(ENDPOINTS.attraction)
         .fetch()
         .then(response => {
             setData(response.data)})

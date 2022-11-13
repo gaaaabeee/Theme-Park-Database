@@ -20,7 +20,7 @@ function RideDataEntry() {
     const [newName,setNewName] = useState('');
 
     useEffect(() => {
-        createAPIEndpoint(ENDPOINTS.ride)
+        createAPIEndpoint(ENDPOINTS.attraction)
         .fetch()
         .then(response => {
             setRidesList(response.data);
@@ -30,7 +30,7 @@ function RideDataEntry() {
 
     const formSubmit = () => {
         console.log(values);
-        createAPIEndpoint(ENDPOINTS.ride)
+        createAPIEndpoint(ENDPOINTS.attraction)
         .post(values)
         .then((response) => {
             setRidesList([
@@ -56,7 +56,7 @@ function RideDataEntry() {
             newName: newName
         }
         console.log(newRecord);
-        createAPIEndpoint(ENDPOINTS.rideUpdate)
+        createAPIEndpoint(ENDPOINTS.attractionUpdate)
         .post(newRecord)
         .then(() => {alert("Successfully changed name");})
         .catch(errors => console.log(errors))
@@ -64,7 +64,7 @@ function RideDataEntry() {
 
     const deleteRide = (attraction_id) => {
         console.log(attraction_id);
-        createAPIEndpoint(ENDPOINTS.ride)
+        createAPIEndpoint(ENDPOINTS.attraction)
         .delete(attraction_id)
         .then(() => {alert("Successfully deleted!");})
         .catch(errors => console.log(errors));
