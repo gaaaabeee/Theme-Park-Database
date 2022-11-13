@@ -104,7 +104,7 @@ function Tickets() {
         createAPIEndpoint(ENDPOINTS.customer+"/"+context.login_id)
         .fetch()
         .then(response => {
-            setValues({...values, email : response.data});
+            setValues({...values, email : response.data[0].email});
         })
         .catch(errors => console.log(errors))
     }
