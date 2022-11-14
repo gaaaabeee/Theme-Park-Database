@@ -2,16 +2,16 @@ import axios from 'axios';
 
 //connects front end to back end, change if needed
 
-export const BASE_URL = 'https://cosc3380-park.azurewebsites.net/'; //change to whatever path to website is later
+export const BASE_URL = 'https://cosc3380-park.azurewebsites.net/';
 
 export const ENDPOINTS = {
-    customer: 'customer', ///{id}
+    customer: 'customer', //'/{id}'
     customerLogin: 'Customer/signin',
     customerSignup: 'Customer/signup',
-    employee: 'Employee', ///{id}
+    employee: 'Employee', //'/{id}'
     employeeLogin: 'Employee/signin',
     employeeUpdate: 'Employee/update',
-    jobSearch: 'Employee/role/', //{title}
+    jobSearch: 'Employee/role/', //'{title}'
     employeePosition: 'Employee/position',
     attraction: 'Attraction',
     rides: 'attraction/rides',
