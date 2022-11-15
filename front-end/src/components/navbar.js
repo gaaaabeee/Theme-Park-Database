@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {NavLink} from 'react-router-dom';
 import '../css/navbar.css';
 import useStateContext from '../hooks/useStateContext.js';
@@ -9,6 +9,7 @@ import useStateContext from '../hooks/useStateContext.js';
 function Navbar(props) {
     const {context, setContext} = useStateContext();
     const [account, setAccount] = useState(context.account);
+
     if (account == "employee")
     {
         return (

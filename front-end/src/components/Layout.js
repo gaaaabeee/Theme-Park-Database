@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import Navbar from './navbar.js';
 import bottomimage from '../images/bottomimage.png';
 import bgHeader from '../images/headerimg.jpg';
@@ -9,13 +9,42 @@ import '../css/layout.css';
 
 function TopHeader(props) {
     const bgImg = "url("+bgHeader+")";
+    const [scrolled,setScrolled] = useState(false);
+
+    const handleScroll = () => {
+        const offset = window.scrollY;
+        if (offset > 180) {
+            setScrolled(true);
+            
+        } else {
+            setScrolled(false);
+            
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll',handleScroll)
+    });
+
+    useEffect(() => {
+        const nav = document.getElementById("navbox");
+        if (scrolled) {
+            nav.classList.add('scrolled');
+        }
+        else {
+            nav.classList.remove('scrolled');
+        }
+    },[scrolled])
+
     return (
         <header>
             <div id='topheader' style={{backgroundImage: bgImg}}>
                 <img src={header} style={{width:'1200px',height:'170px'}} alt='header'></img>
         
             </div>
-            <Navbar login={props.login}/>
+            <div style={{height:"60px"}}>
+                <Navbar login={props.login}/>
+            </div>
         </header>
     );
 }

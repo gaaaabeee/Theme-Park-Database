@@ -133,7 +133,7 @@ function CustomerSearch(){
         }
         return info.map(elem => {
             return (
-                <tr>
+                <tr key={elem.customer_id}>
                     <td>{elem.customer_id}</td>
                     <td>{elem.fname}</td>
                     <td>{elem.lname}</td>

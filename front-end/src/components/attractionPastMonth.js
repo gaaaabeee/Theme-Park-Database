@@ -56,7 +56,7 @@ function AttractionPastMonth() {
         <div className='searchbox'>
             <h2>Attraction Popularity from Past Month</h2>
             <p>Report from {oneMonthAgo.toDateString()} to {today.toDateString()}.</p>
-            <br /><br />
+            <br />
             <table className="result-table">
                 <thead>
                     <tr className="table-title">Rides</tr>
@@ -82,6 +82,7 @@ function AttractionPastMonth() {
                 </thead>
                 <tbody>{renderShopTable()}</tbody>
             </table>
+            <br />
         </div>
     );
 }

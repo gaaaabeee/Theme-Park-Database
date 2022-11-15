@@ -6,11 +6,13 @@ import { createAPIEndpoint, ENDPOINTS } from '../api';
 
 const getFreshModel = () => ({
     name: "",
+    type: "",
     description: "",
+    location: "",
     min_height: "",
     start_time: "",
     end_time: "",
-    breakdown_nums: ""
+    breakdown_nums: 0
 });
 
 function AttractionDataEntry() {
@@ -37,14 +39,17 @@ function AttractionDataEntry() {
                 {
                     attraction_id: response.attraction_id,
                     name: response.name,
+                    type: response.type,
                     description: response.description,
                     min_height: response.min_height,
                     start_time: response.start_time,
                     end_time: response.end_time,
                     breakdown_nums: response.breakdown_nums
                 }
-            ])
-        }).then(() => {alert("Successfully added attraction!");})
+            ]);
+            setValues(getFreshModel());
+        })
+        .then(() => {alert("Successfully added attraction!");})
     };
 
     //change ride name not attraction_id
@@ -71,33 +76,38 @@ function AttractionDataEntry() {
 
     return (
         <div className='outside'>
-            <h1>ADDING NEW RIDE</h1>
+            <h1>Add New Attraction</h1>
             <div className='entry-form'>
                 <label>Name:</label>
-                <input type="text" name="name" onChange={handleInputChange}/>
+                <input type="text" name="name" value={values.name} onChange={handleInputChange}/>
+                <label>Type:</label>
+                <select type="text" name="type" value={values.type} onChange={handleInputChange}>
+                    <option defaultValue="ride">ride</option>
+                    <option value="shop">shop</option>
+                    <option value="show">show</option>
+                </select>
                 <label>Description:</label>
-                <input type="text" name="description" onChange={handleInputChange}/>
+                <input type="text" name="description" value={values.description} onChange={handleInputChange}/>
                 <label>Location Number:</label>
-                <input type="number" name="location" onChange={handleInputChange}/>
+                <input type="number" name="location" value={values.location} onChange={handleInputChange}/>
                 <label>Minimum Height:</label>
-                <input type="number" name="min_height" onChange={handleInputChange}/>
+                <input type="number" name="min_height" value={values.min_height} onChange={handleInputChange}/>
                 <label>Start Time:</label>
-                <input type="time" name="start_time" onChange={handleInputChange}/>
+                <input type="time" name="start_time" value={values.start_time} onChange={handleInputChange}/>
                 <label>End Time:</label>
-                <input type="time" name="end_time" onChange={handleInputChange}/>
-                <label>Breakdowns:</label>
-                <input type="number" name="breakdown_nums" onChange={handleInputChange}/>
+                <input type="time" name="end_time" value={values.end_time} onChange={handleInputChange}/>
                 <button onClick={formSubmit}>Submit</button>
             </div>
             <br />
             <div className="things">
-                <h3>Current Rides</h3>
+                <h3>Current Attractions</h3>
                 {ridesList.map((val) => {
                     return (
                         <div className="thing" key={val.attraction_id}>
                             <div>
                                 <h4>ID: {val.attraction_id}</h4>
                                 <h4>Name: {val.name}</h4>
+                                <h4>Type: {val.type}</h4>
                                 <h4>Description: {val.description}</h4>
                                 <h4>Minimum Height: {val.min_height}</h4>
                                 <h4>Start Time: {val.start_time}</h4>

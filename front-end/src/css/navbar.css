@@ -2,7 +2,16 @@
     background-color: red;
     height: 60px;
     border: 1px solid #7A0707;
+    width: 100%;
     font-weight: bold;
+    z-index: 10;
+    overflow: auto;
+}
+
+#navbox.scrolled {
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 #navbar {

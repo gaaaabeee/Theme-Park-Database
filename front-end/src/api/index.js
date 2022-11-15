@@ -5,22 +5,27 @@ import axios from 'axios';
 export const BASE_URL = 'https://cosc3380-park.azurewebsites.net/';
 
 export const ENDPOINTS = {
-    customer: 'customer', //'/{id}'
-    customerLogin: 'Customer/signin',
-    customerSignup: 'Customer/signup',
-    employee: 'Employee', //'/{id}'
-    employeeLogin: 'Employee/signin',
-    employeeUpdate: 'Employee/update',
-    jobSearch: 'Employee/role/', //'{title}'
+    customer: 'customer', //'/{id}' returns list of customers or specified customer
+    customerLogin: 'Customer/signin', //signs in a customer
+    customerSignup: 'Customer/signup', //creates new customer account
+    customerTickets: 'Customer/tickets/', //'{id}' not in backend yet, returns ticket_bought of that customer
+    employee: 'Employee', //'/{id}' returns list of employees or specified employee
+    employeeLogin: 'Employee/signin', //signs in an employee
+    employeeUpdate: 'Employee/update', //updates an employee
+    jobSearch: 'Employee/role/', //'{title}' returns employees by job title
     employeePosition: 'Employee/position',
-    attraction: 'Attraction',
-    rides: 'attraction/rides',
-    shops: 'attraction/shops',
+    attraction: 'Attraction', //returns list of attractions
+    rides: 'attraction/rides', //returns list of rides
+    shops: 'attraction/shops', //returns list of shops
     ridesPastMonth: 'attraction/ridereportpastmonth',
     shopsPastMonth: 'attraction/shopreportpastmonth',
-    attractionUpdate: 'Attraction/update',
-    tickets: 'Tickets',
-    report: 'Entry/', //'{month}/{year}'
+    attractionUpdate: 'Attraction/update', // not in backend yet, updates an attraction
+    breakdowns: 'RideBreakdown', // not in backend yet, returns list of breakdowns
+    breakdownUpdate: 'RideBreakdown/update', //not in backend yet, resolves a breakdown
+    tickets: 'Tickets', // not in backend yet, adds new ticket
+    overallReport: 'Stats', // not in backend yet, returns overall park report
+    monthReport: 'Entry/', //'{month}/{year}' returns month report
+    dayReport: 'Date', //'/{date}' not in backend yet, returns list of dates or specified date
 };
 
 export const createAPIEndpoint = (endpoint) => {

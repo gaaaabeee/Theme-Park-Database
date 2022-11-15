@@ -9,6 +9,8 @@
 .filter-table {
     text-align: center;
     font-size: 15px;
+    background-color: lightgray;
+    border: 1px solid black;
 }
 
 td input {
@@ -21,10 +23,17 @@ td input {
 
 .result-table td, .result-table th {
     border: 1px solid black;
+    padding: 5px;
     min-width: 50px;
 }
 
 .result-table .table-title {
     border: 1px solid black;
     font-size: 30px;
+}
+
+.result-box {
+    border: 1px solid black;
+    padding: 20px 30px;
+    font-size: 20;
 }

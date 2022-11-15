@@ -49,6 +49,7 @@ function EmployeeDataEntry() {
             ]);
             setValues(getFreshModel());
         })
+        .then(() => {alert("Successfully added attraction!");})
     };
 
     const updateEmployee = (employee_id) => {

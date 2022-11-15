@@ -12,30 +12,82 @@ function StatsMonthly() {
 
     const [filters, setFilters] = useState(blankFilters);
     const updateFilters = (obj) => {setFilters({...filters,...obj});}
+    const [submitted,setSubmitted] = useState(false);
+    const [validData,setValidData] = useState(false);
+
+    const validate = () => {
+        const today = new Date();
+        if (parseInt(filters.year) <= today.getFullYear()) {
+            let month = new Date(Date.parse(filters.month+" 1, 2022")).getMonth();
+            if (month <= today.getMonth()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     const getreport = () => {
-        createAPIEndpoint(ENDPOINTS.report+filters.month+'/'+filters.year)
-        .fetch()
-        .then(response => {
-            console.log(response.data);
-            setData({
-                year: filters.year,
-                month: filters.month,
-                avgEntries: response.data.avgEntries,
-                totalEntries: response.data.totalEntries,
-                avgRevenue: response.data.avgRevenue,
-                totalRevenue: response.data.totalRevenue,
-                avgRainouts: response.data.avgRainouts,
-                totalRainouts: response.data.totalRainouts,
-                avgBreakdowns: response.data.avgBreakdowns,
-                totalBreakdowns: response.data.totalBreakdowns,
-                mostPopularRide: response.data.mostPopularRide
-            })})
-        .catch(error => console.log(error))
+        setSubmitted(true);
+        if (validate()) {
+            setValidData(true);
+            createAPIEndpoint(ENDPOINTS.monthReport+filters.month+'/'+filters.year)
+            .fetch()
+            .then(response => {
+                console.log(response.data);
+                setData({
+                    year: filters.year,
+                    month: filters.month,
+                    avgEntries: response.data.avgEntries,
+                    totalEntries: response.data.totalEntries,
+                    avgRevenue: response.data.avgRevenue,
+                    totalRevenue: response.data.totalRevenue,
+                    avgBreakdowns: response.data.avgBreakdowns,
+                    totalBreakdowns: response.data.totalBreakdowns,
+                    rainouts: response.data.totalRainouts,
+                    mostPopularRide: response.data.mostPopularRide
+                })})
+            .catch(error => console.log(error))
+        }
+        else {
+            setValidData(false);
+        }
     }
 
     const renderReport = () => {
-        
+        if (validData) {
+            return (
+                <div className='result-box'>
+                    <h2>{data.month} {data.year}</h2>
+                    <div style={{float:"left"}}>
+                        <p>Average Entries a Day:</p>
+                        <p>Total Entries this Month:</p>
+                        <p>Average Revenue a Day:</p>
+                        <p>Total Revenue this Month:</p>
+                        <p>Average Breakdowns a Day:</p>
+                        <p>Total Breakdowns this Month:</p>
+                        <p>Rainy Days this Month:</p>
+                        <p>Most Popular Ride this Month:</p>
+                    </div>
+                    <div style={{float:"right"}}>
+                        <p>{data.avgEntries}</p>
+                        <p>{data.totalEntries}</p>
+                        <p>{data.avgRevenue}</p>
+                        <p>{data.totalRevenue}</p>
+                        <p>{data.avgBreakdowns}</p>
+                        <p>{data.totalBreakdowns}</p>
+                        <p>{data.rainouts}</p>
+                        <p>{data.mostPopularRide}</p>
+                    </div>
+                </div>
+            );
+        }
+        else {
+            return (
+                <div className='result-box'>
+                    <p>No Data</p>
+                </div>
+            )
+        }
     }
 
     let todaysYear = new Date().getFullYear();
@@ -73,9 +125,8 @@ function StatsMonthly() {
             </div><br/>
             <button onClick={getreport} className="submit-button" type="button">Search Month</button>
             <br /><br />
-            {}
+            {submitted && renderReport()}
         </div>
-
     )
 }
 

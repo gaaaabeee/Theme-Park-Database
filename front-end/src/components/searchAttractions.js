@@ -134,9 +134,7 @@ function AttractionSearch(){
                 <tbody>{renderTable()}</tbody>
             </table>
         </div>
-
     )
-
 }
 
 //doesnt work

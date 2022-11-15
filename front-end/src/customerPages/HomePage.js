@@ -49,7 +49,12 @@ const mapAd = {
 
 //says at top if amusement park is opened or closed today
 function IsOpen() {
-    return (<div className="opened-header">We are Opened/Closed today!</div>);
+    return (
+        <div className="opened-header">
+            <h4>We are Opened/Closed today!</h4>
+            <p>Park opens 8:00 AM and closes 8:00 PM every day.</p>
+        </div>
+    );
 }
 
 function Home() {

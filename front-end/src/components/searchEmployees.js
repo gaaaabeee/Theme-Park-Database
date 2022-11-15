@@ -118,7 +118,7 @@ function EmployeeSearch(){
             }
             return info.map(elem => {
                 return(
-                    <tr>
+                    <tr key={elem.employee_id}>
                         <td>{elem.employee_id}</td>
                         <td>{elem.fname}</td>
                         <td>{elem.lname}</td>

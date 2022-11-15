@@ -57,7 +57,7 @@ function Stats() {
         return (
             <div className='form-page'>
                 <div className='form-box'>
-                    <h2>Statistics:</h2>
+                    <h2>Diagnostics:</h2>
                     <hr style={{border:'2px solid white'}}/>
                     <br />
                     <p>View Overall Park Diagnostics:</p>
