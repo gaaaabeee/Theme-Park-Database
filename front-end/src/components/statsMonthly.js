@@ -73,7 +73,7 @@ function StatsMonthly() {
             </div><br/>
             <button onClick={getreport} className="submit-button" type="button">Search Month</button>
             <br /><br />
-            
+            {}
         </div>
 
     )

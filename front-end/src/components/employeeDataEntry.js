@@ -5,6 +5,7 @@ import useForm from '../hooks/useForm.js';
 import { createAPIEndpoint, ENDPOINTS } from '../api';
 
 const getFreshModel = () => ({
+    id: "",
     fname: "",
     lname: "",
     job_title: "",
@@ -45,7 +46,8 @@ function EmployeeDataEntry() {
                     username: response.username,
                     password: response.password
                 }
-            ])
+            ]);
+            setValues(getFreshModel());
         })
     };
 
@@ -72,27 +74,27 @@ function EmployeeDataEntry() {
 
     return (
         <div className='outside'>
-            <h1>ADDING NEW EMPLOYEE</h1>
+            <h1>Add New Employee Account</h1>
             <div className='entry-form'>
                 <label>First Name:</label>
-                <input type="text" name="fname" onChange={handleInputChange}/>
+                <input type="text" name="fname" value={values.fname} onChange={handleInputChange}/>
                 <label>Last Name:</label>
-                <input type="text" name="lname" onChange={handleInputChange}/>
+                <input type="text" name="lname" value={values.lname} onChange={handleInputChange}/>
                 <label>Job Title:</label>
-                <input type="text" name="job_title" onChange={handleInputChange}/>
+                <input type="text" name="job_title" value={values.job_title} onChange={handleInputChange}/>
                 <label>Date of Birth:</label>
-                <input type="date" name="dob" onChange={handleInputChange}/>
+                <input type="date" name="dob" value={values.dob} onChange={handleInputChange}/>
                 <label>Supervisor ID:</label>
-                <select type="text" name="supervisor_id" id="supervisor_id" onChange={handleInputChange}>
+                <select type="text" name="supervisor_id" id="supervisor_id" value={values.supervisor_id} onChange={handleInputChange}>
                     <option defaultValue>Open this select menu</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
                 <label>Username:</label>
-                <input type="text" name="username" onChange={handleInputChange}/>
+                <input type="text" name="username" value={values.username} onChange={handleInputChange}/>
                 <label>Password:</label>
-                <input type="text" name="password" onChange={handleInputChange}/>
+                <input type="text" name="password" value={values.password} onChange={handleInputChange}/>
                 <button onClick={formSubmit}>Submit</button>
             </div>
             <br />

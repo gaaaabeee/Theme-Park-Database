@@ -126,7 +126,6 @@ function EmployeeSearch(){
                         <td>{elem.supervisor_id}</td>
                         <td>{elem.job_title}</td>
                         <td>{elem.username}</td>
-                        <td>{elem.password}</td>
                     </tr>
             )
         })}
@@ -204,7 +203,6 @@ function EmployeeSearch(){
                         <th>Supervisor ID</th>
                         <th>Job Title</th>
                         <th>Username</th>
-                        <th>Password</th>
                     </tr>
                 </thead>
                 <tbody>{renderTable()}</tbody>
