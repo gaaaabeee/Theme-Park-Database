@@ -5,7 +5,6 @@ import useForm from '../hooks/useForm.js';
 import { createAPIEndpoint, ENDPOINTS } from '../api';
 
 const getFreshModel = () => ({
-    employee_id: "",
     fname: "",
     lname: "",
     job_title: "",
@@ -75,8 +74,6 @@ function EmployeeDataEntry() {
         <div className='outside'>
             <h1>ADDING NEW EMPLOYEE</h1>
             <div className='entry-form'>
-                <label>Employee ID:</label>
-                <input type="text" name="employee_id" onChange={handleInputChange}/>
                 <label>First Name:</label>
                 <input type="text" name="fname" onChange={handleInputChange}/>
                 <label>Last Name:</label>

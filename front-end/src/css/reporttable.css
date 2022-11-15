@@ -23,3 +23,8 @@ td input {
     border: 1px solid black;
     min-width: 50px;
 }
+
+.result-table .table-title {
+    border: 1px solid black;
+    font-size: 30px;
+}

@@ -16,10 +16,11 @@ export const ENDPOINTS = {
     attraction: 'Attraction',
     rides: 'attraction/rides',
     shops: 'attraction/shops',
-    ridesLastMonth: 'attraction/ridereportlastmonth',
-    shopsLastMonth: 'attraction/shopreportlastmonth',
+    ridesPastMonth: 'attraction/ridereportpastmonth',
+    shopsPastMonth: 'attraction/shopreportpastmonth',
     attractionUpdate: 'Attraction/update',
     tickets: 'Tickets',
+    report: 'Entry/', //'{month}/{year}'
 };
 
 export const createAPIEndpoint = (endpoint) => {

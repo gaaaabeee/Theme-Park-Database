@@ -16,7 +16,7 @@ function Navbar(props) {
                 <ul id='navbar'>
                     <NavButton link="/employee" text="Employees" align="left"/>
                     <NavButton link="/customer" text="Customers" align="left"/>
-                    <NavButton link="/rides2" text="Rides" align="left"/>
+                    <NavButton link="/attraction" text="Attractions" align="left"/>
                     <NavButton link="/stats" text="Diagnostics" align="left"/>
                     <ProfNavButton login={props.login} />
                     <LogNavButton login={props.login} />

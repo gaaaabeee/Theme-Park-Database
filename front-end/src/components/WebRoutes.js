@@ -13,7 +13,7 @@ import Employee from '../employeePages/EmployeePage.js';
 import EmployeeLogIn from '../employeePages/EmployeeLogIn.js';
 import SignClear from '../customerPages/SignClearPage.js';
 import Customer from '../employeePages/CustomerPage.js';
-import Ride2 from '../employeePages/RidesPage.js';
+import Attraction from '../employeePages/AttractionPage.js';
 import Stats from '../employeePages/StatsPage';
 
 function WebRoutes() {
@@ -33,7 +33,7 @@ function WebRoutes() {
             <Route path='/profile' element={<Profile />}></Route>
             <Route path='/employee' element={<Employee />}></Route>
             <Route path='/customer' element={<Customer />}></Route>
-            <Route path='/rides2' element={<Ride2 />}></Route>
+            <Route path='/attraction' element={<Attraction />}></Route>
             <Route path='/stats' element={<Stats />}></Route>
         </Routes>
     );
