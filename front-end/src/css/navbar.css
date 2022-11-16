@@ -21,7 +21,7 @@
     overflow: hidden;
 }
 
-#navbutton {
+.navbutton {
     display: block;
     color: white;
     text-align: center;
@@ -35,11 +35,13 @@
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-#navbutton:hover:not(.active) {
+.navbutton:hover {
     background-color: #FF5656;
-    box-shadow: 3px 3px 3px 1px #7A0707
+    color: white;
+    box-shadow: 3px 3px 3px 1px #7A0707;
+    text-decoration: none;
 }
 
-#navbutton.active {
+.navbutton.active {
     background-color: #B93131;
 }

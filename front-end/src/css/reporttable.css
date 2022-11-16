@@ -6,6 +6,17 @@
     padding-bottom: 20px;
 }
 
+.optionbox {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-evenly;
+}
+
+.search {
+    margin-right: 100px;
+}
+
 .filter-table {
     text-align: center;
     font-size: 15px;

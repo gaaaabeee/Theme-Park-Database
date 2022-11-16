@@ -8,6 +8,7 @@ function BreakdownSearch() {
     const blankFilters = {
         breakdown_id: "",
         ride_id: "",
+        ride_name: "",
         maintainer_id: "",
         breakdown_date: "",
         breakdown_desc: "",
@@ -37,6 +38,11 @@ function BreakdownSearch() {
                 return (item.ride_id == filters.ride_id);
             });
         }
+        if (filters.ride_name != "") {
+            info = info.filter((item) => {
+                return (item.name.toLowerCase().startsWith(filters.ride_name.toLowerCase()))
+            });
+        }
         if (filters.maintainer_id != "") { 
             info = info.filter((item) => {
                 return (item.maintainer_id == filters.maintainer_id);
@@ -63,6 +69,8 @@ function BreakdownSearch() {
                 <tr key={elem.breakdown_id}>
                     <td>{elem.breakdown_id}</td>
                     <td>{elem.ride_id}</td>
+                    <td>{elem.name}</td>
+                    <td>{elem.breakdown_nums}</td>
                     <td>{elem.maintainer_id}</td>
                     <td>{elem.breakdown_date}</td>
                     <td>{elem.breakdown_desc}</td>
@@ -80,23 +88,25 @@ function BreakdownSearch() {
                 <form name="ridesearch" id="ridesearch">
                     <table className="filter-table">
                         <tr>
-                            <th>ID:</th>
+                            <th>Breakdown ID:</th>
                             <th>Ride ID:</th>
-                            <th>Maintainer ID:</th>
+                            <th>Ride Name:</th>
                         </tr>
                         <tr>
                             <td><input type="text" name="breakdown_id" value={filters.breakdown_id} onChange={(e) => updateFilters({breakdown_id:e.target.value})}/></td>
                             <td><input type="text" name="ride_id" value={filters.ride_id} onChange={(e) => updateFilters({ride_id:e.target.value})}/></td>
-                            <td><input type="text" name="maintainer_id" value={filters.maintainer_id} onChange={(e) => updateFilters({maintainer_id:e.target.value})}/></td>
+                            <td><input type="text" name="ride_name" value={filters.ride_name} onChange={(e) => updateFilters({ride_name:e.target.value})}/></td>
                         </tr>
                         <tr>
                             <th>Breakdown Date</th>
                             <th>Breakdown Description</th>
+                            <th>Maintainer ID:</th>
                             <th>Resolved</th>
                         </tr>
                         <tr>
                             <td><input type="text" name="breakdown_date" value={filters.breakdown_date} onChange={(e) => updateFilters({breakdown_date:e.target.value})}/></td>
                             <td><input type="text" name="breakdown_desc" value={filters.breakdown_desc} onChange={(e) => updateFilters({breakdown_desc:e.target.value})}/></td>
+                            <td><input type="text" name="maintainer_id" value={filters.maintainer_id} onChange={(e) => updateFilters({maintainer_id:e.target.value})}/></td>
                             <td>
                                 <select type="text" name="resolved" value={filters.resolved} onChange={(e) => updateFilters({resolved:e.target.value})}>
                                     <option defaultValue=""></option>
@@ -116,6 +126,8 @@ function BreakdownSearch() {
                     <tr>
                         <th>Breakdown ID</th>
                         <th>Ride ID</th>
+                        <th>Ride Name</th>
+                        <th>Times Ride Broke Down</th>
                         <th>Maintainer ID</th>
                         <th>Breakdown Date</th>
                         <th>Breakdown Description</th>

@@ -117,7 +117,7 @@ function EmployeeSearch(){
                 })
             }
             return info.map(elem => {
-                return(
+                return (
                     <tr key={elem.employee_id}>
                         <td>{elem.employee_id}</td>
                         <td>{elem.fname}</td>
@@ -132,64 +132,70 @@ function EmployeeSearch(){
 
     return (
         <div className='searchbox'>
-            <h2>Employee Search</h2>
-            <div>
-                <p>*You can search by exact matches or by ranges for birthdates. Only search by one or the other.</p>
-                <form name="employeesearch" id="employeesearch">
-                    <table className="filter-table">
-                        <tr>
-                            <th>Employee ID:</th>
-                            <th>Supervisor ID:</th>
-                            <th>Job Title:</th>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="customer_id" value={filters.id} onChange={(e) => updateFilters({id:e.target.value})}/></td>
-                            <td><input type="text" name="fname" value={filters.superid} onChange={(e) => updateFilters({superid:e.target.value})}/></td>
-                            <td><input type="text" name="title" value={filters.title} onChange={(e) => updateFilters({title:e.target.value})}/></td>
-                        </tr>
-                        <tr>
-                            <th>First Name:</th>
-                            <th>Last Name:</th>
-                            <th>Username:</th>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="fname" value={filters.fname} onChange={(e) => updateFilters({fname:e.target.value})}/></td>
-                            <td><input type="text" name="lname" value={filters.lname} onChange={(e) => updateFilters({lname:e.target.value})}/></td>
-                            <td><input type="text" name="username" value={filters.username} onChange={(e) => updateFilters({username:e.target.value})}/></td>
-                        </tr>
-                        <tr>
-                            <th>Birth Year:</th>
-                            <th>Least Birth Year:</th>
-                            <th>Greatest Birth Year:</th>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="byear" value={filters.byear} onChange={(e) => updateFilters({byear:e.target.value})}/></td>
-                            <td><input type="text" name="minbyear" value={filters.minbyear} onChange={(e) => updateFilters({minbyear:e.target.value,byear:""})}/></td>
-                            <td><input type="text" name="maxbyear" value={filters.maxbyear} onChange={(e) => updateFilters({maxbyear:e.target.value,byear:""})}/></td>
-                        </tr>
-                        <tr>
-                            <th>Birth Month:</th>
-                            <th>Least Birth Month:</th>
-                            <th>Greatest Birth Month:</th>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="bmonth" value={filters.bmonth} onChange={(e) => updateFilters({bmonth:e.target.value})}/></td>
-                            <td><input type="text" name="minbmonth" value={filters.minbmonth} onChange={(e) => updateFilters({minbmonth:e.target.value,bmonth:""})}/></td>
-                            <td><input type="text" name="maxbmonth" value={filters.maxbmonth} onChange={(e) => updateFilters({maxbmonth:e.target.value,bmonth:""})}/></td>
-                        </tr>
-                        <tr>
-                            <th>Birth Day:</th>
-                            <th>Least Birth Day:</th>
-                            <th>Greatest Birth Day:</th>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="bday" value={filters.bday} onChange={(e) => updateFilters({bday:e.target.value})}/></td>
-                            <td><input type="text" name="minbday" value={filters.minbday} onChange={(e) => updateFilters({minbday:e.target.value,bday:""})}/></td>
-                            <td><input type="text" name="maxbday" value={filters.maxbday} onChange={(e) => updateFilters({maxbday:e.target.value,bday:""})}/></td>
-                        </tr>
-                    </table>
-                </form>
-            </div><br/>
+            <div className='optionbox'>
+                <div className='search'>
+                    <h2>Employee Search</h2>
+                    <p>*You can search by exact matches or by ranges for birthdates. Only search by one or the other.</p>
+                    <form name="employeesearch" id="employeesearch">
+                        <table className="filter-table">
+                            <tr>
+                                <th>Employee ID:</th>
+                                <th>Supervisor ID:</th>
+                                <th>Job Title:</th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="customer_id" value={filters.id} onChange={(e) => updateFilters({id:e.target.value})}/></td>
+                                <td><input type="text" name="fname" value={filters.superid} onChange={(e) => updateFilters({superid:e.target.value})}/></td>
+                                <td><input type="text" name="title" value={filters.title} onChange={(e) => updateFilters({title:e.target.value})}/></td>
+                            </tr>
+                            <tr>
+                                <th>First Name:</th>
+                                <th>Last Name:</th>
+                                <th>Username:</th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="fname" value={filters.fname} onChange={(e) => updateFilters({fname:e.target.value})}/></td>
+                                <td><input type="text" name="lname" value={filters.lname} onChange={(e) => updateFilters({lname:e.target.value})}/></td>
+                                <td><input type="text" name="username" value={filters.username} onChange={(e) => updateFilters({username:e.target.value})}/></td>
+                            </tr>
+                            <tr>
+                                <th>Birth Year:</th>
+                                <th>Least Birth Year:</th>
+                                <th>Greatest Birth Year:</th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="byear" value={filters.byear} onChange={(e) => updateFilters({byear:e.target.value})}/></td>
+                                <td><input type="text" name="minbyear" value={filters.minbyear} onChange={(e) => updateFilters({minbyear:e.target.value,byear:""})}/></td>
+                                <td><input type="text" name="maxbyear" value={filters.maxbyear} onChange={(e) => updateFilters({maxbyear:e.target.value,byear:""})}/></td>
+                            </tr>
+                            <tr>
+                                <th>Birth Month:</th>
+                                <th>Least Birth Month:</th>
+                                <th>Greatest Birth Month:</th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="bmonth" value={filters.bmonth} onChange={(e) => updateFilters({bmonth:e.target.value})}/></td>
+                                <td><input type="text" name="minbmonth" value={filters.minbmonth} onChange={(e) => updateFilters({minbmonth:e.target.value,bmonth:""})}/></td>
+                                <td><input type="text" name="maxbmonth" value={filters.maxbmonth} onChange={(e) => updateFilters({maxbmonth:e.target.value,bmonth:""})}/></td>
+                            </tr>
+                            <tr>
+                                <th>Birth Day:</th>
+                                <th>Least Birth Day:</th>
+                                <th>Greatest Birth Day:</th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="bday" value={filters.bday} onChange={(e) => updateFilters({bday:e.target.value})}/></td>
+                                <td><input type="text" name="minbday" value={filters.minbday} onChange={(e) => updateFilters({minbday:e.target.value,bday:""})}/></td>
+                                <td><input type="text" name="maxbday" value={filters.maxbday} onChange={(e) => updateFilters({maxbday:e.target.value,bday:""})}/></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div>
+                    <h3>Add a New Employee</h3>
+                </div>
+            </div>
+            <br/>
             <button onClick={findemployee} className="submit-button" type="button">Search Employees</button>
             <br /><br />
             <br /><br />

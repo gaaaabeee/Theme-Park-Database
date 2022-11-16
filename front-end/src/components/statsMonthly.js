@@ -4,6 +4,7 @@ import { createAPIEndpoint, ENDPOINTS } from '../api/index.js';
 
 function StatsMonthly() {
     const [data, setData]= useState({});
+    const [breakdownList,setBreakdownList] = useState([]);
 
     const blankFilters = {
         year: new Date().getFullYear(),
@@ -46,6 +47,14 @@ function StatsMonthly() {
                     rainouts: response.data.totalRainouts,
                     mostPopularRide: response.data.mostPopularRide
                 })})
+            .catch(error => console.log(error));
+
+            createAPIEndpoint(ENDPOINTS.breakdowns+'/'+filters.month+'/'+filters.year)
+            .fetch()
+            .then(response => {
+                console.log(response.data);
+                setBreakdownList(response.data);
+            })
             .catch(error => console.log(error))
         }
         else {
@@ -90,6 +99,30 @@ function StatsMonthly() {
         }
     }
 
+    const renderBreakdownList = () => {
+        if (validData) {
+            return breakdownList.map(elem => {
+                return (
+                    <tr key={elem.breakdown_id}>
+                        <td>{elem.breakdown_id}</td>
+                        <td>{elem.ride_id}</td>
+                        <td>{elem.name}</td>
+                        <td>{elem.breakdown_nums}</td>
+                        <td>{elem.maintainer_id}</td>
+                        <td>{elem.breakdown_date}</td>
+                        <td>{elem.breakdown_desc}</td>
+                        <td>{elem.resolved}</td>
+                    </tr>
+                );
+            })
+        }
+        else {
+            return (
+                <td>No Data</td>
+            )
+        }
+    }
+
     let todaysYear = new Date().getFullYear();
     return (
         <div className='searchbox'>
@@ -125,7 +158,28 @@ function StatsMonthly() {
             </div><br/>
             <button onClick={getreport} className="submit-button" type="button">Search Month</button>
             <br /><br />
+            <h3>Monthly Stats</h3>
             {submitted && renderReport()}
+            <br />
+            <h3>Reported Breakdowns this Month</h3>
+            {submitted && 
+            <div>
+                <table className='result-table'>
+                    <thead>
+                        <tr>
+                            <th>Breakdown ID</th>
+                            <th>Ride ID</th>
+                            <th>Ride Name</th>
+                            <th>Times Ride Broke Down</th>
+                            <th>Maintainer ID</th>
+                            <th>Breakdown Date</th>
+                            <th>Breakdown Description</th>
+                            <th>Resolved</th>
+                        </tr>
+                    </thead>
+                    <tbody>{renderBreakdownList()}</tbody>
+                </table>
+            </div>}
         </div>
     )
 }

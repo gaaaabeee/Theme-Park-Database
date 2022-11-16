@@ -20,9 +20,9 @@ export const ENDPOINTS = {
     ridesPastMonth: 'attraction/ridereportpastmonth',
     shopsPastMonth: 'attraction/shopreportpastmonth',
     attractionUpdate: 'Attraction/update', // not in backend yet, updates an attraction
-    breakdowns: 'RideBreakdown', // not in backend yet, returns list of breakdowns
-    breakdownUpdate: 'RideBreakdown/update', //not in backend yet, resolves a breakdown
-    tickets: 'Tickets', // not in backend yet, adds new ticket
+    breakdowns: 'Attraction/breakdown', //'/{month}/{year}' returns list of breakdowns
+    breakdownUpdate: 'attraction/breakdown/update', //not in backend yet, resolves a breakdown
+    tickets: 'Tickets', // adds new ticket
     overallReport: 'Stats', // not in backend yet, returns overall park report
     monthReport: 'Entry/', //'{month}/{year}' returns month report
     dayReport: 'Date', //'/{date}' not in backend yet, returns list of dates or specified date

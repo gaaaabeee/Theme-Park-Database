@@ -18,6 +18,7 @@ function Navbar(props) {
                     <NavButton link="/employee" text="Employees" align="left"/>
                     <NavButton link="/customer" text="Customers" align="left"/>
                     <NavButton link="/attraction" text="Attractions" align="left"/>
+                    <NavButton link="/breakdown" text="Breakdowns" align="left"/>
                     <NavButton link="/stats" text="Diagnostics" align="left"/>
                     <ProfNavButton login={props.login} />
                     <LogNavButton login={props.login} />
@@ -47,7 +48,7 @@ function NavButton(props) {
     const align = {float: props.align};
     return (
         <li style={align}>
-            <NavLink id='navbutton' to={props.link}>{props.text}</NavLink>
+            <NavLink className='navbutton' to={props.link}>{props.text}</NavLink>
         </li>
     );
 }

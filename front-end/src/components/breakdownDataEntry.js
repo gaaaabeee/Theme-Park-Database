@@ -34,6 +34,8 @@ function BreakdownDataEntry() {
                 {
                     breakdown_id: response.breakdown_id,
                     ride_id: response.ride_id,
+                    ride_name: response.name,
+                    ride_breakdowns: response.breakdown_nums,
                     maintainer_id: response.maintainer_id,
                     breakdown_date: response.breakdown_date,
                     breakdown_desc: response.breakdown_desc,
@@ -82,6 +84,8 @@ function BreakdownDataEntry() {
                             <div>
                                 <h4>ID: {val.breakdown_id}</h4>
                                 <h4>Ride ID: {val.ride_id}</h4>
+                                <h4>Ride Name: {val.ride_name}</h4>
+                                <h4>Times Ride Broke Down: {val.ride_breakdowns}</h4>
                                 <h4>Maintainer ID: {val.maintainer_id}</h4>
                                 <h4>Breakdown Date: {val.breakdown_date}</h4>
                                 <h4>Breakdown Description: {val.breakdown_desc}</h4>

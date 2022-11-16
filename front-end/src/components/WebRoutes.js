@@ -14,6 +14,7 @@ import EmployeeLogIn from '../employeePages/EmployeeLogIn.js';
 import SignClear from '../customerPages/SignClearPage.js';
 import Customer from '../employeePages/CustomerPage.js';
 import Attraction from '../employeePages/AttractionPage.js';
+import Breakdown from '../employeePages/BreakdownPage.js';
 import Stats from '../employeePages/StatsPage';
 
 function WebRoutes() {
@@ -34,6 +35,7 @@ function WebRoutes() {
             <Route path='/employee' element={<Employee />}></Route>
             <Route path='/customer' element={<Customer />}></Route>
             <Route path='/attraction' element={<Attraction />}></Route>
+            <Route path='/breakdown' element={<Breakdown />}></Route>
             <Route path='/stats' element={<Stats />}></Route>
         </Routes>
     );
