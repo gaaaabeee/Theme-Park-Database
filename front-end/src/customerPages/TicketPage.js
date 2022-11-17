@@ -127,7 +127,7 @@ function Tickets() {
                         <input type='number' name='tickets' id='ticketsInput' onChange={handleInputChange2} min='0' required /><br />
                         <p>{errors.tickets}</p><br />
                         <label>Purchase Date:</label><br />
-                        <input type='date' name='purchaseDate' id='purchaseDate' onChange={handleInputChange} min={today} max={future} required /><br />
+                        <input type='date' name='date' id='purchaseDate' onChange={handleInputChange} min={today} max={future} required /><br />
                         <p>{errors.date}</p><br />
                         {!context.login_id &&
                         <>

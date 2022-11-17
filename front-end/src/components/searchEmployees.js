@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import '../css/reporttable.css';
 import EmployeeSearchBox from '../components/employeeSearchBox';
 import EmployeeEntry from '../components/employeeEntry';
+import EmployeeEdit from './employeeEdit';
 import { createAPIEndpoint, ENDPOINTS } from '../api';
 
 function EmployeeSearch() {
@@ -9,11 +10,13 @@ function EmployeeSearch() {
     const [filters,setFilters] = useState();
     const [passwords,setPasswords] = useState(false);
     const [doSearch,setDoSearch] = useState(false);
+    const [editId,setEditId] = useState(null);
 
     const getFromSearch = (filter) => {
         console.log(filter);
         setFilters(filter);
         setDoSearch(!doSearch);
+        setEditId(null);
     }
 
     const searchEmployees = () => {
@@ -118,19 +121,39 @@ function EmployeeSearch() {
         return info;
     }
 
+    const editPopup = (e) => {
+        setEditId(e.target.value);
+    }
+
+    const endEdit = () => {
+        setEditId(null);
+    }
+
+    const editChange = () => {
+        setEditId(null);
+        setDoSearch(!doSearch);
+    }
+
     const renderTable = () => {
         return data.map(elem => {
             return (
-                <tr key={elem.employee_id}>
-                    <td>{elem.employee_id}</td>
-                    <td>{elem.fname}</td>
-                    <td>{elem.lname}</td>
-                    <td>{new Date(elem.dob).toLocaleDateString()}</td>
-                    <td>{elem.supervisor_id}</td>
-                    <td>{elem.job_title}</td>
-                    <td>{elem.username}</td>
-                    {passwords && <td>{elem.password}</td>}
-                </tr>
+                <>
+                    <tr key={elem.employee_id} id={"employee-"+elem.employee_id} className="result-row">
+                        <td>{elem.employee_id}</td>
+                        <td>{elem.fname}</td>
+                        <td>{elem.lname}</td>
+                        <td>{new Date(elem.dob).toLocaleDateString()}</td>
+                        <td>{elem.supervisor_id}</td>
+                        <td>{elem.job_title}</td>
+                        <td>{elem.username}</td>
+                        {passwords && <td>{elem.password}</td>}
+                        <td><button type='button' value={elem.employee_id} id={'edit-'+elem.employee_id} onClick={editPopup}>Edit</button></td>
+                    </tr>
+                    {editId == elem.employee_id && 
+                    <tr id={"edit-employee-"+elem.employee_id} className="edit-row">
+                        <EmployeeEdit values={elem} endEdit={endEdit} editChange={editChange}/>
+                    </tr>}
+                </>
             )
         })
     }
@@ -166,6 +189,7 @@ function EmployeeSearch() {
                             <th>Job Title</th>
                             <th>Username</th>
                             {passwords && <th>Password</th>}
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>{renderTable()}</tbody>
