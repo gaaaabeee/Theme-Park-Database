@@ -49,7 +49,7 @@ function EmployeeDataEntry() {
             ]);
             setValues(getFreshModel());
         })
-        .then(() => {alert("Successfully added attraction!");})
+        .then(() => {alert("Successfully added employee!");})
     };
 
     const updateEmployee = (employee_id) => {

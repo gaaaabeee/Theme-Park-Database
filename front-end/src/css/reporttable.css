@@ -1,9 +1,9 @@
-.searchbox {
+.searchpage {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-bottom: 20px;
+    padding: 20px 0;
 }
 
 .optionbox {
@@ -17,15 +17,50 @@
     margin-right: 100px;
 }
 
-.filter-table {
-    text-align: center;
-    font-size: 15px;
+.searchbox {
     background-color: lightgray;
     border: 1px solid black;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.filter-table {
+    text-align: left;
+    font-size: 15px;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.filter-table th {
+    padding-right: 10px;
+}
+
+.filter-table td {
+    padding-top: 0;
+    padding-right: 10px;
+    padding-bottom: 10px;
 }
 
 td input {
     height: 20px;
+}
+
+.reset-search {
+    position: absolute;
+    right: 50px;
+    bottom: 5px;
+}
+
+.entrybox {
+    background-color: lightgray;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    font-size: 15px;
 }
 
 .result-table {
