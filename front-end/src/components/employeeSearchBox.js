@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import '../css/reporttable.css';
-import { createAPIEndpoint, ENDPOINTS } from '../api/index.js';
 
 const blankFilters = {
     id: "",
@@ -36,6 +35,7 @@ function EmployeeSearchBox(props) {
         <div className='search'>
             <h2>Employee Search</h2>
             <p>*You can search by exact matches or by ranges for birthdates. Only search by one or the other.</p>
+            <p>*Leave all filters blank to return all employees.</p>
             <form name="employeesearch" id="employeesearch" className="searchbox">
                 <table className="filter-table">
                     <tr>

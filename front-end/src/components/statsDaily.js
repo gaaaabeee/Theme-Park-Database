@@ -163,7 +163,7 @@ function StatsDaily() {
     }
 
     return (
-        <div className='searchbox'>
+        <div className='searchpage'>
             <h2>Daily Reports</h2>
             <div>
                 <p>*You can search by exact matches or by ranges. Only search by one or the other.</p>

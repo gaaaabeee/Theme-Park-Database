@@ -53,7 +53,7 @@ function AttractionPastMonth() {
     let oneMonthAgo = new Date(today);
     oneMonthAgo.setMonth(oneMonthAgo.getMonth()-1);
     return (
-        <div className='searchbox'>
+        <div className='searchpage'>
             <h2>Attraction Popularity from Past Month</h2>
             <p>Report from {oneMonthAgo.toDateString()} to {today.toDateString()}.</p>
             <br />

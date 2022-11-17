@@ -23,9 +23,13 @@ function EmployeeSearch() {
         createAPIEndpoint(ENDPOINTS.employee)
         .fetch()
         .then(response => {
+            console.log(response.data);
             setData(filterData(response.data));
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error);
+            alert("Failed to fetch employee list from server.");
+        })
     }
 
     useEffect(() => {
@@ -138,7 +142,7 @@ function EmployeeSearch() {
         return data.map(elem => {
             return (
                 <>
-                    <tr key={elem.employee_id} id={"employee-"+elem.employee_id} className="result-row">
+                    <tr key={elem.employee_id} className="result-row">
                         <td>{elem.employee_id}</td>
                         <td>{elem.fname}</td>
                         <td>{elem.lname}</td>
@@ -147,14 +151,14 @@ function EmployeeSearch() {
                         <td>{elem.job_title}</td>
                         <td>{elem.username}</td>
                         {passwords && <td>{elem.password}</td>}
-                        <td><button type='button' value={elem.employee_id} id={'edit-'+elem.employee_id} onClick={editPopup}>Edit</button></td>
+                        <td><button type='button' value={elem.employee_id} onClick={editPopup}>Edit</button></td>
                     </tr>
                     {editId == elem.employee_id && 
-                    <tr id={"edit-employee-"+elem.employee_id} className="edit-row">
+                    <tr className="edit-row">
                         <EmployeeEdit values={elem} endEdit={endEdit} editChange={editChange}/>
                     </tr>}
                 </>
-            )
+            );
         })
     }
 

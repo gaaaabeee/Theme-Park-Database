@@ -74,11 +74,14 @@ td input {
     background-color: red;
     padding: 5px;
     min-width: 50px;
+    max-width: 220px;
+
 }
 
 .result-table td {
     padding: 5px;
     min-width: 50px;
+    max-width: 220px;
 }
 
 .result-table tr:nth-child(even):not(.edit-row) {
@@ -94,6 +97,7 @@ td input {
     border: 1px solid black;
     padding: 20px 30px;
     font-size: 20;
+    background-color: lightgray;
 }
 
 .edit-row {

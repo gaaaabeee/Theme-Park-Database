@@ -46,10 +46,10 @@ function Employee() {
                     <p>See employees:</p>
                     <button className="other-form-button" onClick={() => changeOption(1)}>Employee Search</button>
                     <br /><br />
-                    <p>Find Under Job Title:</p>
+                    <p>Find Under Job Title (ignore):</p>
                     <button className="other-form-button" onClick={() => changeOption(3)}>Job Search</button>
                     <br /><br />
-                    <p>Add New Employees:</p>
+                    <p>Add New Employees (ignore):</p>
                     <button className="other-form-button" onClick={() => changeOption(2)}>Data Entry</button>
                 </div>
             </div>

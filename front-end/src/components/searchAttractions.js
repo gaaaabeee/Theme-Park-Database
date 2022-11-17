@@ -1,34 +1,44 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../css/reporttable.css';
+import AttractionSearchBox from './attractionSearchBox';
+import AttractionEntry from './attractionEntry';
+import AttractionEdit from './attractionEdit';
 import { createAPIEndpoint, ENDPOINTS } from '../api/index.js';
 
 function AttractionSearch(){
     const [data, setData]= useState([]);
+    const [filters, setFilters] = useState();
+    const [doSearch,setDoSearch] = useState(false);
+    const [editId,setEditId] = useState(null);
 
-    const blankFilters = {
-        id: "",
-        name: "",
-        description: "",
-        location: "",
-        min_height: "",
-        start_time: "",
-        end_time: "",
-        breakdown_nums: ""
-    };
+    const getFromSearch = (filter) => {
+        console.log(filter);
+        setFilters(filter);
+        setDoSearch(!doSearch);
+        setEditId(null);
+    }
 
-    const [filters, setFilters] = useState(blankFilters);
-    const updateFilters = (obj) => {setFilters({...filters,...obj});}
-
-    const findride = () => {
+    const searchAttractions = () => {
         createAPIEndpoint(ENDPOINTS.attraction)
         .fetch()
         .then(response => {
-            setData(response.data)})
-        .catch(error => console.log(error))
+            console.log(response.data);
+            setData(filterData(response.data))
+        })
+        .catch(error => {
+            console.log(error);
+            alert("Failed to fetch attraction list from server.");
+        })
     }
 
-    const renderTable = () => {
-        let info = data;
+    useEffect(() => {
+        if (filters) {
+            searchAttractions();
+            console.log(data);
+        }
+    },[filters,doSearch]);
+
+    const filterData = (info) => {
         if (filters.id != "") { 
             info = info.filter((item) => {
                 return (item.attraction_id == filters.id);
@@ -44,6 +54,11 @@ function AttractionSearch(){
                 return (item.description.toLowerCase().includes(filters.description.toLowerCase()));
             });
         }
+        if (filters.type != "") {
+            info = info.filter((item) => {
+                return (item.type == filters.type);
+            })
+        }
         if (filters.location != "") {
             info = info.filter((item) => {
                 return (item.location == parseInt(filters.location));
@@ -54,85 +69,99 @@ function AttractionSearch(){
                 return (item.min_height.toString().startsWith(filters.min_height));
             });
         }
+        if (filters.start_time != "") {
+            let times = filters.start_time.split(":");
+            let hour = parseInt(times[0]);
+            let minute = parseInt(times[1]);
+            const startTime = new Date('0001-01-01T00:00:00');
+            startTime.setHours(hour,minute);
+            info = info.filter((item) => {
+                return (new Date(item.start_time) >= startTime);
+            })
+        }
+        if (filters.end_time != "") {
+            let times = filters.end_time.split(":");
+            let hour = parseInt(times[0]);
+            let minute = parseInt(times[1]);
+            const endTime = new Date('0001-01-01T00:00:00');
+            endTime.setHours(hour,minute);
+            info = info.filter((item) => {
+                return (new Date(item.end_time) <= endTime);
+            })
+        }
         if (filters.breakdown_nums != "") {
             info = info.filter((item) => {
                 return (item.breakdown_nums == parseInt(filters.breakdown_nums));
             });
         }
-        //start time filter
-        //end time filter
-        return info.map(elem => {
+        return info;
+    }
+
+    const editPopup = (e) => {
+        setEditId(e.target.value);
+    }
+
+    const endEdit = () => {
+        setEditId(null);
+    }
+
+    const editChange = () => {
+        setEditId(null);
+        setDoSearch(!doSearch);
+    }
+
+    const renderTable = () => {
+        return data.map(elem => {
             return (
-                <tr key={elem.attraction_id}>
-                    <td>{elem.attraction_id}</td>
-                    <td>{elem.name}</td>
-                    <td>{elem.description}</td>
-                    <td>{elem.location}</td>
-                    <td>{elem.min_height}</td>
-                    <td>{elem.start_time}</td>
-                    <td>{elem.end_time}</td>
-                    <td>{elem.breakdown_nums}</td>
-                </tr>
+                <>
+                    <tr key={elem.attraction_id} className="result-row">
+                        <td>{elem.attraction_id}</td>
+                        <td>{elem.name}</td>
+                        <td>{elem.type}</td>
+                        <td>{elem.description}</td>
+                        <td>{elem.location}</td>
+                        <td>{elem.min_height}</td>
+                        <td>{new Date(elem.start_time).toLocaleTimeString()}</td>
+                        <td>{new Date(elem.end_time).toLocaleTimeString()}</td>
+                        <td>{elem.breakdown_nums}</td>
+                        <td><button type="button" value={elem.attraction_id} onClick={editPopup}>Edit</button></td>
+                    </tr>
+                    {editId == elem.attraction_id &&
+                    <tr className="edit-row">
+                        <AttractionEdit values={elem} endEdit={endEdit} editChange={editChange}/>
+                    </tr>}
+                </>
             );}
         )
     }
 
     return (
         <div className='searchpage'>
-            <h2>Attraction Search</h2>
+            <div className='optionbox'>
+                {<AttractionSearchBox returnFilters={getFromSearch}/>}
+                {<AttractionEntry/>}
+            </div>
+            <br /><br />
+            <br /><br />
             <div>
-                <p>*You can search by exact matches or by ranges. Only search by one or the other.</p>
-                <form name="ridesearch" id="ridesearch">
-                    <table className="filter-table">
+                <table className="result-table">
+                    <thead>
                         <tr>
-                            <th>ID:</th>
-                            <th>Name:</th>
-                            <th>Description:</th>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="customer_id" value={filters.id} onChange={(e) => updateFilters({id:e.target.value})}/></td>
-                            <td><input type="text" name="fname" value={filters.name} onChange={(e) => updateFilters({name:e.target.value})}/></td>
-                            <td><input type="text" name="lname" value={filters.description} onChange={(e) => updateFilters({description:e.target.value})}/></td>
-                        </tr>
-                        <tr>
+                            <th>Attraction ID</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
                             <th>Location</th>
                             <th>Minimum Height</th>
-                            <th>Breakdowns</th>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="location" value={filters.location} onChange={(e) => updateFilters({location:e.target.value})}/></td>
-                            <td><input type="text" name="min_height" value={filters.min_height} onChange={(e) => updateFilters({min_height:e.target.value})}/></td>
-                            <td><input type="text" name="breakdown_nums" value={filters.breakdown_nums} onChange={(e) => updateFilters({breakdown_nums:e.target.value})}/></td>
-                        </tr>
-                        <tr>
                             <th>Start Time</th>
                             <th>End Time</th>
+                            <th>Breakdowns</th>
+                            <th></th>
                         </tr>
-                        <tr>
-                            <td><input type="time" name="start_time" value={filters.start_time} onChange={(e) => updateFilters({start_time:e.target.value})}/></td>
-                            <td><input type="time" name="end_time" value={filters.end_time} onChange={(e) => updateFilters({end_time:e.target.value})}/></td>
-                        </tr>
-                    </table>
-                </form>
-            </div><br/>
-            <button onClick={findride} className="submit-button" type="button">Search Rides</button>
-            <br /><br />
-            <br /><br />
-            <table className="result-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Location</th>
-                        <th>Minimum Height</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Breakdowns</th>
-                    </tr>
-                </thead>
-                <tbody>{renderTable()}</tbody>
-            </table>
+                    </thead>
+                    <tbody>{renderTable()}</tbody>
+                </table>
+            </div>
         </div>
     )
 }

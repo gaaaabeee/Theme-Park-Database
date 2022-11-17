@@ -36,10 +36,10 @@ function Breakdown() {
                     <hr style={{border:'2px solid white'}}/>
                     <br />
                     <p>View Ride Breakdowns:</p>
-                    <button className="other-form-button" onClick={() => changeOption(3)}>Breakdown Search</button>
+                    <button className="other-form-button" onClick={() => changeOption(1)}>Breakdown Search</button>
                     <br /><br />
                     <p>Report New Breakdown:</p>
-                    <button className="other-form-button" onClick={() => changeOption(4)}>Breakdown Data Entry</button>
+                    <button className="other-form-button" onClick={() => changeOption(2)}>Breakdown Data Entry</button>
                     <br /><br />
                 </div>
             </div>

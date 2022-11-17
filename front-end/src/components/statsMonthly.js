@@ -109,9 +109,9 @@ function StatsMonthly() {
                         <td>{elem.name}</td>
                         <td>{elem.breakdown_nums}</td>
                         <td>{elem.maintainer_id}</td>
-                        <td>{elem.breakdown_date}</td>
+                        <td>{new Date(elem.breakdown_date).toLocaleString()}</td>
                         <td>{elem.breakdown_desc}</td>
-                        <td>{elem.resolved}</td>
+                        <td>{elem.resolved ? "Yes" : "No"}</td>
                     </tr>
                 );
             })
@@ -125,7 +125,7 @@ function StatsMonthly() {
 
     let todaysYear = new Date().getFullYear();
     return (
-        <div className='searchbox'>
+        <div className='searchpage'>
             <h2>Monthly Reports</h2>
             <div>
                 <p>*Search by year and month.</p>

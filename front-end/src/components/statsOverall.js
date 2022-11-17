@@ -43,7 +43,7 @@ function StatsOverall() {
     }
 
     return (
-        <div className="searchbox">
+        <div className="searchpage">
             <h2>Overall Park Report</h2>
             <br /><br />
             {renderReport()}

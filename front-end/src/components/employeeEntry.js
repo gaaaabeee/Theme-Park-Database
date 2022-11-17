@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react';
+import React from 'react';
 import '../css/formpage.css';
 import '../css/dataentry.css';
 import useForm from '../hooks/useForm.js';
@@ -26,6 +26,10 @@ function EmployeeEntry() {
         .then(() => {
             setValues(getFreshModel());
             alert("Successfully added employee!\nSearch again to refresh the table.");
+        })
+        .catch(error => {
+            console.log(error);
+            alert("Failed to add employee.")
         })
     };
 
