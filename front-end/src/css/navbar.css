@@ -4,7 +4,7 @@
     border: 1px solid #7A0707;
     width: 100%;
     font-weight: bold;
-    z-index: 10;
+    z-index: 1;
     overflow: auto;
 }
 
@@ -44,4 +44,41 @@
 
 .navbutton.active {
     background-color: #B93131;
+}
+
+#vnavbox {
+    background-color: maroon;
+    min-height: 100%;
+    height: 100%;
+    font-weight: bold;
+    overflow: auto;
+    position: relative;
+    top: 240px;
+    z-index: 1;
+    position: relative;
+}
+
+#vnavbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.vnavbutton {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 8px 16px;
+    font-size: 20px;
+    border-bottom: 1px solid #470101;
+}
+
+.vnavbutton:hover {
+    background-color: crimson;
+    text-decoration: none;
+    color: white;
+}
+
+.vnavbutton.active {
+    background-color: #540202;
 }

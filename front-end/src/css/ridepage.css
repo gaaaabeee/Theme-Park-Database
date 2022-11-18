@@ -1,0 +1,82 @@
+.ridepage-header {
+    text-align: center;
+    background-color: gold;
+    padding: 5px;
+    border-bottom: 2px solid black;
+}
+
+.ride-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border-bottom: 1px solid lightgray;
+    height: 50px;
+}
+
+.ride-search-label {
+    font-size: 25px;
+    padding: 5px 10px;
+    border-right: 1px solid lightgray;
+    font-weight: bold;
+}
+
+.ride-search-box {
+    width: 30%;
+    height: 100%;
+    border-right: 1px solid lightgray;
+}
+
+.ride-search-input {
+    border: none;
+    height: 100%;
+    width: 100%;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+.ride-search-input:focus {
+    border-radius: 0;
+    outline: 0;
+}
+
+.ride-search-filter {
+    height: 100%;
+    padding: 12px 15px;
+    border-right: 1px solid lightgray;
+}
+
+.ride-list {
+    padding-bottom: 20px;
+    padding-left: 0;
+    width: 100%;
+}
+
+.ride-item {
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    width: 100%;
+    list-style-type: none;
+    padding: 10px 30px;
+    height: 180px;
+}
+
+.ride-name {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.ride-img-box {
+    float: left;
+    padding-right: 15px;
+}
+
+.ride-image {
+    object-fit: cover;
+}
+
+.noImage {
+    width: 250px;
+    height: 150px;
+    background-color: gray;
+}

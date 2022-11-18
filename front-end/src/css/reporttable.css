@@ -3,7 +3,26 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px 0;
+    padding-bottom: 20px;
+}
+
+.search-header {
+    background-color: maroon;
+    color: white;
+    text-align: center;
+    width: 100%;
+}
+
+.search-caption {
+    padding: 0;
+    margin: 0;
+}
+
+.search-area {
+    background-color: maroon;
+    color: white;
+    border-radius: 20px;
+    padding: 10px;
 }
 
 .optionbox {
@@ -11,6 +30,7 @@
     flex-direction: row;
     align-items: baseline;
     justify-content: space-evenly;
+    padding-top: 20px;
 }
 
 .search {
@@ -19,6 +39,7 @@
 
 .searchbox {
     background-color: lightgray;
+    color: black;
     border: 1px solid black;
     border-radius: 20px;
     padding: 10px;
@@ -55,6 +76,7 @@ td input {
 
 .entrybox {
     background-color: lightgray;
+    color: black;
     border: 1px solid black;
     border-radius: 20px;
     padding: 10px;
@@ -65,7 +87,7 @@ td input {
 
 .result-table {
     text-align: center;
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 .result-table th {
@@ -88,16 +110,17 @@ td input {
     background-color: #FFB9B9;
 }
 
-.result-table .table-title {
-    border: 1px solid black;
+.table-title {
+    border: 2px solid black;
     font-size: 30px;
+    background-color: maroon;
+    color: white;
+    text-align: center;
 }
 
-.result-box {
-    border: 1px solid black;
-    padding: 20px 30px;
-    font-size: 20;
-    background-color: lightgray;
+.total-label {
+    background-color: red;
+    color: white;
 }
 
 .edit-row {

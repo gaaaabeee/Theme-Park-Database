@@ -1,5 +1,5 @@
 .form-page {
-    background-color: lightskyblue;
+    background-image: linear-gradient(120deg,#D6F1FE,#A1E1FF,#00AEFF,#0078FF);
     width: 100%;
     text-align: center;
     min-height: 55vh;
@@ -28,11 +28,14 @@
     background-color: goldenrod;
     border: 1px solid black;
     border-radius: 10px;
+    box-shadow: 1px 1px 3px 1px #7A0707;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .submit-button:hover {
+    background-color: gold;
+    box-shadow: 3px 3px 3px 1px #7A0707;
     color: red;
-    text-decoration: underline red solid;
 }
 
 .other-form-button {
@@ -44,11 +47,15 @@
     font-size: 20px;
     border: 1px solid black;
     border-radius: 10px;
+    box-shadow: 1px 1px 3px 1px #7A0707;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .other-form-button:hover {
     color: red;
-    text-decoration: underline red solid;
+    background-color: gold;
+    box-shadow: 3px 3px 3px 1px #7A0707;
+    text-decoration: none;
 }
 
 .other2-form-button {
