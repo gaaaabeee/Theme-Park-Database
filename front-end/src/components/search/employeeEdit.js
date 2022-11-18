@@ -17,7 +17,7 @@ function EmployeeEdit (props) {
     //only updates username atm
     const updateEmployee = (e) => {
         e.preventDefault();
-        console.log("Updating employee"+props.values.employee_id, values);
+        console.log("Updating employee "+props.values.employee_id, values);
         const newRecord = {
             employee_id: props.values.employee_id,
             newFirstName: values.fname,
