@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import '../css/reporttable.css';
 
 const blankFilters = {
     id: "",
@@ -32,11 +31,11 @@ function EmployeeSearchBox(props) {
     }
 
     return (
-        <div className='search'>
+        <div className='search search-area'>
             <h2>Employee Search</h2>
-            <p>*You can search by exact matches or by ranges for birthdates. Only search by one or the other.</p>
-            <p>*Leave all filters blank to return all employees.</p>
             <form name="employeesearch" id="employeesearch" className="searchbox">
+                <p>*You can search by exact matches or by ranges. Only search by one or the other.<br/>
+                *Leave all filters blank to return all employees.</p>
                 <table className="filter-table">
                     <tr>
                         <th>Employee ID:</th>

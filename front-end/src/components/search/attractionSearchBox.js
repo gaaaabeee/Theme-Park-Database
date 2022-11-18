@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import '../css/reporttable.css';
 
 const blankFilters = {
     id: "",
@@ -26,13 +25,13 @@ function AttractionSearchBox(props) {
     }
 
     return (
-        <div className='search'>
+        <div className='search search-area'>
             <h2>Attraction Search</h2>
-            <p>*Leave all filters blank to return all attractions.</p>
             <form name="ridesearch" id="ridesearch" className="searchbox">
+                <p>*Leave all filters blank to return all attractions.</p>
                 <table className="filter-table">
                     <tr>
-                        <th>ID:</th>
+                        <th>Attraction ID:</th>
                         <th>Name:</th>
                         <th>Description:</th>
                     </tr>

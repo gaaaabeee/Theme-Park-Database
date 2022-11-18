@@ -14,7 +14,8 @@ function About() {
                     <h1>A Memorable Experience for the Whole Family!</h1>
                     <h4>Join us at Amusement Park for the time of your life!
                      We have many amazing rides and activities for all ages, so kids and adults alike will never get bored!
-                     more info...</h4>
+                     There are over 20 rides to try and multiple shops and restaurants all around the park to explore.
+                     We also host many events during certain times of the year with exclusive activities that you will surely enjoy!</h4>
                 </div>
             </div>
             <div className="about-item">

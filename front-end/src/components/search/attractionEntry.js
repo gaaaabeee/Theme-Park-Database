@@ -1,8 +1,6 @@
 import React from 'react';
-import '../css/formpage.css';
-import '../css/dataentry.css';
-import useForm from '../hooks/useForm.js';
-import { createAPIEndpoint, ENDPOINTS } from '../api';
+import useForm from '../../hooks/useForm.js';
+import { createAPIEndpoint, ENDPOINTS } from '../../api';
 
 function AttractionEntry() {
     const getFreshModel = () => ({
@@ -34,16 +32,17 @@ function AttractionEntry() {
     };
 
     return (
-        <div>
+        <div className="search-area">
             <h3>Add New Attraction</h3>
             <form name="attractionadd" id="attractionadd" className="entrybox" onSubmit={addattraction}>
+                <p>Required fields marked with *</p>
                 <table>
                     <tr>
-                        <td><label>Name: </label></td>
+                        <td><label>*Name: </label></td>
                         <td><input type="text" name="name" value={values.name} onChange={handleInputChange} required/></td>
                     </tr>
                     <tr>
-                        <td><label>Type: </label></td>
+                        <td><label>*Type: </label></td>
                         <td>
                         <select type="text" name="type" value={values.type} onChange={handleInputChange} required>
                             <option defaultValue="ride">ride</option>
@@ -53,7 +52,7 @@ function AttractionEntry() {
                         </td>
                     </tr>
                     <tr>
-                        <td><label>Description: </label></td>
+                        <td><label>*Description: </label></td>
                         <td><input type="text" name="description" value={values.description} onChange={handleInputChange} required/></td>
                     </tr>
                     <tr>

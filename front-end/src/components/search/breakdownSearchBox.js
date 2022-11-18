@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import '../css/reporttable.css';
 
 const blankFilters = {
     breakdown_id: "",
@@ -24,10 +23,10 @@ function BreakdownSearchBox(props) {
     }
 
     return (
-        <div className='search'>
+        <div className='search search-area'>
             <h2>Breakdown Search</h2>
-            <p>*Leave all filters blank to return all breakdowns.</p>
             <form name="breakdownsearch" id="breakdownsearch" className="searchbox">
+                <p>*Leave all filters blank to return all breakdowns.</p>
                 <table className="filter-table">
                     <tr>
                         <th>Breakdown ID:</th>

@@ -1,8 +1,6 @@
 import React from 'react';
-import '../css/formpage.css';
-import '../css/dataentry.css';
-import useForm from '../hooks/useForm.js';
-import { createAPIEndpoint, ENDPOINTS } from '../api';
+import useForm from '../../hooks/useForm.js';
+import { createAPIEndpoint, ENDPOINTS } from '../../api';
 
 function BreakdownEntry() {
     const getFreshModel = () => ({
@@ -30,9 +28,10 @@ function BreakdownEntry() {
     };
 
     return (
-        <div>
+        <div className="search-area">
             <h3>Report New Ride Breakdown</h3>
             <form name="breakdownadd" id="breakdownadd" className="entrybox" onSubmit={addbreakdown}>
+                <p>*All fields are required</p>
                 <table>
                     <tr>
                         <td><label>Ride ID: </label></td>

@@ -1,7 +1,6 @@
 import React from 'react';
-import '../css/reporttable.css';
-import useForm from '../hooks/useForm';
-import { createAPIEndpoint, ENDPOINTS } from '../api';
+import useForm from '../../hooks/useForm';
+import { createAPIEndpoint, ENDPOINTS } from '../../api';
 
 function EmployeeEdit (props) {
     const getFreshModel = () => ({

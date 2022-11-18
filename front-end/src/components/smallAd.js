@@ -7,7 +7,7 @@ function LeftSmallAd(props) {
         <div className="smallad-container small-left">
             <div className="smallad-content">
                 <div className="smallad-text">
-                    <h2>{props.value.title}</h2>
+                    <h2>{props.value.title} {props.value.icon}</h2>
                     <p>{props.value.description}</p>
                 </div>
                 <br />
@@ -22,7 +22,7 @@ function RightSmallAd(props) {
         <div className="smallad-container small-right">
             <div className="smallad-content">
                 <div className="smallad-text">
-                    <h2>{props.value.title}</h2>
+                    <h2>{props.value.title} {props.value.icon}</h2>
                     <p>{props.value.description}</p>
                 </div>
                 <br />
