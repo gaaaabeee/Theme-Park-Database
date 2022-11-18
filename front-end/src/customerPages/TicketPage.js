@@ -1,8 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import useStateContext from '../hooks/useStateContext.js';
 import useForm from '../hooks/useForm.js';
+import '../css/ticketpage.css';
 import { createAPIEndpoint, ENDPOINTS } from '../api';
+import {GiTicket} from 'react-icons/gi';
+import {AiOutlinePlusCircle,AiOutlineMinusCircle} from 'react-icons/ai';
 
 const getFreshModel = () => ({
     tickets: 0,
@@ -17,7 +20,6 @@ function Tickets() {
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
     const [price,setPrice] = useState({sub:0,disc:"0%",total:0});
 
-    //ADD API ENDPOINT CONNECTION
     const buyTickets = (e) => {
         e.preventDefault();
         if (validate())
@@ -39,7 +41,11 @@ function Tickets() {
     const validate = () => {
         let temp = {};
         temp.email = (/\S+@\S+\.\S+/).test(values.email) ? "" : "Not a valid email.";
-        temp.tickets = values.tickets > 0 ? "" : "Select number of tickets to buy.";
+        if (Number.isInteger(values.tickets)) {
+            temp.tickets = values.tickets > 0 ? "" : "Select number of tickets to buy.";
+        } else {
+            temp.tickets = "Not a valid number.";
+        }
         setErrors(temp);
         return Object.values(temp).every(x => x == "");
     };
@@ -80,6 +86,20 @@ function Tickets() {
         setPrice(getPrice(e.target.value));
     }
 
+    const decrementTicket = (e) => {
+        if (values.tickets > 0) {
+            setValues({...values,tickets:values.tickets-1});
+        }
+    }
+
+    const incrementTicket = (e) => {
+        setValues({...values,tickets:values.tickets+1});
+    }
+
+    useEffect(() => {
+        setPrice(getPrice(values.tickets));
+    },[values.tickets]);
+
     const getPrice = (amount) => {
         let price = {sub: 0.00, disc: "0%", total: 0.00};
         if (amount < 1 || !amount) {
@@ -113,27 +133,31 @@ function Tickets() {
     return (
         <div className='form-page'>
             <div className='form-box'>
-                <h2>Buy Tickets</h2>
+                <h2><GiTicket/> Buy Tickets <GiTicket/></h2>
                 <hr style={{border:'2px solid white'}}/>
                 <h4>Tickets include full 1-day access to all park amenities including rides, shows, and attractions.</h4>
                 <div className="deal">
-                    <h5>Special Discount:</h5>
+                    <h5>Special Discount!!</h5>
                     <p>If you purchase 5 or more tickets, you'll get the group pack 15% discount! &#40;5 tickets will be $85 instead of $100!&#41;</p>
                 </div>
                 <br /><br />
                 <div className='form-inner-box'>
                     <form name='buyTickets' id='buyTickets' method='post' onSubmit={buyTickets}>
-                        <label>Tickets:</label><br />
-                        <input type='number' name='tickets' id='ticketsInput' onChange={handleInputChange2} min='0' required /><br />
-                        <p>{errors.tickets}</p><br />
-                        <label>Purchase Date:</label><br />
-                        <input type='date' name='date' id='purchaseDate' onChange={handleInputChange} min={today} max={future} required /><br />
+                        <label>How many tickets?:</label><br />
+                        <div className="ticket-box">
+                            <button className="ticket-button" type="button" onClick={decrementTicket}><AiOutlineMinusCircle/></button>
+                            <input className="ticket-input" id="ticket-input" type='number' value={values.tickets} name='tickets' onChange={handleInputChange2} min='0' required readOnly/>
+                            <button className="ticket-button" type="button" onClick={incrementTicket}><AiOutlinePlusCircle/></button><br />
+                            <p>{errors.tickets}</p><br />
+                        </div>
+                        <label>What day will you be visiting?:</label><br />
+                        <input type='date' name='date' value={values.date} onChange={handleInputChange} min={today} max={future} required/><br />
                         <p>{errors.date}</p><br />
                         {!context.login_id &&
                         <>
                             <label>Email:</label><br />
                             <p>*Since you are not logged in, your ticket will be emailed to you.</p>
-                            <input type='email' name='email' onChange={handleInputChange} size="30" required form='buyTickets'/><br />
+                            <input type='email' name='email' values={values.email} onChange={handleInputChange} size="30" required form='buyTickets'/><br />
                             <p>{errors.email}</p><br />
                         </>
                         }
