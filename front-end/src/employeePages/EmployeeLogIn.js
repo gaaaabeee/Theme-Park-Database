@@ -28,7 +28,7 @@ function EmployeeLogIn() {
             .post(values)
             .then(response => {
                 setContext({login_id: response.data[0].employee_id, account: "employee"});
-                navigate('/employee');
+                navigate('/report');
                 window.location.reload(false);}) 
             .catch(error => console.log(error))
         }

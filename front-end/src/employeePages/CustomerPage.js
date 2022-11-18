@@ -8,6 +8,8 @@ function Customer(){
     const [filters, setFilters] = useState();
     const [passwords,setPasswords] = useState(false);
     const [doSearch,setDoSearch] = useState(false);
+    const [sortF,setSortF] = useState("customer id");
+    const [sortOrder,setSortOrder] = useState(0);
 
     const getFromSearch = (filter) => {
         console.log(filter);
@@ -20,7 +22,7 @@ function Customer(){
         .fetch()
         .then(response => {
             console.log(response.data);
-            setData(filterData(response.data));
+            setData(sortData(filterData(response.data)));
         })
         .catch(error => {
             console.log(error);
@@ -33,7 +35,7 @@ function Customer(){
             searchCustomers();
             console.log(data);
         }
-    },[filters,doSearch]);
+    },[filters,doSearch,sortOrder]);
 
     const filterData = (info) => {
         if (filters.id != "") { 
@@ -60,6 +62,17 @@ function Customer(){
             info = info.filter((item) => {
                 return (item.height.toString().startsWith(filters.height));
             });
+        }
+        if (filters.minheight != "" || filters.maxheight != "") {
+            let minheight, maxheight;
+            if (filters.minheight == "") {minheight = [0,0];}
+            else {minheight = heightToNum(filters.minheight);}
+            if (filters.maxheight == "") {maxheight = [10,10];}
+            else {maxheight = heightToNum(filters.maxheight);}
+            info = info.filter((item) => {
+                let h = heightToNum(item.height);
+                return (((h[0] == minheight[0]) ? (h[1] >= minheight[1]) : (h[0] >= minheight[0])) && ((h[0] == maxheight[0]) ? (h[1] <= maxheight[1]) : (h[0] <= maxheight[0])));
+            })
         }
         if (filters.byear != "") {
             info = info.filter((item) => {
@@ -130,6 +143,50 @@ function Customer(){
         return info;
     }
 
+    const sortData = (info) => {
+        if (sortF == "customer id") {
+            info.sort((a,b) => {
+                return sortCustomerId(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "first name") {
+            info.sort((a,b) => {
+                return sortFirstName(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "last name") {
+            info.sort((a,b) => {
+                return sortLastName(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "dob") {
+            info.sort((a,b) => {
+                return sortDOB(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "height") {
+            info.sort((a,b) => {
+                return sortHeight(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "tickets") {
+            info.sort((a,b) => {
+                return sortTickets(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "email") {
+            info.sort((a,b) => {
+                return sortEmail(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "password") {
+            info.sort((a,b) => {
+                return sortPassword(a,b,sortOrder);
+            })
+        }
+        return info;
+    }
+
     const renderTable = () => {
         return data.map(elem => {
             return (
@@ -145,6 +202,11 @@ function Customer(){
                 </tr>
             );}
         )
+    }
+
+    const setSort = (field) => {
+        setSortF(field);
+        setDoSearch(!doSearch);
     }
 
     const showPasswords = () => {
@@ -171,19 +233,25 @@ function Customer(){
             <br /><br />
             <br /><br />
             <div>
-                <label>Show Passwords: </label>
-                <input type="checkbox" name="showpasswords" onChange={showPasswords}/>
+                <p>Sort by a field by clicking on the column header.</p>
+                <label>Sort:</label>
+                <select className="tableOption" type="number" name="sortOrder" onChange={(e) => setSortOrder(e.target.value)}>
+                    <option value="0">Ascending</option>
+                    <option value="1">Descending</option>
+                </select>
+                <label> Show Passwords: </label>
+                <input className="tableOption" type="checkbox" name="showpasswords" onChange={showPasswords}/>
                 <table className="result-table">
                     <thead>
                         <tr>
-                            <th>Customer ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Height</th>
-                            <th>DOB</th>
-                            <th>Tickets</th>
-                            {passwords && <th>Password</th>}
+                            <th><button type="button" className="sortB" onClick={() => setSort("customer id")}>Customer ID</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("first name")}>First Name</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("last name")}>Last Name</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("email")}>Email</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("height")}>Height</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("dob")}>DOB</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("tickets")}>Tickets</button></th>
+                            {passwords && <th><button type="button" className="sortB" onClick={() => setSort("password")}>Password</button></th>}
                         </tr>
                     </thead>
                     <tbody>{renderTable()}</tbody>
@@ -194,28 +262,90 @@ function Customer(){
 
 }
 
-function compareHeight(height1,height2) {
-    let inches1,inches2,theight1,theight2;
-    let tempin1 = (height1%1).toString().slice(2);
-    if (tempin1.charAt(1) == "0") {
-        tempin1 = tempin1.slice(0,1);
-    } else {
-        tempin1 = tempin1.slice(0,2);
+function sortCustomerId(a,b,order) {
+    let a_v = parseInt(a.customer_id);
+    let b_v = parseInt(b.customer_id);
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
     }
-    inches1 = parseInt(tempin1);
-    theight1 = (parseInt(height1)*30.48)+(inches1*2.54)
-    let tempin2 = (height2%1).toString().slice(2);
-    if (tempin2.charAt(1) == "0") {
-        tempin2 = tempin2.slice(0,1);
-    } else {
-        tempin2 = tempin2.slice(0,2);
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortFirstName(a,b,order) {
+    let a_v = a.fname;
+    let b_v = b.fname;
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
     }
-    inches2 = parseInt(tempin2);
-    theight2 = (parseInt(height2)*30.48)+(inches2*2.54)
-    console.log(theight1,theight2);
-    if (theight1 > theight2) {return 1;}
-    else if (theight1 == theight2) {return 0;}
-    return 1;
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortLastName(a,b,order) {
+    let a_v = a.lname;
+    let b_v = b.lname;
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortDOB(a,b,order) {
+    let a_v = new Date(a.dob);
+    let b_v = new Date(b.dob);
+    if (order == 1) {
+        return b_v - a_v;
+    }
+    return a_v - b_v;
+}
+
+function sortHeight(a,b,order) {
+    let a_v = heightToNum(a.height);
+    let b_v = heightToNum(b.height);
+    if (order == 1) {
+        return ((b_v[0] == a_v[0]) ? ((b_v[1] < a_v[1]) ? -1 : ((b_v[1] > a_v[1]) ? 1 : 0)) : ((b_v[0] < a_v[0]) ? -1 : ((b_v[0] > a_v[0]) ? 1 : 0)));
+    }
+    return ((a_v[0] == b_v[0]) ? ((a_v[1] < b_v[1]) ? -1 : ((a_v[1] > b_v[1]) ? 1 : 0)) : ((a_v[0] < b_v[0]) ? -1 : ((a_v[0] > b_v[0]) ? 1 : 0)));
+}
+
+function sortEmail(a,b,order) {
+    let a_v = a.email;
+    let b_v = b.email;
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortPassword(a,b,order) {
+    let a_v = a.password;
+    let b_v = b.password;
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortTickets(a,b,order) {
+    let a_v = parseInt(a.tickets_bought);
+    let b_v = parseInt(b.tickets_bought);
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function heightToNum(height) {
+    let ft, inc;
+    let hs = height.toString();
+    if (hs.includes(".")) {
+        let h = height.toString().split(".");
+        ft = parseInt(h[0]);
+        inc = parseInt(h[1]);
+    } else {
+        ft = height;
+        inc = 0;
+    }
+    return [ft,inc];
 }
 
 export default Customer;

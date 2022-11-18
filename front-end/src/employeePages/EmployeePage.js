@@ -10,6 +10,8 @@ function Employee() {
     const [filters,setFilters] = useState();
     const [passwords,setPasswords] = useState(false);
     const [doSearch,setDoSearch] = useState(false);
+    const [sortF,setSortF] = useState("employee id");
+    const [sortOrder,setSortOrder] = useState(0);
     const [editId,setEditId] = useState(null);
 
     const getFromSearch = (filter) => {
@@ -24,7 +26,7 @@ function Employee() {
         .fetch()
         .then(response => {
             console.log(response.data);
-            setData(filterData(response.data));
+            setData(sortData(filterData(response.data)));
         })
         .catch(error => {
             console.log(error);
@@ -37,7 +39,7 @@ function Employee() {
             searchEmployees();
             console.log(data);
         }
-    },[filters,doSearch]);
+    },[filters,doSearch,sortOrder]);
 
 
     const filterData = (info) => {
@@ -125,6 +127,50 @@ function Employee() {
         return info;
     }
 
+    const sortData = (info) => {
+        if (sortF == "employee id") {
+            info.sort((a,b) => {
+                return sortEmployeeId(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "first name") {
+            info.sort((a,b) => {
+                return sortFirstName(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "last name") {
+            info.sort((a,b) => {
+                return sortLastName(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "dob") {
+            info.sort((a,b) => {
+                return sortDOB(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "supervisor id") {
+            info.sort((a,b) => {
+                return sortSupervisorID(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "job title") {
+            info.sort((a,b) => {
+                return sortJobTitle(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "username") {
+            info.sort((a,b) => {
+                return sortUsername(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "password") {
+            info.sort((a,b) => {
+                return sortPassword(a,b,sortOrder);
+            })
+        }
+        return info;
+    }
+
     const editPopup = (e) => {
         setEditId(e.target.value);
     }
@@ -162,6 +208,11 @@ function Employee() {
         })
     }
 
+    const setSort = (field) => {
+        setSortF(field);
+        setDoSearch(!doSearch);
+    }
+
     const showPasswords = () => {
         if (!passwords) {
             setPasswords(true);
@@ -187,20 +238,26 @@ function Employee() {
             <br /><br />
             <br /><br />
             <div>
-            <p>To edit or delete an employee account, click "Edit" on that row. Edit any fields then click "Save Changes". Click "Delete Attraction" to delete it permenantly.</p>
-                <label>Show Passwords: </label>
-                <input type="checkbox" name="showpasswords" onChange={showPasswords}/>
+                <p>To edit or delete an employee account, click "Edit" on that row. Edit any fields then click "Save Changes". Click "Delete Attraction" to delete it permenantly.<br/>
+                Sort by a field by clicking on the column header.</p>
+                <label>Sort:</label>
+                <select className="tableOption" type="number" name="sortOrder" onChange={(e) => setSortOrder(e.target.value)}>
+                    <option value="0">Ascending</option>
+                    <option value="1">Descending</option>
+                </select>
+                <label> Show Passwords: </label>
+                <input className="tableOption" type="checkbox" name="showpasswords" onChange={showPasswords}/>
                 <table className="result-table">
                     <thead>
                         <tr>
-                            <th>Employee ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Date of Birth</th>
-                            <th>Supervisor ID</th>
-                            <th>Job Title</th>
-                            <th>Username</th>
-                            {passwords && <th>Password</th>}
+                            <th><button type="button" className="sortB" onClick={() => setSort("employee id")}>Employee ID</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("first name")}>First Name</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("last name")}>Last Name</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("dob")}>Date of Birth</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("supervisor id")}>Supervisor ID</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("job title")}>Job Title</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("username")}>Username</button></th>
+                            {passwords && <th><button type="button" className="sortB" onClick={() => setSort("password")}>Password</button></th>}
                             <th></th>
                         </tr>
                     </thead>
@@ -209,6 +266,78 @@ function Employee() {
             </div>
         </div>
     );
+}
+
+function sortEmployeeId(a,b,order) {
+    let a_v = parseInt(a.employee_id);
+    let b_v = parseInt(b.employee_id);
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortFirstName(a,b,order) {
+    let a_v = a.fname;
+    let b_v = b.fname;
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortLastName(a,b,order) {
+    let a_v = a.lname;
+    let b_v = b.lname;
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortDOB(a,b,order) {
+    let a_v = new Date(a.dob);
+    let b_v = new Date(b.dob);
+    if (order == 1) {
+        return b_v - a_v;
+    }
+    return a_v - b_v;
+}
+
+function sortSupervisorID(a,b,order) {
+    let a_v = parseInt(a.supervisor_id);
+    let b_v = parseInt(b.supervisor_id);
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortJobTitle(a,b,order) {
+    let a_v = a.job_title;
+    let b_v = b.job_title;
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortUsername(a,b,order) {
+    let a_v = a.username;
+    let b_v = b.username;
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortPassword(a,b,order) {
+    let a_v = a.password;
+    let b_v = b.password;
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
 }
 
 export default Employee;

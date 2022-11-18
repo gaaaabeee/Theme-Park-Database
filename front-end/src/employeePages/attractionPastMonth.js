@@ -84,7 +84,7 @@ function AttractionPastMonth() {
                             <tr>
                                 <th>Rank</th>
                                 <th>Name</th>
-                                <th>Average Revenue Day</th>
+                                <th>Average Revenue a Day</th>
                                 <th>Total Revenue Within Past Month</th>
                             </tr>
                         </thead>

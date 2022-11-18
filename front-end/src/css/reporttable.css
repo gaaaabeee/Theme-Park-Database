@@ -143,3 +143,14 @@ td input {
 .edit-form-item {
     flex: 1 0 30%;
 }
+
+.sortB {
+    border: none;
+    background-color: inherit;
+    color: inherit;
+    font-weight: inherit;
+}
+
+.tableOption {
+    margin-right: 30px;
+}

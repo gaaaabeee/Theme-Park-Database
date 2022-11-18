@@ -59,8 +59,8 @@ function CustomerSearchBox(props) {
                         </tr>
                         <tr>
                             <td><input type="text" name="height" value={filters.height} onChange={(e) => updateFilters({height:e.target.value})}/></td>
-                            <td><input type="text" name="minheight" value={filters.minheight} onChange={(e) => updateFilters({minheight:e.target.value,height:""})} disabled/></td>
-                            <td><input type="text" name="maxheight" value={filters.maxheight} onChange={(e) => updateFilters({maxheight:e.target.value,height:""})} disabled/></td>
+                            <td><input type="text" name="minheight" value={filters.minheight} onChange={(e) => updateFilters({minheight:e.target.value,height:""})}/></td>
+                            <td><input type="text" name="maxheight" value={filters.maxheight} onChange={(e) => updateFilters({maxheight:e.target.value,height:""})}/></td>
                         </tr>
                         <tr>
                             <th>Birth Year:</th>

@@ -8,6 +8,8 @@ function Breakdown() {
     const [data, setData]= useState([]);
     const [filters, setFilters] = useState();
     const [doSearch,setDoSearch] = useState(false);
+    const [sortF,setSortF] = useState("breakdown id");
+    const [sortOrder,setSortOrder] = useState(0);
 
     const getFromSearch = (filter) => {
         console.log(filter);
@@ -20,7 +22,7 @@ function Breakdown() {
         .fetch()
         .then(response => {
             console.log(response.data);
-            setData(filterData(response.data));
+            setData(sortData(filterData(response.data)));
         })
         .catch(error => {
             console.log(error);
@@ -33,7 +35,7 @@ function Breakdown() {
             findbreakdowns();
             console.log(data);
         }
-    },[filters,doSearch]);
+    },[filters,doSearch,sortOrder]);
 
     const filterData = (info) => {
         if (filters.breakdown_id != "") { 
@@ -75,6 +77,50 @@ function Breakdown() {
         return info;
     }
 
+    const sortData = (info) => {
+        if (sortF == "breakdown id") {
+            info.sort((a,b) => {
+                return sortBreakdownId(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "ride id") {
+            info.sort((a,b) => {
+                return sortRideId(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "ride") {
+            info.sort((a,b) => {
+                return sortRide(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "description") {
+            info.sort((a,b) => {
+                return sortDescription(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "date") {
+            info.sort((a,b) => {
+                return sortDate(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "maintainer id") {
+            info.sort((a,b) => {
+                return sortMaintainerId(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "resolved") {
+            info.sort((a,b) => {
+                return sortResolved(a,b,sortOrder);
+            })
+        }
+        else if (sortF == "breakdown num") {
+            info.sort((a,b) => {
+                return sortBreakdownNum(a,b,sortOrder);
+            })
+        }
+        return info;
+    }
+
     const renderTable = () => {
         return data.map(elem => {
             return (
@@ -95,7 +141,29 @@ function Breakdown() {
         )
     }
 
-    const resolveBreakdown = () => {}
+    const resolveBreakdown = (e) => {
+        console.log("Resolving breakdown report "+e.target.value);
+        const newRecord = {
+            breakdown_id: e.target.value,
+            resolved: 1
+        }
+        console.log(newRecord);
+        createAPIEndpoint(ENDPOINTS.breakdownUpdate)
+        .post(newRecord)
+        .then(() => {
+            alert("Successfully resolved breakdown!");
+            setDoSearch(!doSearch);
+        })
+        .catch(errors => {
+            console.log(errors);
+            alert("Failed to resolve breakdown.")
+        })
+    }
+
+    const setSort = (field) => {
+        setSortF(field);
+        setDoSearch(!doSearch);
+    }
 
     return (
         <div className='searchpage'>
@@ -112,18 +180,24 @@ function Breakdown() {
             <br/><br/>
             <br/><br/>
             <div>
-                <p>If a breakdown has been fixed but is marked as not resolved, click "Resolve" on that row to mark it as fixed.</p>
+                <p>If a breakdown has been fixed but is marked as not resolved, click "Resolve" on that row to mark it as fixed.<br/>
+                Sort by a field by clicking on the column header.</p>
+                <label>Sort:</label>
+                <select className="tableOption" type="number" name="sortOrder" onChange={(e) => setSortOrder(e.target.value)}>
+                    <option value="0">Ascending</option>
+                    <option value="1">Descending</option>
+                </select>
                 <table className="result-table">
                     <thead>
                         <tr>
-                            <th>Breakdown ID</th>
-                            <th>Ride ID</th>
-                            <th>Ride Name</th>
-                            <th>Times Ride Broke Down</th>
-                            <th>Maintainer ID</th>
-                            <th>Breakdown Date</th>
-                            <th>Breakdown Description</th>
-                            <th>Resolved</th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("breakdown id")}>Breakdown ID</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("ride id")}>Ride ID</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("ride")}>Ride Name</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("breakdown num")}>Times Ride Broke Down</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("maintainer id")}>Maintainer ID</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("date")}>Breakdown Date</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("description")}>Breakdown Description</button></th>
+                            <th><button type="button" className="sortB" onClick={() => setSort("resolved")}>Resolved</button></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -132,6 +206,78 @@ function Breakdown() {
             </div>
         </div>
     )
+}
+
+function sortBreakdownId(a,b,order) {
+    let a_v = parseInt(a.breakdown_id);
+    let b_v = parseInt(b.breakdown_id);
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortRideId(a,b,order) {
+    let a_v = parseInt(a.ride_id);
+    let b_v = parseInt(b.ride_id);
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortMaintainerId(a,b,order) {
+    let a_v = parseInt(a.maintainer_id);
+    let b_v = parseInt(b.maintainer_id);
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortBreakdownNum(a,b,order) {
+    let a_v = parseInt(a.breakdown_nums);
+    let b_v = parseInt(b.breakdown_nums);
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortResolved(a,b,order) {
+    let a_v = a.resolved;
+    let b_v = b.resolved;
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortRide(a,b,order) {
+    let a_v = a.ride_name;
+    let b_v = b.ride_name;
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortDescription(a,b,order) {
+    let a_v = a.breakdown_desc;
+    let b_v = b.breakdown_desc;
+    if (order == 1) {
+        return (b_v < a_v) ? -1 : (b_v > a_v) ? 1 : 0;
+    }
+    return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
+}
+
+function sortDate(a,b,order) {
+    let a_v = new Date(a.breakdown_date);
+    let b_v = new Date(b.breakdown_date);
+    if (order == 1) {
+        return b_v - a_v;
+    }
+    return a_v - b_v;
 }
 
 export default Breakdown;
