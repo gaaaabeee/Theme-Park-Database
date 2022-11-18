@@ -20,6 +20,11 @@ function EmployeeEdit (props) {
         console.log("Updating employee"+props.values.employee_id, values);
         const newRecord = {
             employee_id: props.values.employee_id,
+            newFirstName: values.fname,
+            newLastName: values.lname,
+            newJobTitle: values.job_title,
+            newDOB: values.dob,
+            newSupervisorID: values.supervisor_id,
             newUsername: values.username
         }
         console.log(newRecord);
