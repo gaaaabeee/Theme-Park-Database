@@ -1,16 +1,30 @@
 import React, {useState} from 'react';
-import '../css/reporttable.css';
 import { createAPIEndpoint, ENDPOINTS } from '../api/index.js';
+import '../css/monthpage.css';
+import {MonthValueBox,MonthChartBox} from '../components/report/monthGridBox.js';
+
+const blankFilters = {
+    year: new Date().getFullYear(),
+    month: "January"
+};
+
+const getFreshModel = () => ({
+    year: "",
+    month: "",
+    avgEntries: "",
+    totalEntries: "",
+    avgRevenue: "",
+    totalRevenue: "",
+    avgBreakdowns: "",
+    totalBreakdowns: "",
+    rainouts: ""
+})
 
 function StatsMonthly() {
-    const [data, setData]= useState({});
+    const [data, setData]= useState(getFreshModel);
+    const [popRide,setPopRide] = useState({mostPopularRide:""});
     const [breakdownList,setBreakdownList] = useState([]);
-
-    const blankFilters = {
-        year: new Date().getFullYear(),
-        month: "January"
-    };
-
+    const [days,setDays] = useState(0);
     const [filters, setFilters] = useState(blankFilters);
     const updateFilters = (obj) => {setFilters({...filters,...obj});}
     const [submitted,setSubmitted] = useState(false);
@@ -30,24 +44,36 @@ function StatsMonthly() {
     const getreport = () => {
         setSubmitted(true);
         if (validate()) {
-            setValidData(true);
-            createAPIEndpoint(ENDPOINTS.monthReport+filters.month+'/'+filters.year)
+            createAPIEndpoint(ENDPOINTS.months+filters.month+'/'+filters.year)
             .fetch()
             .then(response => {
                 console.log(response.data);
                 setData({
-                    year: filters.year,
-                    month: filters.month,
-                    avgEntries: response.data.avgEntries,
-                    totalEntries: response.data.totalEntries,
-                    avgRevenue: response.data.avgRevenue,
-                    totalRevenue: response.data.totalRevenue,
-                    avgBreakdowns: response.data.avgBreakdowns,
-                    totalBreakdowns: response.data.totalBreakdowns,
-                    rainouts: response.data.totalRainouts,
-                    mostPopularRide: response.data.mostPopularRide
+                    year: response.data[0].year,
+                    month: response.data[0].month,
+                    avgEntries: response.data[0].average_entries,
+                    totalEntries: response.data[0].total_entries,
+                    avgRevenue: response.data[0].average_revenue,
+                    totalRevenue: response.data[0].total_revenue,
+                    avgBreakdowns: response.data[0].average_breakdown,
+                    totalBreakdowns: response.data[0].total_breakdowns,
+                    rainouts: response.data[0].total_rainy_days,
                 })})
-            .catch(error => console.log(error));
+            .catch(error => {
+                console.log(error)
+                alert("Failed to get monthly report from server.")
+            });
+
+            createAPIEndpoint(ENDPOINTS.mostPopularRidebyMonth+filters.month+'/'+filters.year)
+            .fetch()
+            .then(response => {
+                console.log(response.data[0]);
+                setPopRide({mostPopularRide: response.data[0].most_popular_ride});
+            })
+            .catch(error => {
+                console.log(error);
+                alert("Failed to fetch most popular ride of the month from server.")
+            })
 
             createAPIEndpoint(ENDPOINTS.breakdowns+'/'+filters.month+'/'+filters.year)
             .fetch()
@@ -55,47 +81,14 @@ function StatsMonthly() {
                 console.log(response.data);
                 setBreakdownList(response.data);
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error);
+                alert("Failed to get breakdown list of this month from the server.")
+            });
+            setValidData(true);
         }
         else {
             setValidData(false);
-        }
-    }
-
-    const renderReport = () => {
-        if (validData) {
-            return (
-                <div className='result-box'>
-                    <h2>{data.month} {data.year}</h2>
-                    <div style={{float:"left"}}>
-                        <p>Average Entries a Day:</p>
-                        <p>Total Entries this Month:</p>
-                        <p>Average Revenue a Day:</p>
-                        <p>Total Revenue this Month:</p>
-                        <p>Average Breakdowns a Day:</p>
-                        <p>Total Breakdowns this Month:</p>
-                        <p>Rainy Days this Month:</p>
-                        <p>Most Popular Ride this Month:</p>
-                    </div>
-                    <div style={{float:"right"}}>
-                        <p>{data.avgEntries}</p>
-                        <p>{data.totalEntries}</p>
-                        <p>{data.avgRevenue}</p>
-                        <p>{data.totalRevenue}</p>
-                        <p>{data.avgBreakdowns}</p>
-                        <p>{data.totalBreakdowns}</p>
-                        <p>{data.rainouts}</p>
-                        <p>{data.mostPopularRide}</p>
-                    </div>
-                </div>
-            );
-        }
-        else {
-            return (
-                <div className='result-box'>
-                    <p>No Data</p>
-                </div>
-            )
         }
     }
 
@@ -133,7 +126,7 @@ function StatsMonthly() {
             <div className="optionbox">
                 <div className="search-area">
                     <h2>Month Search</h2>
-                    <form name="ridesearch" id="ridesearch" className="searchbox">
+                    <form name="monthsearch" id="monthsearch" className="searchbox monthsearchbox">
                         <p>*Search by year and month.</p>
                         <table className="filter-table">
                             <tr>
@@ -164,12 +157,48 @@ function StatsMonthly() {
                 </div>
             </div>
             <br /><br />
-            <h3>Monthly Stats</h3>
-            {submitted && renderReport()}
-            <br />
-            <h3>Reported Breakdowns this Month</h3>
-            {submitted && 
+            {validData &&
+            <>
+                <div className="month-header">
+                    <p className="time-period">{data.month} {data.year}</p>
+                    <p>Including <b>x</b> Days in Report</p>
+                </div>
+                <div className="month-report-grid">
+                    <MonthValueBox label="Average Entries per Day" value={data.avgEntries}/>
+                    <MonthValueBox label="Total Entries this Month" value={data.totalEntries}/>
+                    <MonthValueBox label="Most Entries in a Day this Month" value={""}/>
+                    <MonthValueBox label="Date of Most Entries this Month" value={""}/>
+                    <MonthValueBox label="Least Entries in a Day this Month" value={""}/>
+                    <MonthValueBox label="Date of Least Entries this Month" value={""}/>
+                    <MonthValueBox label="Entry Rate Compared to Overall Average" value={""}/>
+                    <MonthValueBox label="Rainy Days this Month" value={data.rainouts}/>
+
+                    <MonthValueBox label="Average Revenue per Day" value={'$'+parseFloat(data.avgRevenue).toFixed(2)}/>
+                    <MonthValueBox label="Total Revenue this Month" value={'$'+parseFloat(data.totalRevenue).toFixed(2)}/>
+                    <MonthValueBox label="Largest Revenue in a Day this Month" value={""}/>
+                    <MonthValueBox label="Date of Largest Revenue this Month" value={""}/>
+                    <MonthValueBox label="Smallest Revenue in a Day" value={""}/>
+                    <MonthValueBox label="Date of Smallest Revenue this Month" value={""}/>
+                    <MonthValueBox label="Revenue Rate Compared to Overall Average" value={""}/>
+                    <MonthValueBox label="Likelihood of Rain per Day" value={""}/>
+
+                    <MonthValueBox label="Average New Breakdowns per Day" value={data.avgBreakdowns}/>
+                    <MonthValueBox label="Total New Breakdowns this Month" value={data.totalBreakdowns}/>
+                    <MonthValueBox label="Number of Days a Breakdown Occurred this Month" value={""}/>
+                    <MonthValueBox label="Most Breakdowns in a Day" value={""}/>
+                    <MonthValueBox label="Date of Most Breakdowns this Month" value={""}/>
+                    <MonthValueBox label="Likelihood of a New Breakdown per Day" value={""}/>
+                    <MonthValueBox label="Ride that Broke Down the Most this Month" value={""}/>
+                    <MonthValueBox label="Most Popular Ride this Month" value={popRide.mostPopularRide}/>
+
+                    <MonthChartBox/>
+                    <MonthChartBox/>
+                </div>
+            </>}
+            <br/>
+            {validData && 
             <div>
+                <h3>Reported Breakdowns this Month</h3>
                 <table className='result-table'>
                     <thead>
                         <tr>

@@ -140,6 +140,7 @@ function StatsDailySearchBox(props) {
                         <td><input type="text" name="popular_ride" value={filters.popular_ride} onChange={(e) => updateFilters({popular_ride:e.target.value})}/></td>
                     </tr>
                 </table>
+                <button type="button" className="reset-search" onClick={resetFilters}>Reset</button>
             </form>
             <br/>
             <button onClick={returnFilter} className="submit-button" type="button">Search Dates</button>

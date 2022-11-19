@@ -7,6 +7,7 @@ function ReportNavbar() {
         <div id="vnavbox">
             <ul id="vnavbar">
                 <ReportNavButton link="/report/general" text="General"/>
+                <ReportNavButton link="/report/time_period_reports" text="Time Interval Reports"/>
                 <ReportNavButton link="/report/monthly_reports" text="Monthly Reports"/>
                 <ReportNavButton link="/report/daily_reports" text="Daily Reports"/>
                 <ReportNavButton link="/report/todays_report" text="Today's Report"/>

@@ -1,0 +1,57 @@
+.month-header {
+    background-color: white;
+    border: 1px solid lightslategray;
+    border-radius: 5px;
+    
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.time-period {
+    font-size: 40px;
+}
+
+.month-report-grid {
+    display: grid;
+    justify-content: space-evenly;
+    grid-template-columns: auto auto auto auto auto auto auto auto;
+    gap: 10px;
+    width: 100%;
+
+}
+
+.month-report-grid-item {
+    background-color: white;
+    border: 1px solid lightslategray;
+    border-radius: 5px;
+}
+
+.month-report-grid-chart {
+    grid-column-end: span 4;
+    grid-row-end: span 3;
+    max-width: 840px;
+    max-height: 380px;
+}
+
+.small-value-box {
+    width: 200px;
+    height: 150px;
+    text-align: center;
+    padding: 10px;
+}
+
+.small-value-box-label {
+    font-size: 15px;
+    margin-bottom: 5px;
+    height: 40%;
+}
+
+.small-value-box-value {
+    font-size: 20px;
+    height: 60%;
+}
+
+.monthsearchbox th, .monthsearchbox td {
+    font-size: 20px;
+}

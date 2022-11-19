@@ -3,7 +3,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex: 0 0 auto;
     padding-bottom: 20px;
+    background-color: #E9EAEA;
+    height: 100%;
+    width: 100%;
 }
 
 .search-header {
@@ -108,6 +112,10 @@ td input {
 
 .result-table tr:nth-child(even):not(.edit-row) {
     background-color: #FFB9B9;
+}
+
+.result-table tr:nth-child(odd):not(.edit-row) {
+    background-color: white;
 }
 
 .table-title {

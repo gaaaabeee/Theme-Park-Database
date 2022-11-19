@@ -29,7 +29,7 @@ export const ENDPOINTS = {
     months: 'Date/data/', //'{month}/{year}' returns stats of that month
     timePeriod: 'Date/range/', //'{start date}/{end date}' returns stats of that time period
     overall: 'Date/overall', // returns overall park stats
-    overallTimePeriod: 'Date/overall/range/', //'{start date}/{end date}' returns overall stats of that time period
+    overallTimePeriod: 'Date/overall/range/', //'{start date}/{end date}' returns dates of that time period
 
 
 };

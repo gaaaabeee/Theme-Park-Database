@@ -17,7 +17,7 @@ function StatsDaily() {
     }
 
     const findday = () => {
-        createAPIEndpoint(ENDPOINTS.report)
+        createAPIEndpoint(ENDPOINTS.days)
         .fetch()
         .then(response => {
             console.log(response.data);
@@ -37,6 +37,9 @@ function StatsDaily() {
     },[filters,doSearch,sortOrder]);
 
     const filterData = (info) => {
+        info = info.filter((item) => {
+            return (new Date(item.date) <= new Date())
+        })
         if (filters.fullDate != "") { 
             let fullDate = new Date(filters.fullDate);
             info = info.filter((item) => {
@@ -198,6 +201,7 @@ function StatsDaily() {
         return data.map(elem => {
             return (
                 <tr key={elem.date}>
+                    <td>{new Date(elem.date).toLocaleDateString()}</td>
                     <td>{elem.dayname}</td>
                     <td>{elem.open ? "Yes" : "No"}</td>
                     <td>{elem.holiday ? "Yes" : "No"}</td>
