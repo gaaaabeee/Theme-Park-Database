@@ -19,13 +19,19 @@ export const ENDPOINTS = {
     shops: 'attraction/shops', //returns list of shops
     ridesPastMonth: 'attraction/ridereportpastmonth',
     shopsPastMonth: 'attraction/shopreportpastmonth',
-    attractionUpdate: 'Attraction/update', // not in backend yet, updates an attraction
+    attractionUpdate: 'Attraction/update', // updates an attraction
     breakdowns: 'Attraction/breakdown', //'/{month}/{year}' returns list of breakdowns
-    breakdownUpdate: 'attraction/breakdown/update', //not in backend yet, resolves a breakdown
+    breakdownUpdate: 'attraction/breakdown/update', //resolves a breakdown
+    mostPopularRidebyMonth: 'attraction/popular/month/', //'{month}/{year}' returns most popular ride within a month
+    mostPopularRide: 'attraction/popular/', //'{start date}/{end date}' returns most popular ride in a time period
     tickets: 'Ticket', // adds new ticket
-    overallReport: 'Stats', // not in backend yet, returns overall park report
-    monthReport: 'Entry/', //'{month}/{year}' returns month report
-    dayReport: 'Date', //'/{date}' not in backend yet, returns list of dates or specified date
+    days: 'Date', //'/{date}' or '/{start date}/{end date}' returns list of dates or specified date or dates within time period
+    months: 'Date/data/', //'{month}/{year}' returns stats of that month
+    timePeriod: 'Date/range/', //'{start date}/{end date}' returns stats of that time period
+    overall: 'Date/overall', // returns overall park stats
+    overallTimePeriod: 'Date/overall/range/', //'{start date}/{end date}' returns overall stats of that time period
+
+
 };
 
 export const createAPIEndpoint = (endpoint) => {
