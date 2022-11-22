@@ -12,10 +12,13 @@ const getFreshFormModel = () => ({
     dob: ""
 });
 
+//account profile page
+
 function Profile() {
     const {context,setContext} = useStateContext();
     const [account,setAccount] = useState({});
 
+    //gets account data from server
     useEffect(() => {
         if (context.account == "customer") {
             createAPIEndpoint(ENDPOINTS.customer)
@@ -54,8 +57,11 @@ function Profile() {
             .catch(errors => console.log(errors))
         }
     },[]);
+
     console.log(account);
+
     if (context.account == "employee") {
+        //employee profile page
         return (
             <div>
             <div className="profile-name">
@@ -107,6 +113,7 @@ function Profile() {
         </div>
         );
     }
+    //customer profile page
     return (
         <div>
             <div className="profile-name">
@@ -160,12 +167,14 @@ function Profile() {
     );
 }
 
+//component to view tickets customer has purchased, not implemented yet
 function ViewTickets() {
     return (
         <div className="profile-info">View Purchased Tickets</div>
     );
 }
 
+//component to change profile, not implemented yet
 function ChangeProfile() {
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshFormModel);
     return (

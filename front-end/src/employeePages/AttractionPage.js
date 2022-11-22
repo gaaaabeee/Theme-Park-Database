@@ -5,6 +5,8 @@ import AttractionEntry from '../components/search/attractionEntry';
 import AttractionEdit from '../components/search/attractionEdit';
 import { createAPIEndpoint, ENDPOINTS } from '../api/index.js';
 
+//employee page for seeing attractions in the database
+
 function Attraction(){
     const [data, setData]= useState([]);
     const [filters, setFilters] = useState();
@@ -13,6 +15,7 @@ function Attraction(){
     const [sortOrder,setSortOrder] = useState(0);
     const [editId,setEditId] = useState(null);
 
+    //get search filters from search box
     const getFromSearch = (filter) => {
         console.log(filter);
         setFilters(filter);
@@ -20,6 +23,7 @@ function Attraction(){
         setEditId(null);
     }
 
+    //get list of attractions from server
     const searchAttractions = () => {
         createAPIEndpoint(ENDPOINTS.attraction)
         .fetch()
@@ -33,6 +37,7 @@ function Attraction(){
         })
     }
 
+    //gets attraction list whenever search options are updated
     useEffect(() => {
         if (filters) {
             searchAttractions();
@@ -40,6 +45,7 @@ function Attraction(){
         }
     },[filters,doSearch,sortOrder]);
 
+    //filters attraction list to match search filters
     const filterData = (info) => {
         if (filters.id != "") { 
             info = info.filter((item) => {
@@ -120,6 +126,7 @@ function Attraction(){
         return info;
     }
 
+    //sorts attraction list by specified column
     const sortData = (info) => {
         if (sortF == "attraction id") {
             info.sort((a,b) => {
@@ -169,19 +176,23 @@ function Attraction(){
         return info;
     }
 
+    //activate editing component for attraction
     const editPopup = (e) => {
         setEditId(e.target.value);
     }
 
+    //close editing component
     const endEdit = () => {
         setEditId(null);
     }
 
+    //called when saving edits
     const editChange = () => {
         setEditId(null);
         setDoSearch(!doSearch);
     }
 
+    //return table of attractions
     const renderTable = () => {
         return data.map(elem => {
             return (
@@ -207,6 +218,7 @@ function Attraction(){
         )
     }
 
+    //sets sort by column
     const setSort = (field) => {
         setSortF(field);
         setDoSearch(!doSearch);
@@ -256,6 +268,8 @@ function Attraction(){
         </div>
     )
 }
+
+//sort functions
 
 function sortAttractionId(a,b,order) {
     let a_v = parseInt(a.attraction_id);
@@ -338,6 +352,8 @@ function sortBreakdowns(a,b,order) {
     return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
 }
 
+
+//separates height into ft and inches
 function heightToNum(height) {
     let ft, inc;
     let hs = height.toString();

@@ -5,7 +5,7 @@ import '../css/formpage.css';
 import { createAPIEndpoint, ENDPOINTS } from '../api/index.js';
 import useStateContext from '../hooks/useStateContext.js';
 
-//login page
+//customer login page
 
 const getFreshModel = () => ({
     email: "",
@@ -18,7 +18,7 @@ function Login() {
     const navigate = useNavigate();
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
 
-    //when form submits
+    //when form submits, attempts to log in customer
     const login = (e) => {
         e.preventDefault();
         if (validate()) {
@@ -36,7 +36,7 @@ function Login() {
         }
     };
 
-    //check if fields are correct
+    //check if login fields are valid values
     const validate = () => {
         let temp = {};
         temp.email = (/\S+@\S+\.\S+/).test(values.email) ? "" : "Not a valid email.";

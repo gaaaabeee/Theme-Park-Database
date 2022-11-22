@@ -7,6 +7,8 @@ import { createAPIEndpoint, ENDPOINTS } from '../api';
 import {GiTicket} from 'react-icons/gi';
 import {AiOutlinePlusCircle,AiOutlineMinusCircle} from 'react-icons/ai';
 
+//buy tickets page
+
 const getFreshModel = () => ({
     tickets: 0,
     price: 0,
@@ -20,11 +22,11 @@ function Tickets() {
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
     const [price,setPrice] = useState({sub:0,disc:"0%",total:0});
 
+    //connects to endpoint to buy ticket after submitting form
     const buyTickets = (e) => {
         e.preventDefault();
         if (validate())
         {
-
             const data = {tickets: values.tickets, price: price.total, date: values.date, customer_id: (context.login_id == "0") ? -1 : context.login_id};
             createAPIEndpoint(ENDPOINTS.tickets)
             .post(data)
@@ -39,6 +41,7 @@ function Tickets() {
         }       
     };
 
+    //makes sure all input fields are valid
     const validate = () => {
         let temp = {};
         temp.email = (/\S+@\S+\.\S+/).test(values.email) ? "" : "Not a valid email.";
@@ -51,6 +54,7 @@ function Tickets() {
         return Object.values(temp).every(x => x == "");
     };
 
+    //gets date string for today
     const getToday = () => {
         let today = new Date();
         let dd = today.getDate();
@@ -66,6 +70,7 @@ function Tickets() {
         return today;
     }
 
+    //gets date string for 4 months from today
     const getFourMonths = () => {
         let today = new Date();
         let future = new Date(today.setMonth(today.getMonth()+4));
@@ -82,25 +87,30 @@ function Tickets() {
         return future;
     }
 
+    //handles price change
     const handleInputChange2 = (e) => {
         handleInputChange(e);
         setPrice(getPrice(e.target.value));
     }
 
+    //decrease number of tickets
     const decrementTicket = (e) => {
         if (values.tickets > 0) {
             setValues({...values,tickets:values.tickets-1});
         }
     }
 
+    //increase number of tickets, possibly add max ticket limit?
     const incrementTicket = (e) => {
         setValues({...values,tickets:values.tickets+1});
     }
 
+    //changes price whenever number of tickets changes
     useEffect(() => {
         setPrice(getPrice(values.tickets));
     },[values.tickets]);
 
+    //calculates the price including discount
     const getPrice = (amount) => {
         let price = {sub: 0.00, disc: "0%", total: 0.00};
         if (amount < 1 || !amount) {
@@ -120,6 +130,7 @@ function Tickets() {
         return price;
     }
 
+    //if logged in then gets customers email
     if (context.account == "customer" && !values.email)
     {
         createAPIEndpoint(ENDPOINTS.customer+"/"+context.login_id)
@@ -129,6 +140,7 @@ function Tickets() {
         })
         .catch(errors => console.log(errors))
     }
+
     let today = getToday();
     let future = getFourMonths();
     return (

@@ -56,6 +56,7 @@ const mapAd = {
     icon: <FaMap/>
 }
 
+//home page component
 function Home() {
     return (
         <div>

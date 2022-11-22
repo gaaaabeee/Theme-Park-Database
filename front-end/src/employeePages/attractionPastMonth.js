@@ -2,10 +2,13 @@ import React, {useEffect, useState} from 'react';
 import '../css/reporttable.css';
 import { createAPIEndpoint, ENDPOINTS } from '../api/index.js';
 
+//employee page for viewing attraction popularity within the past m30 days
+
 function AttractionPastMonth() {
     const [rides, setRides]= useState([]);
     const [shops, setShops]= useState([]);
 
+    //get ride popularity list from server
     useEffect(() => {
         createAPIEndpoint(ENDPOINTS.ridesPastMonth)
         .fetch()
@@ -15,6 +18,7 @@ function AttractionPastMonth() {
         .catch(error => console.log(error))
     },[]);
 
+    //get shop popularity list from server
     useEffect(() => {
         createAPIEndpoint(ENDPOINTS.shopsPastMonth)
         .fetch()
@@ -24,6 +28,7 @@ function AttractionPastMonth() {
         .catch(error => console.log(error))
     },[]);
 
+    //return ride table
     const renderRideTable = () => {
         return rides.map((elem,idx) => {
             return (
@@ -36,6 +41,8 @@ function AttractionPastMonth() {
             );
         })
     };
+
+    //return shop table
     const renderShopTable = () => {
         return shops.map((elem,idx) => {
             return (

@@ -4,6 +4,8 @@ import BreakdownSearchBox from '../components/search/breakdownSearchBox.js';
 import BreakdownEntry from '../components/search/breakdownEntry.js';
 import { createAPIEndpoint, ENDPOINTS } from '../api/index.js';
 
+//employee page for viewing breakdowns in the database
+
 function Breakdown() {
     const [data, setData]= useState([]);
     const [filters, setFilters] = useState();
@@ -11,12 +13,14 @@ function Breakdown() {
     const [sortF,setSortF] = useState("breakdown id");
     const [sortOrder,setSortOrder] = useState(0);
 
+    //get search filters from search box
     const getFromSearch = (filter) => {
         console.log(filter);
         setFilters(filter);
         setDoSearch(!doSearch);
     }
 
+    //get list of breakdowns from server
     const findbreakdowns = () => {
         createAPIEndpoint(ENDPOINTS.breakdowns)
         .fetch()
@@ -30,6 +34,7 @@ function Breakdown() {
         })
     }
 
+    //get breakdown list whenever search options change
     useEffect(() => {
         if (filters) {
             findbreakdowns();
@@ -37,6 +42,7 @@ function Breakdown() {
         }
     },[filters,doSearch,sortOrder]);
 
+    //filters breakdown list to match search filters
     const filterData = (info) => {
         if (filters.breakdown_id != "") { 
             info = info.filter((item) => {
@@ -77,6 +83,7 @@ function Breakdown() {
         return info;
     }
 
+    //sorts breakdown list by specified column
     const sortData = (info) => {
         if (sortF == "breakdown id") {
             info.sort((a,b) => {
@@ -121,6 +128,7 @@ function Breakdown() {
         return info;
     }
 
+    //return table of breakdowns
     const renderTable = () => {
         return data.map(elem => {
             return (
@@ -141,6 +149,7 @@ function Breakdown() {
         )
     }
 
+    //update breakdown to resolved
     const resolveBreakdown = (e) => {
         console.log("Resolving breakdown report "+e.target.value);
         const newRecord = {
@@ -160,6 +169,7 @@ function Breakdown() {
         })
     }
 
+    //update breakdown to unresolved
     const unresolveBreakdown = (e) => {
         console.log("Resolving breakdown report "+e.target.value);
         const newRecord = {
@@ -179,6 +189,7 @@ function Breakdown() {
         })
     }
 
+    //sets sort by column
     const setSort = (field) => {
         setSortF(field);
         setDoSearch(!doSearch);
@@ -226,6 +237,8 @@ function Breakdown() {
         </div>
     )
 }
+
+//sort functions
 
 function sortBreakdownId(a,b,order) {
     let a_v = parseInt(a.breakdown_id);

@@ -3,6 +3,8 @@ import '../css/reporttable.css';
 import CustomerSearchBox from '../components/search/customerSearchBox';
 import { createAPIEndpoint, ENDPOINTS } from '../api/index.js';
 
+//employee page for viewing all customers in database
+
 function Customer(){
     const [data, setData]= useState([]);
     const [filters, setFilters] = useState();
@@ -11,12 +13,14 @@ function Customer(){
     const [sortF,setSortF] = useState("customer id");
     const [sortOrder,setSortOrder] = useState(0);
 
+    //gets search filters from search box
     const getFromSearch = (filter) => {
         console.log(filter);
         setFilters(filter);
         setDoSearch(!doSearch);
     }
 
+    //gets customer list from server
     const searchCustomers = () => {
         createAPIEndpoint(ENDPOINTS.customer)
         .fetch()
@@ -30,6 +34,7 @@ function Customer(){
         })
     }
 
+    //get customer list whenever search options change
     useEffect(() => {
         if (filters) {
             searchCustomers();
@@ -37,6 +42,7 @@ function Customer(){
         }
     },[filters,doSearch,sortOrder]);
 
+    //filter customer list to match search filters
     const filterData = (info) => {
         if (filters.id != "") { 
             info = info.filter((item) => {
@@ -143,6 +149,7 @@ function Customer(){
         return info;
     }
 
+    //sort customer list by specified column
     const sortData = (info) => {
         if (sortF == "customer id") {
             info.sort((a,b) => {
@@ -187,6 +194,7 @@ function Customer(){
         return info;
     }
 
+    //return table of customers
     const renderTable = () => {
         return data.map(elem => {
             return (
@@ -204,11 +212,13 @@ function Customer(){
         )
     }
 
+    //sets sort by column
     const setSort = (field) => {
         setSortF(field);
         setDoSearch(!doSearch);
     }
 
+    //show customer passwords
     const showPasswords = () => {
         if (!passwords) {
             setPasswords(true);
@@ -261,6 +271,8 @@ function Customer(){
     )
 
 }
+
+//sort functions
 
 function sortCustomerId(a,b,order) {
     let a_v = parseInt(a.customer_id);
@@ -334,6 +346,7 @@ function sortTickets(a,b,order) {
     return (a_v < b_v) ? -1 : (a_v > b_v) ? 1 : 0;
 }
 
+//convert height double to ft and inches
 function heightToNum(height) {
     let ft, inc;
     let hs = height.toString();

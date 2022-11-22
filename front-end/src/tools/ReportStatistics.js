@@ -1,5 +1,7 @@
 import { createAPIEndpoint, ENDPOINTS } from "../api";
 
+//would be used to calculate monthly and time period stats, no longer in use
+
 class ReportStatistics {
 
     static getDaysInMonth(month,year) {

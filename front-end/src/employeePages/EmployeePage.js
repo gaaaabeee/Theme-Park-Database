@@ -5,6 +5,8 @@ import EmployeeEntry from '../components/search/employeeEntry';
 import EmployeeEdit from '../components/search/employeeEdit';
 import { createAPIEndpoint, ENDPOINTS } from '../api';
 
+//employee page for viewing all employees in database
+
 function Employee() {
     const [data, setData] = useState([]);
     const [filters,setFilters] = useState();
@@ -14,6 +16,7 @@ function Employee() {
     const [sortOrder,setSortOrder] = useState(0);
     const [editId,setEditId] = useState(null);
 
+    //get search filters from search box
     const getFromSearch = (filter) => {
         console.log(filter);
         setFilters(filter);
@@ -21,6 +24,7 @@ function Employee() {
         setEditId(null);
     }
 
+    //get employee list from server
     const searchEmployees = () => {
         createAPIEndpoint(ENDPOINTS.employee)
         .fetch()

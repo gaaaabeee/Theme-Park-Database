@@ -5,7 +5,7 @@ import '../css/formpage.css';
 import { createAPIEndpoint, ENDPOINTS } from '../api/index.js';
 import useStateContext from '../hooks/useStateContext.js';
 
-//login page
+//login page for employees
 
 const getFreshModel = () => ({
     username: "",
@@ -13,13 +13,11 @@ const getFreshModel = () => ({
 });
 
 function EmployeeLogIn() {
-
     const {context, setContext} = useStateContext();
     const navigate = useNavigate();
-
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
 
-    //when form submits
+    //when form submits, log in employee
     const employeelogin = (e) => {
         e.preventDefault();
         if (validate()) {
@@ -37,7 +35,7 @@ function EmployeeLogIn() {
         }
     };
 
-    //check if fields are correct
+    //check if form fields are correct
     const validate = () => {
         let temp = {};
         temp.lname = values.username != "" ? "" : "You must enter a username.";

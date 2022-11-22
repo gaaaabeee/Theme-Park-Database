@@ -3,11 +3,14 @@ import '../css/ridepage.css';
 import {createAPIEndpoint,ENDPOINTS} from '../api/index.js';
 import {BsSearch} from 'react-icons/bs';
 
+//rides page
+
 function Rides() {
     const [rides,setRides] = useState([]);
     const [search,setSearch] = useState("");
     const [filter,setFilter] = useState(0);
 
+    //filters ride list when using search filters
     const filterData = (info) => {
         if (search != "") {
             info = info.filter((item) => {
@@ -32,6 +35,7 @@ function Rides() {
         return info;
     }
 
+    //gets ride list from server
     useEffect(() => {
         createAPIEndpoint(ENDPOINTS.rides)
         .fetch()
@@ -42,6 +46,7 @@ function Rides() {
         .catch(error => console.log(error))
     },[search,filter]);
 
+    //returns list component of each ride
     const renderRideList = () => {
         return rides.map((item) => {
             let min_height = item.min_height.toString().replace(".","\"");
@@ -82,12 +87,15 @@ function Rides() {
     );
 }
 
+//list component for one ride
 function RideLi(props) {
     const imgName = props.values.name.replaceAll(" ","_")+".jpg";
     let rideImg;
     try {
+        //get ride image if exists
         rideImg = (<img src={require('../images/rides/'+imgName)} alt="Image" className="ride-image" width="250px" height="150px"/>);
     } catch (error) {
+        //no ride image, use blank image
         console.log(error);
         rideImg = (<div className="noImage"></div>);
     }

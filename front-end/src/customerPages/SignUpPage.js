@@ -22,7 +22,7 @@ function Signup() {
     
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
 
-    //when form submits
+    //when form submits, try to create new customer account
     const signup = (e) => {
         e.preventDefault();
         if (validate()) {
