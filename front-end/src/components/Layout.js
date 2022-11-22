@@ -1,8 +1,8 @@
 import React, {useState,useEffect} from 'react';
 import Navbar from './navbar.js';
 import bottomimage from '../images/bottomimage.png';
-import bgHeader from '../images/headerimg.jpg';
-import header from '../images/header.png'; 
+import bgHeader from '../images/headerimg2.png';
+import header from '../images/header3.png'; 
 import '../css/layout.css';
 
 //layout of every page, includes header, navbar, and footer
