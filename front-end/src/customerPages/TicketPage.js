@@ -36,7 +36,7 @@ function Tickets() {
             })
             .catch(error => {
                 console.log(error);
-                alert("The park is closed on that day.");
+                alert("The park is closed or full on that day.");
             })
         }       
     };
