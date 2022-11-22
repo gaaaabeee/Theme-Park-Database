@@ -134,7 +134,7 @@ function Breakdown() {
                         <td>{new Date(elem.breakdown_date).toLocaleString()}</td>
                         <td>{elem.breakdown_desc}</td>
                         <td>{elem.resolved ? "Yes" : "No"}</td>
-                        <td>{!elem.resolved && <button type="button" value={elem.breakdown_id} onClick={resolveBreakdown}>Resolve as Fixed</button>}</td>
+                        <td>{elem.resolved ? <button type="button" value={elem.breakdown_id} onClick={unresolveBreakdown}>Unresolve</button> : <button type="button" value={elem.breakdown_id} onClick={resolveBreakdown}>Resolve as Fixed</button>}</td>
                     </tr>
                 </>
             );}
@@ -157,6 +157,25 @@ function Breakdown() {
         .catch(errors => {
             console.log(errors);
             alert("Failed to resolve breakdown.")
+        })
+    }
+
+    const unresolveBreakdown = (e) => {
+        console.log("Resolving breakdown report "+e.target.value);
+        const newRecord = {
+            breakdown_id: e.target.value,
+            resolved: 0
+        }
+        console.log(newRecord);
+        createAPIEndpoint(ENDPOINTS.breakdownUpdate)
+        .post(newRecord)
+        .then(() => {
+            alert("Successfully unresolved breakdown!");
+            setDoSearch(!doSearch);
+        })
+        .catch(errors => {
+            console.log(errors);
+            alert("Failed to unresolve breakdown.")
         })
     }
 

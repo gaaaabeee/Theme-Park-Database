@@ -32,8 +32,6 @@ export const ENDPOINTS = {
     overall: 'Date/overall', // returns overall park stats
     yearly: 'Date/overall/year/', //'{year}' returns stats of each month in that year
     overallTimePeriod: 'Date/overall/range/', //'{start date}/{end date}' returns dates of that time period
-
-
 };
 
 export const createAPIEndpoint = (endpoint) => {

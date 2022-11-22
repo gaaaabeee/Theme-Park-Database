@@ -9,9 +9,9 @@ function AttractionEntry() {
         type: "",
         description: "",
         location: "",
-        min_height: "",
-        start_time: "",
-        end_time: "",
+        min_height: 0,
+        start_time: "08:00:00",
+        end_time: "20:00:00",
         breakdown_nums: 0
     });
 

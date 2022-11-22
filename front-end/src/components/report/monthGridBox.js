@@ -20,7 +20,11 @@ function MonthChartBox(props) {
             x: {
                 title: {
                     display: true,
-                    text: props.titles.xTitle
+                    text: props.titles.xTitle,
+                    ticks: {
+                        autoSkip: true,
+                        maxTicksLimit: 20,
+                    }
                 }
             },
             y: {

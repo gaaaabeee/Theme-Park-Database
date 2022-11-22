@@ -35,7 +35,7 @@ function StatsMonthly() {
     const entryChartTitles = {
         title: "Entries per Day",
         xTitle: "Date",
-        yTitle: "Entries"
+        yTitle: "Entries",
     }
 
     const revChartTitles = {
@@ -204,29 +204,11 @@ function StatsMonthly() {
                 <div className="month-report-grid">
                     <MonthValueBox label="Average Entries per Day" value={data.avgEntries}/>
                     <MonthValueBox label="Total Entries this Month" value={data.totalEntries}/>
-                    <MonthValueBox label="Most Entries in a Day this Month" value={""}/>
-                    <MonthValueBox label="Date of Most Entries this Month" value={""}/>
-                    <MonthValueBox label="Least Entries in a Day this Month" value={""}/>
-                    <MonthValueBox label="Date of Least Entries this Month" value={""}/>
-                    <MonthValueBox label="Entry Rate Compared to Overall Average" value={""}/>
                     <MonthValueBox label="Rainy Days this Month" value={data.rainouts}/>
-
                     <MonthValueBox label="Average Revenue per Day" value={'$'+parseFloat(data.avgRevenue).toFixed(2)}/>
                     <MonthValueBox label="Total Revenue this Month" value={'$'+parseFloat(data.totalRevenue).toFixed(2)}/>
-                    <MonthValueBox label="Largest Revenue in a Day this Month" value={""}/>
-                    <MonthValueBox label="Date of Largest Revenue this Month" value={""}/>
-                    <MonthValueBox label="Smallest Revenue in a Day" value={""}/>
-                    <MonthValueBox label="Date of Smallest Revenue this Month" value={""}/>
-                    <MonthValueBox label="Revenue Rate Compared to Overall Average" value={""}/>
-                    <MonthValueBox label="Likelihood of Rain per Day" value={""}/>
-
                     <MonthValueBox label="Average New Breakdowns per Day" value={data.avgBreakdowns}/>
                     <MonthValueBox label="Total New Breakdowns this Month" value={data.totalBreakdowns}/>
-                    <MonthValueBox label="Number of Days a Breakdown Occurred this Month" value={""}/>
-                    <MonthValueBox label="Most Breakdowns in a Day" value={""}/>
-                    <MonthValueBox label="Date of Most Breakdowns this Month" value={""}/>
-                    <MonthValueBox label="Likelihood of a New Breakdown per Day" value={""}/>
-                    <MonthValueBox label="Ride that Broke Down the Most this Month" value={""}/>
                     <MonthValueBox label="Most Popular Ride this Month" value={data.mostPopularRide}/>
 
                     <MonthChartBox data={entryChart} titles={entryChartTitles}/>
@@ -235,8 +217,8 @@ function StatsMonthly() {
             </>}
             <br/>
             {validData && 
-            <div>
-                <h3>Reported Breakdowns this Month</h3>
+            <div className="flex-result-chart">
+                <div className="table-title">Reported Breakdowns this Month</div>
                 <table className='result-table'>
                     <thead>
                         <tr>

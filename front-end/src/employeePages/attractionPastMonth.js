@@ -13,7 +13,7 @@ function AttractionPastMonth() {
             setRides(response.data);
         })
         .catch(error => console.log(error))
-    },[rides]);
+    },[]);
 
     useEffect(() => {
         createAPIEndpoint(ENDPOINTS.shopsPastMonth)
@@ -22,7 +22,7 @@ function AttractionPastMonth() {
             setShops(response.data);
         })
         .catch(error => console.log(error))
-    },[shops]);
+    },[]);
 
     const renderRideTable = () => {
         return rides.map((elem,idx) => {

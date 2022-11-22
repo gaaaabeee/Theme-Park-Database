@@ -19,25 +19,7 @@
     margin-left: 10%;
     height: 100%;
     width: 90%;
-}
-
-.result-box {
-    border: 1px solid black;
-    padding: 20px 30px;
-    font-size: 20;
-    text-align: center;
-    background-color: lightgray;
-}
-
-.result-box-label {
-    float: left;
-    text-align: left;
-    margin-right: 20px;
-}
-
-.result-box-value {
-    float: right;
-    text-align: left;
+    overflow-x: auto;
 }
 
 .flex-result-charts {
@@ -50,4 +32,50 @@
 
 .flex-result-chart {
     margin: 20px;
+}
+
+.general-report-grid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 10px;
+    width: 100%;
+    overflow-x: auto;
+    padding: 20px;
+}
+
+.general-report-grid-chart {
+    max-width: 600px;
+    max-height: 500px;
+    background-color: white;
+    border: 1px solid lightslategray;
+    border-radius: 5px;
+}
+
+.general-report-grid-chart-large {
+    width: 100%;
+    max-height: 1000px;
+    grid-column-end: span 3;
+    grid-row-end: span 2;
+    background-color: white;
+    border: 1px solid lightslategray;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+.year-report-grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    gap: 10px;
+    width: 100%;
+    overflow-x: auto;
+    padding: 20px;
+}
+
+.year-report-grid-chart {
+    max-width: 800px;
+    max-height: 600px;
+    background-color: white;
+    border: 1px solid lightslategray;
+    border-radius: 5px;
 }

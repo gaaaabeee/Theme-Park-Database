@@ -23,7 +23,7 @@ function Navbar(props) {
                     <NavButton link="/customer" text="Customers" align="left"/>
                     <NavButton link="/attraction" text="Attractions" align="left"/>
                     <NavButton link="/breakdown" text="Breakdowns" align="left"/>
-                    <NavButton link="/report" text="Diagnostics" align="left"/>
+                    <NavButton link="/report/general" text="Reports" align="left"/>
                     <ProfNavButton login={props.login} />
                     <LogNavButton login={props.login} />
                 </ul>

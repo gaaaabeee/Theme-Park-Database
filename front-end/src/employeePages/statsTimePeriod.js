@@ -30,6 +30,7 @@ function StatsTimePeriod() {
     const [validData,setValidData] = useState(false);
     const [entryChart,setEntryChart] = useState({labels:[],values:[]});
     const [revenueChart,setRevenueChart] = useState({labels:[],values:[]});
+    const [breakdownList,setBreakdownList] = useState([]);
 
     const entryChartTitles = {
         title: "Entries per Day",
@@ -108,11 +109,44 @@ function StatsTimePeriod() {
                 console.log(error);
             })
 
+            const start = new Date(filters.start_date);
+            const end = new Date(filters.end_date);
+            createAPIEndpoint(ENDPOINTS.breakdowns)
+            .fetch()
+            .then(response => {
+                console.log(response.data);
+                setBreakdownList(response.data.filter((item) => {
+                    const bdate = new Date(item.breakdown_date)
+                    return bdate >= start && bdate <= end;
+                }))
+            })
+            .catch(errors => console.log(errors));
 
             setValidData(true);
         }
         else {
             setValidData(false);
+        }
+    }
+
+    const renderBreakdownList = () => {
+        if (breakdownList.length > 0) {
+            return breakdownList.map(elem => {
+                return (
+                    <tr key={elem.breakdown_id}>
+                        <td>{elem.breakdown_id}</td>
+                        <td>{elem.ride_id}</td>
+                        <td>{elem.name}</td>
+                        <td>{elem.breakdown_nums}</td>
+                        <td>{elem.maintainer_id}</td>
+                        <td>{new Date(elem.breakdown_date).toLocaleString()}</td>
+                        <td>{elem.breakdown_desc}</td>
+                        <td>{elem.resolved ? "Yes" : "No"}</td>
+                    </tr>
+                );
+            })
+        } else {
+            return (<tr>No Breakdowns</tr>);
         }
     }
     
@@ -169,33 +203,33 @@ function StatsTimePeriod() {
                 <div className="month-report-grid">
                     <MonthValueBox label="Average Entries per Day" value={data.avgEntries}/>
                     <MonthValueBox label="Total Number of Entries" value={data.totalEntries}/>
-                    <MonthValueBox label="Most Entries in a Day" value={""}/>
-                    <MonthValueBox label="Date of Most Entries" value={""}/>
-                    <MonthValueBox label="Least Entries in a Day" value={""}/>
-                    <MonthValueBox label="Date of Least Entries" value={""}/>
-                    <MonthValueBox label="Entry Rate Compared to Overall Average" value={""}/>
                     <MonthValueBox label="Number of Rainy Days" value={data.rainouts}/>
-
                     <MonthValueBox label="Average Revenue per Day" value={'$'+parseFloat(data.avgRevenue).toFixed(2)}/>
                     <MonthValueBox label="Total Revenue" value={'$'+parseFloat(data.totalRevenue).toFixed(2)}/>
-                    <MonthValueBox label="Largest Revenue in a Day" value={""}/>
-                    <MonthValueBox label="Date of Largest Revenue" value={""}/>
-                    <MonthValueBox label="Smallest Revenue in a Day" value={""}/>
-                    <MonthValueBox label="Date of Smallest Revenue" value={""}/>
-                    <MonthValueBox label="Revenue Rate Compared to Overall Average" value={""}/>
-                    <MonthValueBox label="Likelihood of Rain per Day" value={""}/>
-
                     <MonthValueBox label="Average New Breakdowns per Day" value={data.avgBreakdowns}/>
                     <MonthValueBox label="Total Number of New Breakdowns" value={data.totalBreakdowns}/>
-                    <MonthValueBox label="Number of Days a Breakdown Occurred" value={""}/>
-                    <MonthValueBox label="Most Breakdowns in a Day" value={""}/>
-                    <MonthValueBox label="Date of Most Breakdowns" value={""}/>
-                    <MonthValueBox label="Likelihood of a New Breakdown per Day" value={""}/>
-                    <MonthValueBox label="Ride that Broke Down the Most" value={""}/>
                     <MonthValueBox label="Most Popular Ride" value={data.mostPopularRide}/>
 
                     <MonthChartBox data={entryChart} titles={entryChartTitles}/>
                     <MonthChartBox data={revenueChart} titles={revChartTitles}/>
+                </div>
+                <div className="flex-result-chart">
+                    <div className="table-title">Reported Breakdowns during this Time</div>
+                    <table className='result-table'>
+                        <thead>
+                            <tr>
+                                <th>Breakdown ID</th>
+                                <th>Ride ID</th>
+                                <th>Ride Name</th>
+                                <th>Times Ride Broke Down</th>
+                                <th>Maintainer ID</th>
+                                <th>Breakdown Date</th>
+                                <th>Breakdown Description</th>
+                                <th>Resolved</th>
+                            </tr>
+                        </thead>
+                        <tbody>{renderBreakdownList()}</tbody>
+                    </table>
                 </div>
             </>}
             <br/>

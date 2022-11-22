@@ -21,16 +21,15 @@ function AttractionEdit (props) {
         e.preventDefault();
         console.log("Updating attraction"+props.values.attraction_id, values);
         const newRecord = {
-            attraction_id: props.values.attraction_id,
-            newName: values.name,
-            newDescription: values.description,
-            newLocation: values.location,
-            newMinHeight: values.min_height,
-            newStartTime: values.start_time,
-            newEndTime: values.end_time
+            name: values.name,
+            description: values.description,
+            location: values.location,
+            min_height: values.min_height,
+            start_time: values.start_time,
+            end_time: values.end_time
         }
         console.log(newRecord);
-        createAPIEndpoint(ENDPOINTS.attractionUpdate)
+        createAPIEndpoint(ENDPOINTS.attractionUpdate+"/"+props.values.attraction_id)
         .post(newRecord)
         .then(() => {
             alert("Successfully changed attraction!");
@@ -56,7 +55,6 @@ function AttractionEdit (props) {
         });
     }
     
-    console.log(values.start_time);
     return (
         <td className="edit-box" colSpan="9">
             <p>Edit Attraction {props.values.attraction_id}</p>
