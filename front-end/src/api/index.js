@@ -24,11 +24,13 @@ export const ENDPOINTS = {
     breakdownUpdate: 'attraction/breakdown/update', //resolves a breakdown
     mostPopularRidebyMonth: 'attraction/popular/month/', //'{month}/{year}' returns most popular ride within a month
     mostPopularRide: 'attraction/popular/', //'{start date}/{end date}' returns most popular ride in a time period
+    attractionUsage: 'attraction/usage/', //'{date}' returns usage per day of all attractions of that date
     tickets: 'Ticket', // adds new ticket
     days: 'Date', //'/{date}' or '/{start date}/{end date}' returns list of dates or specified date or dates within time period
     months: 'Date/data/', //'{month}/{year}' returns stats of that month
     timePeriod: 'Date/range/', //'{start date}/{end date}' returns stats of that time period
     overall: 'Date/overall', // returns overall park stats
+    yearly: 'Date/overall/year/', //'{year}' returns stats of each month in that year
     overallTimePeriod: 'Date/overall/range/', //'{start date}/{end date}' returns dates of that time period
 
 

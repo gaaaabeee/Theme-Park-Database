@@ -10,7 +10,7 @@ function ReportNavbar() {
                 <ReportNavButton link="/report/time_period_reports" text="Time Interval Reports"/>
                 <ReportNavButton link="/report/monthly_reports" text="Monthly Reports"/>
                 <ReportNavButton link="/report/daily_reports" text="Daily Reports"/>
-                <ReportNavButton link="/report/todays_report" text="Today's Report"/>
+                <ReportNavButton link="/report/last_open_report" text="See Last Opening"/>
                 <ReportNavButton link="/report/attractions_past_month" text="Attraction Popularity"/>
             </ul>
         </div>

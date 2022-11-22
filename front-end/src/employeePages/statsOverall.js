@@ -12,8 +12,8 @@ function StatsOverall() {
             console.log(response.data);
             setData({
                 avgEntries: response.data[0].average_entries,
-                avgRevenue: response.data[0].average_Revenue,
-                avgRainouts: response.data[0].average_Rainouts,
+                avgRevenue: response.data[0].average_revenue,
+                avgRainouts: response.data[0].average_rainouts,
                 avgBreakdowns: response.data[0].average_breakdowns,
                 popularRide: response.data[0].mostPopularRide
             });

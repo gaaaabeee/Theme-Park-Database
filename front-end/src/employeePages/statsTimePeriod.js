@@ -25,7 +25,6 @@ const getFreshModel = () => ({
 
 function StatsTimePeriod() {
     const [data, setData]= useState(getFreshModel);
-    const [days,setDays] = useState(0);
     const [filters, setFilters] = useState(blankFilters);
     const updateFilters = (obj) => {setFilters({...filters,...obj});}
     const [validData,setValidData] = useState(false);

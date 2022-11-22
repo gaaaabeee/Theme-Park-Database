@@ -25,7 +25,7 @@ function Tickets() {
         if (validate())
         {
 
-            const data = {tickets: values.tickets, price: price.total, date: values.date, customer_id: (context.login_id == "0") ? null : context.login_id};
+            const data = {tickets: values.tickets, price: price.total, date: values.date, customer_id: (context.login_id == "0") ? -1 : context.login_id};
             createAPIEndpoint(ENDPOINTS.tickets)
             .post(data)
             .then(respone => {
