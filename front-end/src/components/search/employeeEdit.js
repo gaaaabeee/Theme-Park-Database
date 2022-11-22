@@ -1,6 +1,8 @@
 import React from 'react';
 import useForm from '../../hooks/useForm';
 import { createAPIEndpoint, ENDPOINTS } from '../../api';
+import {GiSaveArrow} from 'react-icons/gi';
+import {AiFillDelete} from 'react-icons/ai';
 
 function EmployeeEdit (props) {
     const getFreshModel = () => ({
@@ -89,10 +91,10 @@ function EmployeeEdit (props) {
                         <input type="text" name="username" value={values.username} onChange={handleInputChange}/>
                     </div>
                     <div className="edit-form-item">
-                        <button type="submit" value="submit">Save Changes</button>
+                        <button type="submit" value="submit">Save Changes <GiSaveArrow/></button>
                     </div>
                     <div className="edit-form-item">
-                        <button type="button" onClick={deleteEmployee}>Delete Employee</button>
+                        <button type="button" onClick={deleteEmployee}>Delete Employee <AiFillDelete/></button>
                     </div>
                     <div className="edit-form-item">
                         <button type="button" onClick={props.endEdit}>Close</button>

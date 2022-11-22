@@ -1,8 +1,9 @@
 import React from 'react';
+import '../css/home.css';
 import LargeAd from '../components/largeAd.js';
 import {LeftSmallAd,RightSmallAd} from '../components/smallAd.js';
 import About from '../components/about.js';
-import '../css/home.css';
+import IsOpen from '../components/isOpenBar.js';
 import eventAdImg from '../images/homepage_event_ad.jpg';
 import restaurantAdImg from '../images/homepage_restaurant_ad.jpg';
 import rideAdImg from '../images/rideAdImg.jpg';
@@ -53,16 +54,6 @@ const mapAd = {
     link: "/map",
     buttonText: "See the Map >",
     icon: <FaMap/>
-}
-
-//says at top if amusement park is opened or closed today
-function IsOpen() {
-    return (
-        <div className="opened-header">
-            <h4>We are Opened/Closed today!</h4>
-            <p>Park opens 8:00 AM and closes 8:00 PM every day.</p>
-        </div>
-    );
 }
 
 function Home() {

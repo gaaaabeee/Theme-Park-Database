@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {BsSearch} from 'react-icons/bs';
 
 const blankFilters = {
     id: "",
@@ -32,7 +33,7 @@ function EmployeeSearchBox(props) {
 
     return (
         <div className='search search-area'>
-            <h2>Employee Search</h2>
+            <h2>Find Current Employee Accounts</h2>
             <form name="employeesearch" id="employeesearch" className="searchbox">
                 <p>*You can search by exact matches or by ranges. Only search by one or the other.<br/>
                 *Leave all filters blank to return all employees.</p>
@@ -92,7 +93,7 @@ function EmployeeSearchBox(props) {
                 <button type="button" className="reset-search" onClick={resetFilters}>Reset</button>
             </form>
             <br/>
-            <button onClick={returnFilter} className="submit-button" type="button">Search Employees</button>
+            <button onClick={returnFilter} className="submit-button" type="button">Search Employees <BsSearch/></button>
         </div>
     );
 }

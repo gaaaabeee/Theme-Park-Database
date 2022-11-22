@@ -7,7 +7,7 @@ function LargeAd(props) {
         <div className="largead-container" style={{backgroundImage: props.value.image}}>
             <div className="largead-content">
                 <div className="largead-text">
-                    <h2>{props.value.title} {props.value.icon}</h2>
+                    <h2>{props.value.icon} {props.value.title} {props.value.icon}</h2>
                     <p>{props.value.description}</p>
                 </div>
                 <br />

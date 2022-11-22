@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { createAPIEndpoint, ENDPOINTS } from '../api/index.js';
 import '../css/monthpage.css';
 import {MonthValueBox,MonthChartBox} from '../components/report/monthGridBox.js';
+import {BsSearch} from 'react-icons/bs';
 
 const blankFilters = {
     year: new Date().getFullYear(),
@@ -17,18 +18,31 @@ const getFreshModel = () => ({
     totalRevenue: "",
     avgBreakdowns: "",
     totalBreakdowns: "",
-    rainouts: ""
+    rainouts: "",
+    mostPopularRide: "",
+    days: ""
 })
 
 function StatsMonthly() {
     const [data, setData]= useState(getFreshModel);
-    const [popRide,setPopRide] = useState({mostPopularRide:""});
     const [breakdownList,setBreakdownList] = useState([]);
-    const [days,setDays] = useState(0);
     const [filters, setFilters] = useState(blankFilters);
     const updateFilters = (obj) => {setFilters({...filters,...obj});}
-    const [submitted,setSubmitted] = useState(false);
     const [validData,setValidData] = useState(false);
+    const [entryChart,setEntryChart] = useState({labels:[],values:[]});
+    const [revenueChart,setRevenueChart] = useState({labels:[],values:[]});
+
+    const entryChartTitles = {
+        title: "Entries per Day",
+        xTitle: "Date",
+        yTitle: "Entries"
+    }
+
+    const revChartTitles = {
+        title: "Revenue per Day",
+        xTitle: "Date",
+        yTitle: "Revenue ($)"
+    }
 
     const validate = () => {
         const today = new Date();
@@ -42,23 +56,23 @@ function StatsMonthly() {
     }
 
     const getreport = () => {
-        setSubmitted(true);
+        let dataObj = getFreshModel();
         if (validate()) {
+            //get month stats
             createAPIEndpoint(ENDPOINTS.months+filters.month+'/'+filters.year)
             .fetch()
             .then(response => {
                 console.log(response.data);
-                setData({
-                    year: response.data[0].year,
-                    month: response.data[0].month,
-                    avgEntries: response.data[0].average_entries,
-                    totalEntries: response.data[0].total_entries,
-                    avgRevenue: response.data[0].average_revenue,
-                    totalRevenue: response.data[0].total_revenue,
-                    avgBreakdowns: response.data[0].average_breakdown,
-                    totalBreakdowns: response.data[0].total_breakdowns,
-                    rainouts: response.data[0].total_rainy_days,
-                })})
+                dataObj.year = response.data[0].year;
+                dataObj.month = response.data[0].month
+                dataObj.avgEntries = response.data[0].average_entries;
+                dataObj.totalEntries = response.data[0].total_entries;
+                dataObj.avgRevenue = response.data[0].average_revenue;
+                dataObj.totalRevenue = response.data[0].total_revenue;
+                dataObj.avgBreakdowns = response.data[0].average_breakdown;
+                dataObj.totalBreakdowns = response.data[0].total_breakdowns;
+                dataObj.rainouts = response.data[0].total_rainy_days;
+                })
             .catch(error => {
                 console.log(error)
                 alert("Failed to get monthly report from server.")
@@ -68,13 +82,36 @@ function StatsMonthly() {
             .fetch()
             .then(response => {
                 console.log(response.data[0]);
-                setPopRide({mostPopularRide: response.data[0].most_popular_ride});
+                dataObj.mostPopularRide = response.data[0].most_popular_ride;
             })
             .catch(error => {
                 console.log(error);
                 alert("Failed to fetch most popular ride of the month from server.")
             })
 
+            const monthN = getMonthNumberFromName(filters.month);
+            dataObj.days = getDaysInMonth(monthN,filters.year);
+
+            setData(dataObj);
+
+            //get chart data
+            const firstDay = getFirstDayInMonth(monthN);
+            const lastDay = getLastDayInMonth(monthN,filters.year);
+            createAPIEndpoint(ENDPOINTS.days+"/"+firstDay+"/"+lastDay)
+            .fetch()
+            .then(response => {
+                console.log(response.data);
+                const dates = response.data.map((item) => {return item.date.split("T")[0]});
+                const entries = response.data.map((item) => {return item.entries});
+                const revenues = response.data.map((item) => {return item.revenue});
+                setEntryChart({labels: dates, values: entries});
+                setRevenueChart({labels: dates, values: revenues});
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+            //get breakdowns this month
             createAPIEndpoint(ENDPOINTS.breakdowns+'/'+filters.month+'/'+filters.year)
             .fetch()
             .then(response => {
@@ -89,6 +126,7 @@ function StatsMonthly() {
         }
         else {
             setValidData(false);
+            alert("There is no data for a future month.");
         }
     }
 
@@ -125,7 +163,7 @@ function StatsMonthly() {
             </div>
             <div className="optionbox">
                 <div className="search-area">
-                    <h2>Month Search</h2>
+                    <h2>Select Month</h2>
                     <form name="monthsearch" id="monthsearch" className="searchbox monthsearchbox">
                         <p>*Search by year and month.</p>
                         <table className="filter-table">
@@ -153,7 +191,7 @@ function StatsMonthly() {
                             </tr>
                         </table>
                     </form><br/>
-                    <button onClick={getreport} className="submit-button" type="button">Search Month</button>
+                    <button onClick={getreport} className="submit-button" type="button">Search Month <BsSearch/></button>
                 </div>
             </div>
             <br /><br />
@@ -161,7 +199,7 @@ function StatsMonthly() {
             <>
                 <div className="month-header">
                     <p className="time-period">{data.month} {data.year}</p>
-                    <p>Including <b>x</b> Days in Report</p>
+                    <p>Including <b>{data.days}</b> Days in Report</p>
                 </div>
                 <div className="month-report-grid">
                     <MonthValueBox label="Average Entries per Day" value={data.avgEntries}/>
@@ -189,10 +227,10 @@ function StatsMonthly() {
                     <MonthValueBox label="Date of Most Breakdowns this Month" value={""}/>
                     <MonthValueBox label="Likelihood of a New Breakdown per Day" value={""}/>
                     <MonthValueBox label="Ride that Broke Down the Most this Month" value={""}/>
-                    <MonthValueBox label="Most Popular Ride this Month" value={popRide.mostPopularRide}/>
+                    <MonthValueBox label="Most Popular Ride this Month" value={data.mostPopularRide}/>
 
-                    <MonthChartBox/>
-                    <MonthChartBox/>
+                    <MonthChartBox data={entryChart} titles={entryChartTitles}/>
+                    <MonthChartBox data={revenueChart} titles={revChartTitles}/>
                 </div>
             </>}
             <br/>
@@ -217,6 +255,25 @@ function StatsMonthly() {
             </div>}
         </div>
     )
+}
+
+function getMonthNumberFromName(month) {
+    let monthN = new Date(Date.parse(month+" 1, 2022")).getMonth();
+    return monthN;
+}
+
+function getFirstDayInMonth(month) {
+    const firstDay = new Date(2022,month,1);
+    return firstDay.toISOString().split("T")[0];
+}
+
+function getLastDayInMonth(month,year) {
+    const lastDay = new Date(year,month+1,0);
+    return lastDay.toISOString().split("T")[0];
+}
+
+function getDaysInMonth(month,year) {
+    return new Date(year,month,0).getDate();
 }
 
 export default StatsMonthly;

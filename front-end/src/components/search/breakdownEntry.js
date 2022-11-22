@@ -1,6 +1,7 @@
 import React from 'react';
 import useForm from '../../hooks/useForm.js';
 import { createAPIEndpoint, ENDPOINTS } from '../../api';
+import {GrAddCircle} from 'react-icons/gr';
 
 function BreakdownEntry() {
     const getFreshModel = () => ({
@@ -52,7 +53,7 @@ function BreakdownEntry() {
                 </table>
             </form>
             <br />
-            <button className="submit-button" type="submit" value="submit" form="breakdownadd">Add Report</button>
+            <button className="submit-button" type="submit" value="submit" form="breakdownadd">Add Report <GrAddCircle/></button>
         </div>
     );
 }

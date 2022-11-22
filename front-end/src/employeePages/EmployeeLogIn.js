@@ -30,7 +30,10 @@ function EmployeeLogIn() {
                 setContext({login_id: response.data[0].employee_id, account: "employee"});
                 navigate('/report');
                 window.location.reload(false);}) 
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error);
+                alert("Username or password is incorrect.");
+            })
         }
     };
 

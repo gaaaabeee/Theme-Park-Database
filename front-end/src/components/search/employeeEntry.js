@@ -1,6 +1,7 @@
 import React from 'react';
 import useForm from '../../hooks/useForm.js';
 import { createAPIEndpoint, ENDPOINTS } from '../../api';
+import {GrAddCircle} from 'react-icons/gr';
 
 function EmployeeEntry() {
     const getFreshModel = () => ({
@@ -75,7 +76,7 @@ function EmployeeEntry() {
                 </table>
             </form>
             <br />
-            <button className="submit-button" type="submit" value="submit" form="employeeadd">Add Employee</button>
+            <button className="submit-button" type="submit" value="submit" form="employeeadd">Add Employee <GrAddCircle/></button>
         </div>
     );
 }

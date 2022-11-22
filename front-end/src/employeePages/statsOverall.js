@@ -1,25 +1,25 @@
 import React, {useEffect, useState} from 'react';
-import '../css/reporttable.css';
+import '../css/report.css';
 import { createAPIEndpoint, ENDPOINTS } from '../api/index.js';
 
 function StatsOverall() {
     const [data,setData] = useState({});
 
     useEffect(() => {
-        createAPIEndpoint(ENDPOINTS.overallReport)
+        createAPIEndpoint(ENDPOINTS.overall)
         .fetch()
         .then(response => {
             console.log(response.data);
             setData({
-                avgEntries: response.data.avgEntries,
-                avgRevenue: response.data.avgRevenue,
-                avgRainouts: response.data.avgRainouts,
-                avgBreakdowns: response.data.avgBreakdowns,
-                popularRide: response.data.mostPopularRide
+                avgEntries: response.data[0].average_entries,
+                avgRevenue: response.data[0].average_Revenue,
+                avgRainouts: response.data[0].average_Rainouts,
+                avgBreakdowns: response.data[0].average_breakdowns,
+                popularRide: response.data[0].mostPopularRide
             });
         })
         .catch(error => console.log(error))
-    },[data]);
+    },[]);
 
     const renderReport = () => {
         return (

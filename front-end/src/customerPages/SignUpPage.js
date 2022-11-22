@@ -74,24 +74,25 @@ function Signup() {
             <div className='form-box'>
                 <h2>Sign Up</h2>
                 <hr style={{border:'2px solid white'}}/>
+                <p>Fields marked with * are required.</p>
                 <div className='form-inner-box'>
                     <form name="signupForm" method="post" id="signupForm" onSubmit={signup}> 
-                        <label>First Name: </label><br />
+                        <label>*First Name: </label><br />
                         <input type="text" name="fname" onChange={handleInputChange} size="30" required/><br />
                         <p>{errors.fname}</p><br />
-                        <label>Last Name: </label><br />
+                        <label>*Last Name: </label><br />
                         <input type="text" name="lname" onChange={handleInputChange} size="30" required/><br />
                         <p>{errors.lname}</p><br />
                         <label>Height: </label><br />
                         <input type="text" name="height" onChange={handleInputChange} size="10" placeholder="ex: 6'10"/><br />
                         <p>{errors.height}</p><br />
-                        <label>Date of Birth: </label><br />
+                        <label>*Date of Birth: </label><br />
                         <input type="date" name="dob" onChange={handleInputChange} size="20" required/><br />
                         <p>{errors.dob}</p><br />
-                        <label>Email: </label><br />
+                        <label>*Email: </label><br />
                         <input type="email" name="email" onChange={handleInputChange} placeholder="ex: example@email.com" size="30" required/><br />
                         <p>{errors.email}</p><br />
-                        <label>Password: </label><br />
+                        <label>*Password: </label><br />
                         <input type="password" name="password" onChange={handleInputChange} size="30" required/><br />
                         <p>{errors.password}</p><br />
                     </form>

@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {BsSearch} from 'react-icons/bs';
 
 const blankFilters = {
     breakdown_id: "",
@@ -24,7 +25,7 @@ function BreakdownSearchBox(props) {
 
     return (
         <div className='search search-area'>
-            <h2>Breakdown Search</h2>
+            <h2>View Existing Breakdown Reports</h2>
             <form name="breakdownsearch" id="breakdownsearch" className="searchbox">
                 <p>*Leave all filters blank to return all breakdowns.</p>
                 <table className="filter-table">
@@ -61,7 +62,7 @@ function BreakdownSearchBox(props) {
                 <button type="button" className="reset-search" onClick={resetFilters}>Reset</button>
             </form>
             <br/>
-            <button onClick={returnFilter} className="submit-button" type="button">Search Breakdowns</button>
+            <button onClick={returnFilter} className="submit-button" type="button">Search Breakdowns <BsSearch/></button>
         </div>
     );
 }

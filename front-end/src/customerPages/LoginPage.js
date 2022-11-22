@@ -32,7 +32,7 @@ function Login() {
                 window.location.reload(false);}) 
             .catch(error => {
                 console.log(error);
-                alert("Username or Password is incorrect");})
+                alert("Email or Password is incorrect");})
         }
     };
 

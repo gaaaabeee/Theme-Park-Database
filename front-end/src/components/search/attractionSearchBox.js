@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {BsSearch} from 'react-icons/bs';
 
 const blankFilters = {
     id: "",
@@ -30,7 +31,7 @@ function AttractionSearchBox(props) {
 
     return (
         <div className='search search-area'>
-            <h2>Attraction Search</h2>
+            <h2>Find Current Attractions</h2>
             <form name="ridesearch" id="ridesearch" className="searchbox">
                 <p>*Leave all filters blank to return all attractions.</p>
                 <table className="filter-table">
@@ -93,7 +94,7 @@ function AttractionSearchBox(props) {
                 <button type="button" className="reset-search" onClick={resetFilters}>Reset</button>
             </form>
             <br/>
-            <button onClick={returnFilter} className="submit-button" type="button">Search Attractions</button>
+            <button onClick={returnFilter} className="submit-button" type="button">Search Attractions <BsSearch/></button>
         </div>
     );
 }
