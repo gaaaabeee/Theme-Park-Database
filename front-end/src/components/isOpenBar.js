@@ -25,6 +25,7 @@ function IsOpen() {
 
     return (
         <div className="opened-header">
+            <br></br>
             <h4>We are {open} today!</h4>
             <p>Park opens 8:00 AM and closes 8:00 PM every day.</p>
         </div>
