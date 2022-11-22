@@ -45,7 +45,7 @@ function Rides() {
     const renderRideList = () => {
         return rides.map((item) => {
             let min_height = item.min_height.toString().replace(".","\"");
-            const values = {name: item.name, description: item.description, min_height: min_height};
+            const values = {name: item.name, description: item.description, min_height: min_height, message: item.message};
             return (<RideLi values={values}/>);
         })
     }
@@ -100,6 +100,8 @@ function RideLi(props) {
             <div className="ride-text">
                 <p className="ride-name">{props.values.name}</p>
                 <p>{props.values.description}</p>
+                {props.values.message && 
+                <p>{props.values.message}</p>}
                 <p>Minimum Height: {props.values.min_height}ft</p>
             </div>
         </li>
