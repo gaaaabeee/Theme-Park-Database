@@ -1,9 +1,15 @@
 import React from 'react';
+import useStateContext from '../../hooks/useStateContext';
+import  {useEffect, useState} from 'react';
 import useForm from '../../hooks/useForm';
 import { createAPIEndpoint, ENDPOINTS } from '../../api';
 import {GiSaveArrow} from 'react-icons/gi';
 import {AiFillDelete} from 'react-icons/ai';
-
+/* i deleted this 
+<div className="edit-form-item">
+                        <button type="button" onClick={deleteEmployee}>Delete Employee <AiFillDelete/></button>
+                    </div>
+                    */
 function EmployeeEdit (props) {
     const getFreshModel = () => ({
         fname: props.values.fname,
@@ -14,9 +20,25 @@ function EmployeeEdit (props) {
         username: props.values.username
     });
 
-    const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
+    const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel)
+    //begin karen edit
+    const {context,setContext} = useStateContext();
+    const [sid,setsid] = useState(0);
+    const [eid,seteid] = useState(0);
+    useEffect(() => {
+        createAPIEndpoint(ENDPOINTS.employee)
+        .fetch()
+        .then(response => {
+            console.log(response.data);
+            const thisEmp = response.data.find((item) => (item.employee_id == context.login_id));
+            setsid(thisEmp.supervisor_id );
+            seteid(thisEmp.employee_id);
+        })
+        .catch(error => console.log(error))
+    },[]);
 
-    //only updates username atm
+    if(eid === sid ){
+        //end edit
     const updateEmployee = (e) => {
         e.preventDefault();
         console.log("Updating employee "+props.values.employee_id, values);
@@ -94,15 +116,14 @@ function EmployeeEdit (props) {
                         <button type="submit" value="submit">Save Changes <GiSaveArrow/></button>
                     </div>
                     <div className="edit-form-item">
-                        <button type="button" onClick={deleteEmployee}>Delete Employee <AiFillDelete/></button>
-                    </div>
-                    <div className="edit-form-item">
                         <button type="button" onClick={props.endEdit}>Close</button>
                     </div>
                 </div>
             </form>
         </td>
-    );
+    );}
+//karen edit
+else{ return( <p> You are not authorized to edit employee information</p>);}
 }
 
 export default EmployeeEdit;
