@@ -1,5 +1,7 @@
 import React from 'react';
 import useForm from '../../hooks/useForm.js';
+import useStateContext from '../../hooks/useStateContext';
+import  {useEffect, useState} from 'react';
 import { createAPIEndpoint, ENDPOINTS } from '../../api';
 import {GrAddCircle} from 'react-icons/gr';
 
@@ -16,7 +18,23 @@ function EmployeeEntry() {
     });
 
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
-
+//begin karen edit
+    const {context,setContext} = useStateContext();
+    const [sid,setsid] = useState(0);
+    const [eid,seteid] = useState(0);
+    useEffect(() => {
+        createAPIEndpoint(ENDPOINTS.employee)
+        .fetch()
+        .then(response => {
+            console.log(response.data);
+            const thisEmp = response.data.find((item) => (item.employee_id == context.login_id));
+            setsid(thisEmp.supervisor_id );
+            seteid(thisEmp.employee_id);
+        })
+        .catch(error => console.log(error))
+    },[]);
+    if(eid === sid){
+       //end edit
     const addemployee = (e) => {
         e.preventDefault();
         console.log(values);
@@ -78,7 +96,7 @@ function EmployeeEntry() {
             <br />
             <button className="submit-button" type="submit" value="submit" form="employeeadd">Add Employee <GrAddCircle/></button>
         </div>
-    );
+    );}
 }
 
 export default EmployeeEntry;
