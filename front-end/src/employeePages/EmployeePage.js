@@ -217,7 +217,7 @@ function Employee() {
                         <EmployeeEdit values={elem} endEdit={endEdit} editChange={editChange}/>
                     </tr>}
                      //karen edit
-                     </tr>
+                     
                     {editId2 == elem.employee_id && 
                     <tr className="edit-row">
                         <EmployeeDelete values={elem} endEdit={endEdit} editChange={editChange}/>
