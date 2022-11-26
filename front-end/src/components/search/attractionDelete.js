@@ -1,4 +1,4 @@
-
+import React from 'react';
 import useStateContext from '../../hooks/useStateContext';
 import  {useEffect, useState} from 'react';
 import useForm from '../../hooks/useForm';
@@ -20,23 +20,18 @@ function AttractionDelete (props) {
     const {context,setContext} = useStateContext();
     const [sid,setsid] = useState(0);
     const [eid,seteid] = useState(0);
-      
-    
-        useEffect(() => {
-            createAPIEndpoint(ENDPOINTS.employee)
-            .fetch()
-            .then(response => {
-                console.log(response.data);
-                const thisEmp = response.data.find((item) => (item.employee_id == context.login_id));
-                setsid(thisEmp.supervisor_id );
-                seteid(thisEmp.employee_id);
-            })
-            .catch(error => console.log(error))
-        },[]);
-
-     if(eid === sid){
-    
-
+    useEffect(() => {
+        createAPIEndpoint(ENDPOINTS.employee)
+        .fetch()
+        .then(response => {
+            console.log(response.data);
+            const thisEmp = response.data.find((item) => (item.employee_id == context.login_id));
+            setsid(thisEmp.supervisor_id );
+            seteid(thisEmp.employee_id);
+        })
+        .catch(error => console.log(error))
+    },[]);
+    if(eid === sid){
     const deleteAttraction = () => {
         console.log(props.values.attraction_id);
         createAPIEndpoint(ENDPOINTS.attraction)
@@ -53,19 +48,20 @@ function AttractionDelete (props) {
     
     return (
         <td className="edit-box" colSpan="9">
-            <p>Are you sure you want to delete attraction {props.values.attraction_id}</p>
+            <p>Are you sure you want to delete {props.values.name}?</p>
             
                     <div className="edit-form-item">
-                        <button type="button" onClick={deleteAttraction}>Yes<AiFillDelete/></button>
+                        <button type="button" onClick={deleteAttraction}>Yes <AiFillDelete/></button>
                     </div>
+                
                     <div className="edit-form-item">
                         <button type="button" onClick={props.endEdit}>No</button>
                     </div>
              
         </td>
     );}
-    else{ return( <p>      You are not authorized to delete attraction information</p>);
-}
-}
+    else{ return( <p> You are not authorized to edit attraction information</p>);
+}}
+
 
 export default AttractionDelete;
