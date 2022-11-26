@@ -209,14 +209,15 @@ function Employee() {
                         <td>{elem.username}</td>
                         {passwords && <td>{elem.password}</td>}
                         <td><button type='button' value={elem.employee_id} onClick={editPopup}>Edit</button></td>
-                            //karen edit
+                          
+                            
                         <td><button type='button' value={elem.employee_id} onClick={editPopup2}>Edit</button></td>
                     </tr>
                     {editId == elem.employee_id && 
                     <tr className="edit-row">
                         <EmployeeEdit values={elem} endEdit={endEdit} editChange={editChange}/>
                     </tr>}
-                     //karen edit
+                    
                      
                     {editId2 == elem.employee_id && 
                     <tr className="edit-row">
