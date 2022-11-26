@@ -211,7 +211,7 @@ function Employee() {
                         <td><button type='button' value={elem.employee_id} onClick={editPopup}>Edit</button></td>
                           
                             
-                        <td><button type='button' value={elem.employee_id} onClick={editPopup2}>Edit</button></td>
+                        <td><button type='button' value={elem.employee_id} onClick={editPopup2}>Delete</button></td>
                     </tr>
                     {editId == elem.employee_id && 
                     <tr className="edit-row">
