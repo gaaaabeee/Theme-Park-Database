@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import '../css/reporttable.css';
+import useStateContext from '../hooks/useStateContext';
 import AttractionSearchBox from '../components/search/attractionSearchBox';
 import AttractionEntry from '../components/search/attractionEntry';
 import AttractionEdit from '../components/search/attractionEdit';
+import AttractionDelete from '../components/search/attractionDelete';
 import { createAPIEndpoint, ENDPOINTS } from '../api/index.js';
-
 //employee page for seeing attractions in the database
 
 function Attraction(){
@@ -14,6 +15,7 @@ function Attraction(){
     const [sortF,setSortF] = useState("attraction id");
     const [sortOrder,setSortOrder] = useState(0);
     const [editId,setEditId] = useState(null);
+    const [editId2,setEditId2] = useState(null);
 
     //get search filters from search box
     const getFromSearch = (filter) => {
@@ -21,6 +23,7 @@ function Attraction(){
         setFilters(filter);
         setDoSearch(!doSearch);
         setEditId(null);
+        setEditId2(null);
     }
 
     //get list of attractions from server
@@ -180,10 +183,15 @@ function Attraction(){
     const editPopup = (e) => {
         setEditId(e.target.value);
     }
+    const editPopup2 = (e) => {
+        setEditId2(e.target.value);
+        
+    }
 
     //close editing component
     const endEdit = () => {
         setEditId(null);
+        setEditId2(null);
     }
 
     //called when saving edits
@@ -208,10 +216,17 @@ function Attraction(){
                         <td>{new Date(elem.end_time).toLocaleTimeString()}</td>
                         <td>{elem.breakdown_nums}</td>
                         <td><button type="button" value={elem.attraction_id} onClick={editPopup}>Edit</button></td>
+                        //karen edit 
+                        <td><button type="button" value={elem.attraction_id} onClick={editPopup2}>Delete</button></td>
                     </tr>
                     {editId == elem.attraction_id &&
                     <tr className="edit-row">
                         <AttractionEdit values={elem} endEdit={endEdit} editChange={editChange}/>
+                    </tr>}
+                     //karen edit
+                     {editId2 == elem.attraction_id &&
+                    <tr className="edit-row">
+                        <AttractionDelete values={elem} endEdit={endEdit} editChange={editChange}/>
                     </tr>}
                 </>
             );}
