@@ -216,14 +216,16 @@ function Attraction(){
                         <td>{new Date(elem.end_time).toLocaleTimeString()}</td>
                         <td>{elem.breakdown_nums}</td>
                         <td><button type="button" value={elem.attraction_id} onClick={editPopup}>Edit</button></td>
-                        //karen edit 
+
+                            
                         <td><button type="button" value={elem.attraction_id} onClick={editPopup2}>Delete</button></td>
                     </tr>
                     {editId == elem.attraction_id &&
                     <tr className="edit-row">
                         <AttractionEdit values={elem} endEdit={endEdit} editChange={editChange}/>
                     </tr>}
-                     //karen edit
+
+                     
                      {editId2 == elem.attraction_id &&
                     <tr className="edit-row">
                         <AttractionDelete values={elem} endEdit={endEdit} editChange={editChange}/>
