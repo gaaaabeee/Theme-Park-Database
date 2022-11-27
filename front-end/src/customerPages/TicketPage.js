@@ -28,11 +28,26 @@ function Tickets() {
         if (validate())
         {
             const data = {tickets: values.tickets, price: price.total, date: values.date, customer_id: (context.login_id == "0") ? -1 : context.login_id};
-            createAPIEndpoint(ENDPOINTS.tickets)
-            .post(data)
+            console.log(data);
+            createAPIEndpoint(ENDPOINTS.tickets + '/' + data.date)
+            .fetch()
             .then(respone => {
-                navigate('/');
-                alert("Successfully purchased tickets!");
+                console.log(typeof(respone.data[0].is_full));
+                if (respone.data[0].is_full == 1) {
+                    alert("The park is full on that day.");
+                }
+                else {
+                    createAPIEndpoint(ENDPOINTS.tickets)
+                    .post(data)
+                    .then(respone => {
+                        navigate('/');
+                        alert("Successfully purchased tickets!");
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+                }
+                
             })
             .catch(error => {
                 console.log(error);
