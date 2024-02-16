@@ -6,11 +6,6 @@ import ReportNavbar from '../components/reportNavbar';
 import ReportWebRoutes from '../components/ReportWebRoutes';
 
 function Report() {
-    const navigate = useNavigate();
-   
-    useEffect(() => {
-        navigate('/report/general');
-    },[]);
 
     return (
         <div className="report-page">

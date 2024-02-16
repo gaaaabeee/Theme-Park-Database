@@ -109,8 +109,9 @@ function RideLi(props) {
                 <p className="ride-name">{props.values.name}</p>
                 <p>{props.values.description}</p>
                 {props.values.message && 
-                <p>{props.values.message}</p>}
+                <p style={{color:"red"}}><b>{props.values.message}</b></p>}
                 <p>Minimum Height: {props.values.min_height}ft</p>
+                
             </div>
         </li>
     );

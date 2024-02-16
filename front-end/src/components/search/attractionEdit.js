@@ -1,9 +1,15 @@
 import React from 'react';
+import useStateContext from '../../hooks/useStateContext';
+import  {useEffect, useState} from 'react';
 import useForm from '../../hooks/useForm';
 import { createAPIEndpoint, ENDPOINTS } from '../../api';
 import {GiSaveArrow} from 'react-icons/gi';
 import {AiFillDelete} from 'react-icons/ai';
-
+/* I deleted this line
+                    <div className="edit-form-item">
+                        <button type="button" onClick={deleteAttraction}>Delete Attraction <AiFillDelete/></button>
+                    </div>
+ */
 function AttractionEdit (props) {
     const getFreshModel = () => ({
         name: props.values.name,
@@ -15,8 +21,23 @@ function AttractionEdit (props) {
     });
 
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
-
-    //only updates username atm
+//begin karen edit
+    const {context,setContext} = useStateContext();
+    const [sid,setsid] = useState(0);
+    const [eid,seteid] = useState(0);
+    useEffect(() => {
+        createAPIEndpoint(ENDPOINTS.employee)
+        .fetch()
+        .then(response => {
+            console.log(response.data);
+            const thisEmp = response.data.find((item) => (item.employee_id == context.login_id));
+            setsid(thisEmp.supervisor_id );
+            seteid(thisEmp.employee_id);
+        })
+        .catch(error => console.log(error))
+    },[]);
+    if(eid === sid){
+ //end karen edit
     const updateAttraction = (e) => {
         e.preventDefault();
         console.log("Updating attraction"+props.values.attraction_id, values);
@@ -88,15 +109,14 @@ function AttractionEdit (props) {
                         <button type="submit" value="submit">Save Changes <GiSaveArrow/></button>
                     </div>
                     <div className="edit-form-item">
-                        <button type="button" onClick={deleteAttraction}>Delete Attraction <AiFillDelete/></button>
-                    </div>
-                    <div className="edit-form-item">
                         <button type="button" onClick={props.endEdit}>Close</button>
                     </div>
                 </div>
             </form>
         </td>
-    );
+    ); //begin karen edit
+}else{ return( <p> You are not authorized to edit attraction information</p>);
+              } //end karen edit
 }
 
 export default AttractionEdit;

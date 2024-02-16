@@ -3,6 +3,7 @@ import '../css/reporttable.css';
 import EmployeeSearchBox from '../components/search/employeeSearchBox';
 import EmployeeEntry from '../components/search/employeeEntry';
 import EmployeeEdit from '../components/search/employeeEdit';
+import EmployeeDelete from '../components/search/employeeDelete';
 import { createAPIEndpoint, ENDPOINTS } from '../api';
 
 //employee page for viewing all employees in database
@@ -15,6 +16,7 @@ function Employee() {
     const [sortF,setSortF] = useState("employee id");
     const [sortOrder,setSortOrder] = useState(0);
     const [editId,setEditId] = useState(null);
+    const [editId2,setEditId2] = useState(null);
 
     //get search filters from search box
     const getFromSearch = (filter) => {
@@ -22,6 +24,7 @@ function Employee() {
         setFilters(filter);
         setDoSearch(!doSearch);
         setEditId(null);
+        setEditId2(null);
     }
 
     //get employee list from server
@@ -178,9 +181,13 @@ function Employee() {
     const editPopup = (e) => {
         setEditId(e.target.value);
     }
+    const editPopup2 = (e) => {
+        setEditId2(e.target.value);
+    }
 
     const endEdit = () => {
         setEditId(null);
+        setEditId2(null);
     }
 
     const editChange = () => {
@@ -202,10 +209,19 @@ function Employee() {
                         <td>{elem.username}</td>
                         {passwords && <td>{elem.password}</td>}
                         <td><button type='button' value={elem.employee_id} onClick={editPopup}>Edit</button></td>
+                          
+                            
+                        <td><button type='button' value={elem.employee_id} onClick={editPopup2}>Delete</button></td>
                     </tr>
                     {editId == elem.employee_id && 
                     <tr className="edit-row">
                         <EmployeeEdit values={elem} endEdit={endEdit} editChange={editChange}/>
+                    </tr>}
+                    
+                     
+                    {editId2 == elem.employee_id && 
+                    <tr className="edit-row">
+                        <EmployeeDelete values={elem} endEdit={endEdit} editChange={editChange}/>
                     </tr>}
                 </>
             );

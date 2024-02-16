@@ -63,19 +63,19 @@ function Shops() {
 }
 
 function ShopLi(props) {
-    const imgName = props.values.name.replaceAll(" ","_")+".jpg";
-    let shopImg;
-    try {
-        shopImg = (<img src={require('../images/shops/'+imgName)} alt="Image" className="ride-image" width="250px" height="150px"/>);
-    } catch (error) {
-        console.log(error);
-        shopImg = (<div className="noImage"></div>);
-    }
+    // const imgName = props.values.name.replaceAll(" ","_")+".jpg";
+    // let shopImg;
+    // try {
+    //     shopImg = (<img src={require('../images/shops/'+imgName)} alt="Image" className="ride-image" width="250px" height="150px"/>);
+    // } catch (error) {
+    //     console.log(error);
+    //     shopImg = (<div className="noImage"></div>);
+    // }
 
     return (
         <li className="ride-item">
             <div className="ride-img-box">
-                {shopImg}
+                {/* {shopImg} */}
             </div>
             <div className="ride-text">
                 <p className="ride-name">{props.values.name}</p>
